@@ -37,7 +37,7 @@ export const Query = queryType({
             const { userId } = ctx.req;
 
             // Cookie userId exists but Guest user has been deleted from table
-            const userExists = await ctx.client.user.findOne({ where: { id: userId } })
+            const userExists = await ctx.prisma.user.findOne({ where: { id: userId } })
   
             if(!userId || !userExists) {
               // create guest user
@@ -51,7 +51,7 @@ export const Query = queryType({
               const name = "Guest User";
   
               // 3. create the user in the database
-              const user = ctx.client.user.create({
+              const user = ctx.prisma.user.create({
                 data: {
                   id: userId,
                   name,
@@ -100,7 +100,7 @@ export const Query = queryType({
           // 2. Check if the user has the permissions to query all the users
           hasPermission(ctx._user, ['ADMIN', 'PERMISSIONUPDATE']);
   
-          return ctx.client.user.findMany();
+          return ctx.prisma.user.findMany();
   
         } 
       })
@@ -121,7 +121,7 @@ export const Query = queryType({
           }
   
           // 2. Query the current order
-          const order = await ctx.client.order.findOne(
+          const order = await ctx.prisma.order.findOne(
             {
               where: { id: args.id },
             },
@@ -153,7 +153,7 @@ export const Query = queryType({
           }
   
           // Return users
-          return ctx.client.order.findMany({
+          return ctx.prisma.order.findMany({
               where: {
                 user: { 
                   equals: userId 

@@ -22,7 +22,7 @@ export const Mutation = mutationType({
 
           const { userId } = ctx.req
   
-          return await ctx.client.item.create(
+          return await ctx.prisma.item.create(
             {
               data: {
                 User: {
@@ -60,7 +60,7 @@ export const Mutation = mutationType({
           }
   
           // 2. check that a different user with that email does not exist
-          const users = await ctx.client.user.findMany(
+          const users = await ctx.prisma.user.findMany(
             {
               where: {
                 email: args.email,
@@ -81,7 +81,7 @@ export const Mutation = mutationType({
           }
   
           // 3. Update the permissions
-          await ctx.client.user.update({
+          await ctx.prisma.user.update({
             data: {
               email: args.email,
               name: args.card_name,
@@ -97,7 +97,7 @@ export const Mutation = mutationType({
           delete args.userId;
           delete args.email;
   
-          const address = await ctx.client.address.create({
+          const address = await ctx.prisma.address.create({
             data: {
               User: {
                 connect: {
@@ -132,7 +132,7 @@ export const Mutation = mutationType({
           const { userId } = ctx.req;
   
           // Update the user details
-          await ctx.client.user.update({
+          await ctx.prisma.user.update({
             data: {
               email: args.email,
               name: args.card_name,
@@ -148,7 +148,7 @@ export const Mutation = mutationType({
           delete args.email;
   
           // run the update method
-          return ctx.client.address.update({
+          return ctx.prisma.address.update({
             data: {...args},
             where: {
               id: addressID,
@@ -171,7 +171,7 @@ export const Mutation = mutationType({
         },
         resolve: async (_, args, ctx) => {
   
-          const item = await ctx.client.siteVisits.create({
+          const item = await ctx.prisma.siteVisits.create({
             data: {
               id: '-1',
               ...args,
@@ -204,7 +204,7 @@ export const Mutation = mutationType({
           delete args.id;
   
           // run the update method
-          return ctx.client.item.update(
+          return ctx.prisma.item.update(
             {
               data: {
                 ...args,
@@ -230,11 +230,11 @@ export const Mutation = mutationType({
 
           const where = { id: args.id };
           // 1. find the item
-          const item = await ctx.client.item.findOne({ where }); //`{ id title image largeImage user { id }}`);
+          const item = await ctx.prisma.item.findOne({ where }); //`{ id title image largeImage user { id }}`);
           
           // 2. Check if they own that item, or have the permissions
           const ownsItem = item?.user === userId;
-          const hasPermissions = ctx.client.user.permissions2.some((permission2: any) =>
+          const hasPermissions = ctx.prisma.user.permissions2.some((permission2: any) =>
             ['ADMIN', 'ITEMDELETE'].includes(permission2)
           );
       
@@ -243,7 +243,7 @@ export const Mutation = mutationType({
           }
       
           // 3a. Update the userIdentity to reflect the user and that a button was clicked
-          await ctx.client.item.update({
+          await ctx.prisma.item.update({
             data: {
               userIdentity: `${userId}-button`
             },
@@ -253,7 +253,7 @@ export const Mutation = mutationType({
           });
       
           // 3b. Delete it!
-          const deletedItem = await ctx.client.item.delete({ where });
+          const deletedItem = await ctx.prisma.item.delete({ where });
       
           // 4. If the item was deleted from db, delete image from Cloudinary
           if (deletedItem) {
@@ -303,12 +303,12 @@ export const Mutation = mutationType({
   
           // If userId already exists and the user has guest_user permissions then
           // update the existing user details with the new user details
-          const hasPermissions = ctx.client.user.permissions2.some((permission2: any) =>
+          const hasPermissions = ctx.prisma.user.permissions2.some((permission2: any) =>
             ['GUEST_USER'].includes(permission2));
   
           if (userId && hasPermissions) {
             // Update the permissions
-            user = ctx.client.user.update({
+            user = ctx.prisma.user.update({
               data: {
                 ...args,
                 password,
@@ -327,14 +327,14 @@ export const Mutation = mutationType({
   
             // You may get an error because of email: emailTest. If so revert back to just
             // where { emailTest }
-            const userTest = await ctx.client.user.findOne({ where: { email: emailTest } });
+            const userTest = await ctx.prisma.user.findOne({ where: { email: emailTest } });
   
             if (userTest) {
               throw new Error(`A user with the email: ${emailTest} already exists.`);
             }
       
             // create the user in the database
-            user = await ctx.client.user.create(
+            user = await ctx.prisma.user.create(
               {
                 data: {
                   id: '-1', // May have to comment this line out if -1 is returned as the user id
@@ -386,7 +386,7 @@ export const Mutation = mutationType({
           }
   
           // get cart information for the current user
-          const cart = await ctx.client.cartItem.findMany({
+          const cart = await ctx.prisma.cartItem.findMany({
             where: {
               user: {
                 equals: userId
@@ -400,10 +400,10 @@ export const Mutation = mutationType({
           })*/
   
           // Get user's permission rights
-          const hasPermissions = ctx.client.user.permissions2.some((permission2: any) => ['GUEST_USER'].includes(permission2));
+          const hasPermissions = ctx.prisma.user.permissions2.some((permission2: any) => ['GUEST_USER'].includes(permission2));
   
           // 1. check if there is a user with that email
-          user = await ctx.client.user.findOne({
+          user = await ctx.prisma.user.findOne({
             where: { email: email },
           }).catch(handleSubmitErr);
   
@@ -425,7 +425,7 @@ export const Mutation = mutationType({
             cart.map(async (cartVal: any, index: any) => {
   
               //console.log("Itemvariants id = ", await cartVal.itemvariants);
-              let registered_userCart = await ctx.client.cartItem.findMany(
+              let registered_userCart = await ctx.prisma.cartItem.findMany(
                 {
                   where: {
                     user: {
@@ -442,7 +442,7 @@ export const Mutation = mutationType({
               if (registered_userCart) {
   
                 // Update the User cart item quantity
-                ctx.client.cartItem.update({
+                ctx.prisma.cartItem.update({
                   data: { 
                     quantity: registered_userCart.quantity + cartVal.quantity 
                   },
@@ -466,7 +466,7 @@ export const Mutation = mutationType({
                   },
                 };
   
-                ctx.client.item.create({
+                ctx.prisma.item.create({
                   data: cartItemz
                 }).catch(handleSubmitErr);
               }
@@ -475,7 +475,7 @@ export const Mutation = mutationType({
   
           // 4. Transfer a guest_users's orders to the registered user logging in
           // if any exists
-          const userOrders = await ctx.client.order.findMany(
+          const userOrders = await ctx.prisma.order.findMany(
             {
               where: {
                 user: { 
@@ -509,7 +509,7 @@ export const Mutation = mutationType({
               });
   
               // Create the newly transfered order
-              ctx.client.order.create({
+              ctx.prisma.order.create({
                 data: {
                   id: '-1',   
                   total: userOrders.total,
@@ -529,7 +529,7 @@ export const Mutation = mutationType({
           
           // 5. Transfer user address only if an address for the user doesn't already exist
           if (user.address.length === 0) {
-            const userAddress = await ctx.client.address.findMany({
+            const userAddress = await ctx.prisma.address.findMany({
               where: {
                 user: { 
                   equals: userId
@@ -539,7 +539,7 @@ export const Mutation = mutationType({
         
             // create new address object
             if (ctx.req.userId && hasPermissions && userAddress != null) {
-              ctx.client.address.create({
+              ctx.prisma.address.create({
                 data: {
                   id: '-1',   
                   User: { connect: { id: user.id } },
@@ -555,7 +555,7 @@ export const Mutation = mutationType({
   
           // 6. Delete guest_user
           if (userId && hasPermissions) {
-            await ctx.client.user.delete({
+            await ctx.prisma.user.delete({
               where: { id: userId },
             }).catch(handleSubmitErr);
   
@@ -625,7 +625,7 @@ export const Mutation = mutationType({
           }
   
           // 1. Check if this is a real user
-          const user = await ctx.client.user.findOne({ where: { email: args.email } });
+          const user = await ctx.prisma.user.findOne({ where: { email: args.email } });
           if (!user) {
             throw new Error(`No such user found for email ${args.email}`);
           }
@@ -634,7 +634,7 @@ export const Mutation = mutationType({
           const randomBytesPromiseified = promisify(randomBytes);
           const resetToken = (await randomBytesPromiseified(20)).toString('hex');
           const resetTokenExpiry = Date.now() + 3600000; // 1 hour from now
-          const res = await ctx.client.user.update({
+          const res = await ctx.prisma.user.update({
             where: { email: args.email },
             data: { resetToken, resetTokenExpiry },
           }).catch(handleSubmitErr);
@@ -672,7 +672,7 @@ export const Mutation = mutationType({
   
           // 2. check if its a legit reset token
           // 3. Check if its expired
-          const user = await ctx.client.user.findMany({
+          const user = await ctx.prisma.user.findMany({
             where: {
               resetToken: args.resetToken,
               resetTokenExpiry: {
@@ -689,7 +689,7 @@ export const Mutation = mutationType({
           const password = await bcrypt.hash(args.password, 10);
   
           // 5. Save the new password to the user and remove old resetToken fields
-          const updatedUser = await ctx.client.user.update({
+          const updatedUser = await ctx.prisma.user.update({
             where: { email: user.email },
             data: {
               password,
@@ -734,7 +734,7 @@ export const Mutation = mutationType({
           }
   
           // 2. Query the current user
-          const currentUser = await ctx.client.user.findOne({
+          const currentUser = await ctx.prisma.user.findOne({
               where: {
                 id: userId,
               },
@@ -744,7 +744,7 @@ export const Mutation = mutationType({
           hasPermission(currentUser, ['ADMIN', 'PERMISSIONUPDATE']);
   
           // 4. Update the permissions
-          return ctx.client.user.update({
+          return ctx.prisma.user.update({
             data: {
               permissions2: {
                 set: args.permissions2,
@@ -780,7 +780,7 @@ export const Mutation = mutationType({
           }
   
           // 2. check that a different user with that email does not exist
-          const users = await ctx.client.user.findMany(
+          const users = await ctx.prisma.user.findMany(
             {
               where: {
                 email: args.email,
@@ -798,7 +798,7 @@ export const Mutation = mutationType({
           }
   
           // 3. Update the permissions
-          const updatedUser = await ctx.client.user.update({
+          const updatedUser = await ctx.prisma.user.update({
             data: {
               email: args.email,
             },
@@ -828,7 +828,7 @@ export const Mutation = mutationType({
           }
   
           // 2. Query the users current cart
-          const existingCartItem = await ctx.client.cartItem.findMany({
+          const existingCartItem = await ctx.prisma.cartItem.findMany({
             where: {
               user: { equals: userId },
               item: { equals: args.id },
@@ -836,7 +836,7 @@ export const Mutation = mutationType({
           }).catch(handleSubmitErr);
   
           // 2b. Check that the existingCartItem count is not > the Item quantity available
-          const currentItemState = await ctx.client.item.findOne({
+          const currentItemState = await ctx.prisma.item.findOne({
             where: {
               id: args.id,
             },
@@ -851,14 +851,14 @@ export const Mutation = mutationType({
           // 3. Check if that item is already in their cart and increment by 1 if it is
           if (existingCartItem) {
             //console.log('This item is already in their cart');
-            return ctx.client.cartItem.update({
+            return ctx.prisma.cartItem.update({
               where: { id: existingCartItem.id },
               data: { quantity: existingCartItem.quantity + 1 },
             }).catch(handleSubmitErr);
           }
   
           // 4. If its not, create a fresh CartItem for that user!
-          return ctx.client.cartItem.create({
+          return ctx.prisma.cartItem.create({
             data: {
               id: '-1',
               User: {
@@ -888,7 +888,7 @@ export const Mutation = mutationType({
           }
   
           // 2. Query the users current cart
-          const existingCartItem = await ctx.client.cartItem.findMany({
+          const existingCartItem = await ctx.prisma.cartItem.findMany({
             where: {
               user: { equals: userId },
               itemvariants: { equals: args.id },
@@ -896,7 +896,7 @@ export const Mutation = mutationType({
           }).catch(handleSubmitErr);
   
           // 2b. Check that the existingCartItem count is not > the Item quantity available
-          const currentItemState = await ctx.client.itemVariants.findOne({
+          const currentItemState = await ctx.prisma.itemVariants.findOne({
             where: {
               id: args.id,
             },
@@ -911,14 +911,14 @@ export const Mutation = mutationType({
           // 3. Check if that item is already in their cart and increment by 1 if it is
           if (existingCartItem) {
             //console.log('This item is already in their cart');
-            return ctx.client.cartItem.update({
+            return ctx.prisma.cartItem.update({
               where: { id: existingCartItem.id },
               data: { quantity: existingCartItem.quantity + 1 },
             }).catch(handleSubmitErr);
           }
   
           // 4. If its not, create a fresh CartItem for that user!
-          return ctx.client.cartItem.create({
+          return ctx.prisma.cartItem.create({
             data: {
               id: '-1',
               User: {
@@ -948,7 +948,7 @@ export const Mutation = mutationType({
           const { userId } = ctx.req;
   
           // 1. Find the cart item
-          const cartItem = await ctx.client.cartItem.findOne({
+          const cartItem = await ctx.prisma.cartItem.findOne({
             where: {
               id: args.id,
             },
@@ -963,7 +963,7 @@ export const Mutation = mutationType({
           }
   
           // 3. Delete that cart item
-          return ctx.client.cartItem.delete({
+          return ctx.prisma.cartItem.delete({
             where: { id: args.id },
           }).catch(handleSubmitErr);
         
@@ -991,7 +991,7 @@ export const Mutation = mutationType({
   
           if (!userId) throw new Error('You must be signed in to complete this order.');
   
-          const user = await ctx.client.user.findOne({ 
+          const user = await ctx.prisma.user.findOne({ 
             where: { id: userId } 
           }).catch(handleSubmitErr);
   
@@ -1058,7 +1058,7 @@ export const Mutation = mutationType({
             
             // Update the quantity sold of each Item variant
             const quantityValItemVariant = cartItem.itemvariants.quantity - cartItem.quantity;
-            const updateItemVariantQuantity = ctx.client.itemVariants.update({
+            const updateItemVariantQuantity = ctx.prisma.itemVariants.update({
               data: {
                 quantity: quantityValItemVariant,
               },
@@ -1072,7 +1072,7 @@ export const Mutation = mutationType({
           });
           
           // 5. create the Order
-          const order = await ctx.client.order.create({
+          const order = await ctx.prisma.order.create({
             data: {
               id: '-1',
               total: charge.amount,
@@ -1093,7 +1093,7 @@ export const Mutation = mutationType({
   
           // 6. Clean up - clear the users cart, delete cartItems
           const cartItemIds = user && user.cart.map((cartItem: any) => cartItem.id);
-          await ctx.client.cartItem.deleteMany({
+          await ctx.prisma.cartItem.deleteMany({
             where: {
               id: {
                 in: cartItemIds,
@@ -1149,7 +1149,7 @@ export const Mutation = mutationType({
           delete updates.id;
   
           // run the update method
-          return ctx.client.cartItem.update({
+          return ctx.prisma.cartItem.update({
             data: updates,
             where: {
               id: args.id,
