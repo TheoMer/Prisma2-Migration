@@ -1,0 +1,5 @@
+backend/prisma/.env
+backend/variables.env
+backend/variables.production.env
+backend/prisma/prisma.yml
+backend/node_modules

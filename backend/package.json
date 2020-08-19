@@ -1,0 +1,85 @@
+{
+  "name": "flamingo-backend",
+  "description": "the backend of Flamingo Ecommerce",
+  "version": "1.0.0",
+  "engines": {
+    "node": "10.16.0",
+    "npm": "6.5.0"
+  },
+  "scripts": {
+    "start": "node dist/index",
+    "clean": "rm -rf dist",
+    "build": "npm -s run clean&& npm -s run generate &&npx tsc",
+    "dev": "set NODE_ENV=development&&ts-node-dev --inspect --no-notify --respawn --transpileOnly src/index",
+    "test": "jest",
+    "initprisma2": "npx prisma init",
+    "introspect": "npx prisma introspect",
+    "generate": "npm -s run generate:prisma&& npm -s run generate:nexus",
+    "generate:prisma": "prisma generate",
+    "generate:nexus": "ts-node --transpile-only src/schema",
+    "postinstall": "npm -s run generate",
+    "migrate:save": "npx prisma migrate save --experimental",
+    "migrate:up": "npx prisma migrate up --experimental",
+    "migrate:down": "npx prisma migrate down 1 --experimental"
+  },
+  "scriptsComments": {
+    "start": "was formally pm2-runtime start ecosystem.config.js --env production",
+    "build": "npm -s run clean&&tsc",
+    "postinstall": "npm run build",
+    "heroku-postbuild": "npm run build",
+    "cacheDirectories": "Taken from  https://github.com/zeit/next.js/issues/12286#issuecomment-620796486",
+    "db:": "Taken from https://github.com/ryands17/nexus-auth/blob/master/package.json",
+    "generate:": "Taken from https://github.com/prisma/prisma-examples/blob/master/typescript/graphql-apollo-server/package.json"
+  },
+  "author": "Theo Mer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheoMer/flamingo-ecom2.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@nexus/schema": "^0.15.0",
+    "@types/graphql-upload": "^8.0.3",
+    "@types/node": "^14.0.19",
+    "@types/node-fetch": "^2.5.7",
+    "ajv": "^6.9.1",
+    "apollo-server-express": "^2.9.14",
+    "babel-preset-env": "^1.7.0",
+    "bcryptjs": "2.4.3",
+    "cloudinary": "^1.13.2",
+    "cookie-parser": "^1.4.3",
+    "copyfiles": "^2.3.0",
+    "date-fns": "^2.0.0-alpha.27",
+    "dotenv": "^6.2.0",
+    "express": "^4.17.1",
+    "graphql-cli": "^3.0.5",
+    "graphql-import": "^0.7.1",
+    "graphql-iso-date": "^3.6.1",
+    "graphql-subscriptions": "^1.1.0",
+    "jsonwebtoken": "^8.4.0",
+    "nexus-plugin-prisma": "^0.16.1",
+    "nodemailer": "^5.1.1",
+    "nodemailer-juice": "^1.0.1",
+    "nodemon": "^1.18.9",
+    "npm-run-all": "^4.1.5",
+    "pm2": "^3.5.1",
+    "prisma-binding": "^2.2.14",
+    "stripe": "^8.63.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.6",
+    "uuid": "^3.3.2"
+  },
+  "cacheDirectories": [
+    "node_modules/"
+  ],
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "devDependencies": {
+    "@types/graphql-iso-date": "^3.4.0",
+    "prisma-upgrade": "0.0.34",
+    "ts-node-dev": "^1.0.0-pre.50"
+  }
+}

@@ -1,0 +1,211 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["connectOrCreate", "transactionApi"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Address {
+  address_line String
+  card_name    String
+  city         String
+  country      String
+  createdAt    DateTime @default(now())
+  id           String   @id
+  postcode     String
+  updatedAt    DateTime @updatedAt
+  user         String
+  User         User     @relation(fields: [user], references: [id])
+}
+
+model CartItem {
+  createdAt    DateTime      @default(now())
+  id           String        @id
+  item         String?
+  itemvariants String?
+  quantity     Int           @default(1)
+  updatedAt    DateTime      @updatedAt
+  user         String
+  Item         Item?         @relation(fields: [item], references: [id])
+  ItemVariants ItemVariants? @relation(fields: [itemvariants], references: [id])
+  User         User          @relation(fields: [user], references: [id])
+}
+
+model Color {
+  createdAt    DateTime       @default(now())
+  id           String         @id
+  label        String?
+  name         String         @unique
+  updatedAt    DateTime       @updatedAt
+  item         Item[]
+  itemvariants ItemVariants[]
+  orderitem    OrderItem[]
+}
+
+model Item {
+  color           String
+  createdAt       DateTime       @default(now())
+  description     String
+  id              String         @id
+  image           String?
+  image2          String?
+  image3          String?
+  image4          String?
+  image5          String?
+  image6          String?
+  largeImage      String?
+  largeImage2     String?
+  largeImage3     String?
+  largeImage4     String?
+  largeImage5     String?
+  largeImage6     String?
+  mainDescription String
+  price           Int
+  quantity        Int            @default(1)
+  size            String
+  title           String
+  updatedAt       DateTime       @updatedAt
+  user            String
+  userIdentity    String         @default("no-button")
+  Color           Color          @relation(fields: [color], references: [id])
+  Size            Size           @relation(fields: [size], references: [id])
+  User            User           @relation(fields: [user], references: [id])
+  cartitems       CartItem[]
+  itemvariants    ItemVariants[]
+}
+
+model ItemVariants {
+  color           String
+  createdAt       DateTime   @default(now())
+  description     String
+  id              String     @id
+  image           String?
+  image2          String?
+  image3          String?
+  image4          String?
+  image5          String?
+  image6          String?
+  item            String
+  largeImage      String?
+  largeImage2     String?
+  largeImage3     String?
+  largeImage4     String?
+  largeImage5     String?
+  largeImage6     String?
+  mainDescription String
+  price           Int
+  quantity        Int        @default(1)
+  size            String
+  title           String
+  updatedAt       DateTime   @updatedAt
+  user            String
+  Color           Color     @relation(fields: [color], references: [id])
+  Item            Item      @relation(fields: [item], references: [id])
+  Size            Size      @relation(fields: [size], references: [id])
+  User            User      @relation(fields: [user], references: [id])
+  cartitems       CartItem[]
+}
+
+model Order {
+  address_line     String
+  card_brand       String
+  card_name        String
+  charge           String
+  city             String
+  country          String
+  createdAt        DateTime    @default(now())
+  id               String      @id
+  last4card_digits String
+  postcode         String
+  total            Int
+  updatedAt        DateTime    @updatedAt
+  user             String
+  User             User       @relation(fields: [user], references: [id])
+  items            OrderItem[]
+}
+
+model OrderItem {
+  color           String
+  createdAt       DateTime @default(now())
+  description     String
+  id              String   @id
+  image           String
+  itemid          String
+  largeImage      String
+  mainDescription String
+  order           String
+  price           Int
+  quantity        Int      @default(1)
+  size            String
+  title           String
+  updatedAt       DateTime @updatedAt
+  user            String
+  Color           Color    @relation(fields: [color], references: [id])
+  Order           Order    @relation(fields: [order], references: [id])
+  Size            Size     @relation(fields: [size], references: [id])
+  User            User     @relation(fields: [user], references: [id])
+}
+
+model SiteVisits {
+  createdAt  DateTime @default(now())
+  id         String   @id
+  updatedAt  DateTime @updatedAt
+  url        String?
+  urlReferer String?
+  userAgent  String?
+  userID     String?
+  userIP     String?
+  userType   String?
+}
+
+model Size {
+  createdAt    DateTime       @default(now())
+  id           String         @id
+  label        String?
+  name         String         @unique
+  updatedAt    DateTime       @updatedAt
+  item         Item[]
+  itemvariants ItemVariants[]
+  orderitem    OrderItem[]
+}
+
+model User {
+  createdAt        DateTime           @default(now())
+  email            String             @unique
+  id               String             @id
+  name             String
+  password         String
+  permissions2     Permission2[]
+  resetToken       String?
+  resetTokenExpiry Float?
+  updatedAt        DateTime           @updatedAt
+  address          Address[]
+  cart             CartItem[]
+  items            Item[]
+  itemvariants     ItemVariants[]
+  order            Order[]
+  OrderItem        OrderItem[]
+  User_permissions User_permissions[]
+}
+
+model User_permissions {
+  nodeId   String
+  position Int
+  value    String
+  User     User   @relation(fields: [nodeId], references: [id])
+
+  @@id([nodeId, position])
+}
+
+enum Permission2 {
+  ADMIN
+  GUEST_USER
+  ITEMCREATE
+  ITEMDELETE
+  ITEMUPDATE
+  PERMISSIONUPDATE
+  USER
+}
