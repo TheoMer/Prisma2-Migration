@@ -1,4 +1,4 @@
-const { ApolloServer, gql } = require('apollo-server-express');
+const { ApolloServer } = require('apollo-server-express');
 import { createContext } from './context';
 import { schema } from './schema';
 
