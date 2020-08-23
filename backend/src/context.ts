@@ -8,7 +8,7 @@ const prisma = new PrismaClient({
 });
 const pubsub = new PubSub();
 
-export function createContext(ctx: any): Context {
+export const createContext(ctx: any): Context => {
   return {
     ...ctx,
     prisma,
