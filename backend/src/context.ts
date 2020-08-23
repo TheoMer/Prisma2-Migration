@@ -3,7 +3,9 @@ import { PubSub } from 'graphql-subscriptions';
 import { Request } from 'apollo-server-express';
 import { Context } from './type2'
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  log: ['query'],
+});
 const pubsub = new PubSub();
 
 export function createContext(ctx: any): Context {
