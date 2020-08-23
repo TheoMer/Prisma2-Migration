@@ -1,6 +1,5 @@
 import { PrismaClient } from '@prisma/client';
 import { PubSub } from 'graphql-subscriptions';
-import { Request } from 'apollo-server-express';
 import { Context } from './type2'
 
 const prisma = new PrismaClient({
