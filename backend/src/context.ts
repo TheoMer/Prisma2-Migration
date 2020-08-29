@@ -1,9 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 import { PubSub } from 'graphql-subscriptions';
-import { Context } from './type2'
+import { Context } from './types2'
 
 const prisma = new PrismaClient({
-  log: ['query'],
+  //log: ['query'],
 });
 const pubsub = new PubSub();
 

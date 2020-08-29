@@ -25,7 +25,7 @@ input AddressCreateWithoutUserInput {
   city: String!
   country: String!
   createdAt: DateTime
-  id: String!
+  id: String
   postcode: String!
   updatedAt: DateTime
 }
@@ -95,7 +95,7 @@ input CartItemCreateManyWithoutUserInput {
 
 input CartItemCreateWithoutItemInput {
   createdAt: DateTime
-  id: String!
+  id: String
   ItemVariants: ItemVariantsCreateOneWithoutCartitemsInput
   quantity: Int
   updatedAt: DateTime
@@ -104,7 +104,7 @@ input CartItemCreateWithoutItemInput {
 
 input CartItemCreateWithoutItemVariantsInput {
   createdAt: DateTime
-  id: String!
+  id: String
   Item: ItemCreateOneWithoutCartitemsInput
   quantity: Int
   updatedAt: DateTime
@@ -113,7 +113,7 @@ input CartItemCreateWithoutItemVariantsInput {
 
 input CartItemCreateWithoutUserInput {
   createdAt: DateTime
-  id: String!
+  id: String
   Item: ItemCreateOneWithoutCartitemsInput
   ItemVariants: ItemVariantsCreateOneWithoutCartitemsInput
   quantity: Int
@@ -181,7 +181,7 @@ input ColorCreateOneWithoutOrderitemInput {
 
 input ColorCreateWithoutItemInput {
   createdAt: DateTime
-  id: String!
+  id: String
   itemvariants: ItemVariantsCreateManyWithoutColorInput
   label: String
   name: String!
@@ -191,7 +191,7 @@ input ColorCreateWithoutItemInput {
 
 input ColorCreateWithoutItemvariantsInput {
   createdAt: DateTime
-  id: String!
+  id: String
   item: ItemCreateManyWithoutColorInput
   label: String
   name: String!
@@ -201,7 +201,7 @@ input ColorCreateWithoutItemvariantsInput {
 
 input ColorCreateWithoutOrderitemInput {
   createdAt: DateTime
-  id: String!
+  id: String
   item: ItemCreateManyWithoutColorInput
   itemvariants: ItemVariantsCreateManyWithoutColorInput
   label: String
@@ -301,7 +301,7 @@ input ItemCreateInput {
   Color: ColorCreateOneWithoutItemInput!
   createdAt: DateTime
   description: String!
-  id: String!
+  id: String
   image: String
   image2: String
   image3: String
@@ -354,7 +354,7 @@ input ItemCreateWithoutCartitemsInput {
   Color: ColorCreateOneWithoutItemInput!
   createdAt: DateTime
   description: String!
-  id: String!
+  id: String
   image: String
   image2: String
   image3: String
@@ -382,7 +382,7 @@ input ItemCreateWithoutColorInput {
   cartitems: CartItemCreateManyWithoutItemInput
   createdAt: DateTime
   description: String!
-  id: String!
+  id: String
   image: String
   image2: String
   image3: String
@@ -411,7 +411,7 @@ input ItemCreateWithoutItemvariantsInput {
   Color: ColorCreateOneWithoutItemInput!
   createdAt: DateTime
   description: String!
-  id: String!
+  id: String
   image: String
   image2: String
   image3: String
@@ -439,7 +439,7 @@ input ItemCreateWithoutSizeInput {
   Color: ColorCreateOneWithoutItemInput!
   createdAt: DateTime
   description: String!
-  id: String!
+  id: String
   image: String
   image2: String
   image3: String
@@ -467,7 +467,7 @@ input ItemCreateWithoutUserInput {
   Color: ColorCreateOneWithoutItemInput!
   createdAt: DateTime
   description: String!
-  id: String!
+  id: String
   image: String
   image2: String
   image3: String
@@ -580,7 +580,7 @@ input ItemVariantsCreateWithoutCartitemsInput {
   Color: ColorCreateOneWithoutItemvariantsInput!
   createdAt: DateTime
   description: String!
-  id: String!
+  id: String
   image: String
   image2: String
   image3: String
@@ -607,7 +607,7 @@ input ItemVariantsCreateWithoutColorInput {
   cartitems: CartItemCreateManyWithoutItemVariantsInput
   createdAt: DateTime
   description: String!
-  id: String!
+  id: String
   image: String
   image2: String
   image3: String
@@ -635,7 +635,7 @@ input ItemVariantsCreateWithoutItemInput {
   Color: ColorCreateOneWithoutItemvariantsInput!
   createdAt: DateTime
   description: String!
-  id: String!
+  id: String
   image: String
   image2: String
   image3: String
@@ -662,7 +662,7 @@ input ItemVariantsCreateWithoutSizeInput {
   Color: ColorCreateOneWithoutItemvariantsInput!
   createdAt: DateTime
   description: String!
-  id: String!
+  id: String
   image: String
   image2: String
   image3: String
@@ -689,7 +689,7 @@ input ItemVariantsCreateWithoutUserInput {
   Color: ColorCreateOneWithoutItemvariantsInput!
   createdAt: DateTime
   description: String!
-  id: String!
+  id: String
   image: String
   image2: String
   image3: String
@@ -913,7 +913,7 @@ input OrderCreateWithoutItemsInput {
   city: String!
   country: String!
   createdAt: DateTime
-  id: String!
+  id: String
   last4card_digits: String!
   postcode: String!
   total: Int!
@@ -929,7 +929,7 @@ input OrderCreateWithoutUserInput {
   city: String!
   country: String!
   createdAt: DateTime
-  id: String!
+  id: String
   items: OrderItemCreateManyWithoutOrderInput
   last4card_digits: String!
   postcode: String!
@@ -985,7 +985,7 @@ input OrderItemCreateManyWithoutUserInput {
 input OrderItemCreateWithoutColorInput {
   createdAt: DateTime
   description: String!
-  id: String!
+  id: String
   image: String!
   itemid: String!
   largeImage: String!
@@ -1003,7 +1003,7 @@ input OrderItemCreateWithoutOrderInput {
   Color: ColorCreateOneWithoutOrderitemInput!
   createdAt: DateTime
   description: String!
-  id: String!
+  id: String
   image: String!
   itemid: String!
   largeImage: String!
@@ -1020,7 +1020,7 @@ input OrderItemCreateWithoutSizeInput {
   Color: ColorCreateOneWithoutOrderitemInput!
   createdAt: DateTime
   description: String!
-  id: String!
+  id: String
   image: String!
   itemid: String!
   largeImage: String!
@@ -1037,7 +1037,7 @@ input OrderItemCreateWithoutUserInput {
   Color: ColorCreateOneWithoutOrderitemInput!
   createdAt: DateTime
   description: String!
-  id: String!
+  id: String
   image: String!
   itemid: String!
   largeImage: String!
@@ -1203,7 +1203,7 @@ input SizeCreateOneWithoutOrderitemInput {
 
 input SizeCreateWithoutItemInput {
   createdAt: DateTime
-  id: String!
+  id: String
   itemvariants: ItemVariantsCreateManyWithoutSizeInput
   label: String
   name: String!
@@ -1213,7 +1213,7 @@ input SizeCreateWithoutItemInput {
 
 input SizeCreateWithoutItemvariantsInput {
   createdAt: DateTime
-  id: String!
+  id: String
   item: ItemCreateManyWithoutSizeInput
   label: String
   name: String!
@@ -1223,7 +1223,7 @@ input SizeCreateWithoutItemvariantsInput {
 
 input SizeCreateWithoutOrderitemInput {
   createdAt: DateTime
-  id: String!
+  id: String
   item: ItemCreateManyWithoutSizeInput
   itemvariants: ItemVariantsCreateManyWithoutSizeInput
   label: String
@@ -1286,6 +1286,7 @@ type User {
   itemvariants(cursor: ItemVariantsWhereUniqueInput, skip: Int, take: Int): [ItemVariants!]!
   name: String!
   order(cursor: OrderWhereUniqueInput, skip: Int, take: Int): [Order!]!
+  OrderItem(cursor: OrderItemWhereUniqueInput, skip: Int, take: Int): [OrderItem!]!
   password: String!
   permissions2: [Permission2!]!
   resetToken: String
@@ -1356,7 +1357,7 @@ input UserCreateWithoutCartInput {
   address: AddressCreateManyWithoutUserInput
   createdAt: DateTime
   email: String!
-  id: String!
+  id: String
   items: ItemCreateManyWithoutUserInput
   itemvariants: ItemVariantsCreateManyWithoutUserInput
   name: String!
@@ -1375,7 +1376,7 @@ input UserCreateWithoutItemsInput {
   cart: CartItemCreateManyWithoutUserInput
   createdAt: DateTime
   email: String!
-  id: String!
+  id: String
   itemvariants: ItemVariantsCreateManyWithoutUserInput
   name: String!
   order: OrderCreateManyWithoutUserInput
@@ -1393,7 +1394,7 @@ input UserCreateWithoutItemvariantsInput {
   cart: CartItemCreateManyWithoutUserInput
   createdAt: DateTime
   email: String!
-  id: String!
+  id: String
   items: ItemCreateManyWithoutUserInput
   name: String!
   order: OrderCreateManyWithoutUserInput
@@ -1411,7 +1412,7 @@ input UserCreateWithoutOrderInput {
   cart: CartItemCreateManyWithoutUserInput
   createdAt: DateTime
   email: String!
-  id: String!
+  id: String
   items: ItemCreateManyWithoutUserInput
   itemvariants: ItemVariantsCreateManyWithoutUserInput
   name: String!
@@ -1429,7 +1430,7 @@ input UserCreateWithoutOrderItemInput {
   cart: CartItemCreateManyWithoutUserInput
   createdAt: DateTime
   email: String!
-  id: String!
+  id: String
   items: ItemCreateManyWithoutUserInput
   itemvariants: ItemVariantsCreateManyWithoutUserInput
   name: String!

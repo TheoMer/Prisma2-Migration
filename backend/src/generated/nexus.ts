@@ -37,7 +37,7 @@ export interface NexusGenInputs {
     city: string; // String!
     country: string; // String!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id: string; // String!
+    id?: string | null; // String
     postcode: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
@@ -89,7 +89,7 @@ export interface NexusGenInputs {
   }
   CartItemCreateWithoutItemInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id: string; // String!
+    id?: string | null; // String
     ItemVariants?: NexusGenInputs['ItemVariantsCreateOneWithoutCartitemsInput'] | null; // ItemVariantsCreateOneWithoutCartitemsInput
     quantity?: number | null; // Int
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -97,7 +97,7 @@ export interface NexusGenInputs {
   }
   CartItemCreateWithoutItemVariantsInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id: string; // String!
+    id?: string | null; // String
     Item?: NexusGenInputs['ItemCreateOneWithoutCartitemsInput'] | null; // ItemCreateOneWithoutCartitemsInput
     quantity?: number | null; // Int
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -105,7 +105,7 @@ export interface NexusGenInputs {
   }
   CartItemCreateWithoutUserInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id: string; // String!
+    id?: string | null; // String
     Item?: NexusGenInputs['ItemCreateOneWithoutCartitemsInput'] | null; // ItemCreateOneWithoutCartitemsInput
     ItemVariants?: NexusGenInputs['ItemVariantsCreateOneWithoutCartitemsInput'] | null; // ItemVariantsCreateOneWithoutCartitemsInput
     quantity?: number | null; // Int
@@ -157,7 +157,7 @@ export interface NexusGenInputs {
   }
   ColorCreateWithoutItemInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id: string; // String!
+    id?: string | null; // String
     itemvariants?: NexusGenInputs['ItemVariantsCreateManyWithoutColorInput'] | null; // ItemVariantsCreateManyWithoutColorInput
     label?: string | null; // String
     name: string; // String!
@@ -166,7 +166,7 @@ export interface NexusGenInputs {
   }
   ColorCreateWithoutItemvariantsInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id: string; // String!
+    id?: string | null; // String
     item?: NexusGenInputs['ItemCreateManyWithoutColorInput'] | null; // ItemCreateManyWithoutColorInput
     label?: string | null; // String
     name: string; // String!
@@ -175,7 +175,7 @@ export interface NexusGenInputs {
   }
   ColorCreateWithoutOrderitemInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id: string; // String!
+    id?: string | null; // String
     item?: NexusGenInputs['ItemCreateManyWithoutColorInput'] | null; // ItemCreateManyWithoutColorInput
     itemvariants?: NexusGenInputs['ItemVariantsCreateManyWithoutColorInput'] | null; // ItemVariantsCreateManyWithoutColorInput
     label?: string | null; // String
@@ -231,7 +231,7 @@ export interface NexusGenInputs {
     Color: NexusGenInputs['ColorCreateOneWithoutItemInput']; // ColorCreateOneWithoutItemInput!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     image?: string | null; // String
     image2?: string | null; // String
     image3?: string | null; // String
@@ -278,7 +278,7 @@ export interface NexusGenInputs {
     Color: NexusGenInputs['ColorCreateOneWithoutItemInput']; // ColorCreateOneWithoutItemInput!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     image?: string | null; // String
     image2?: string | null; // String
     image3?: string | null; // String
@@ -305,7 +305,7 @@ export interface NexusGenInputs {
     cartitems?: NexusGenInputs['CartItemCreateManyWithoutItemInput'] | null; // CartItemCreateManyWithoutItemInput
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     image?: string | null; // String
     image2?: string | null; // String
     image3?: string | null; // String
@@ -333,7 +333,7 @@ export interface NexusGenInputs {
     Color: NexusGenInputs['ColorCreateOneWithoutItemInput']; // ColorCreateOneWithoutItemInput!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     image?: string | null; // String
     image2?: string | null; // String
     image3?: string | null; // String
@@ -360,7 +360,7 @@ export interface NexusGenInputs {
     Color: NexusGenInputs['ColorCreateOneWithoutItemInput']; // ColorCreateOneWithoutItemInput!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     image?: string | null; // String
     image2?: string | null; // String
     image3?: string | null; // String
@@ -387,7 +387,7 @@ export interface NexusGenInputs {
     Color: NexusGenInputs['ColorCreateOneWithoutItemInput']; // ColorCreateOneWithoutItemInput!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     image?: string | null; // String
     image2?: string | null; // String
     image3?: string | null; // String
@@ -464,7 +464,7 @@ export interface NexusGenInputs {
     Color: NexusGenInputs['ColorCreateOneWithoutItemvariantsInput']; // ColorCreateOneWithoutItemvariantsInput!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     image?: string | null; // String
     image2?: string | null; // String
     image3?: string | null; // String
@@ -490,7 +490,7 @@ export interface NexusGenInputs {
     cartitems?: NexusGenInputs['CartItemCreateManyWithoutItemVariantsInput'] | null; // CartItemCreateManyWithoutItemVariantsInput
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     image?: string | null; // String
     image2?: string | null; // String
     image3?: string | null; // String
@@ -517,7 +517,7 @@ export interface NexusGenInputs {
     Color: NexusGenInputs['ColorCreateOneWithoutItemvariantsInput']; // ColorCreateOneWithoutItemvariantsInput!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     image?: string | null; // String
     image2?: string | null; // String
     image3?: string | null; // String
@@ -543,7 +543,7 @@ export interface NexusGenInputs {
     Color: NexusGenInputs['ColorCreateOneWithoutItemvariantsInput']; // ColorCreateOneWithoutItemvariantsInput!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     image?: string | null; // String
     image2?: string | null; // String
     image3?: string | null; // String
@@ -569,7 +569,7 @@ export interface NexusGenInputs {
     Color: NexusGenInputs['ColorCreateOneWithoutItemvariantsInput']; // ColorCreateOneWithoutItemvariantsInput!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     image?: string | null; // String
     image2?: string | null; // String
     image3?: string | null; // String
@@ -738,7 +738,7 @@ export interface NexusGenInputs {
     city: string; // String!
     country: string; // String!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id: string; // String!
+    id?: string | null; // String
     last4card_digits: string; // String!
     postcode: string; // String!
     total: number; // Int!
@@ -753,7 +753,7 @@ export interface NexusGenInputs {
     city: string; // String!
     country: string; // String!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id: string; // String!
+    id?: string | null; // String
     items?: NexusGenInputs['OrderItemCreateManyWithoutOrderInput'] | null; // OrderItemCreateManyWithoutOrderInput
     last4card_digits: string; // String!
     postcode: string; // String!
@@ -784,7 +784,7 @@ export interface NexusGenInputs {
   OrderItemCreateWithoutColorInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     image: string; // String!
     itemid: string; // String!
     largeImage: string; // String!
@@ -801,7 +801,7 @@ export interface NexusGenInputs {
     Color: NexusGenInputs['ColorCreateOneWithoutOrderitemInput']; // ColorCreateOneWithoutOrderitemInput!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     image: string; // String!
     itemid: string; // String!
     largeImage: string; // String!
@@ -817,7 +817,7 @@ export interface NexusGenInputs {
     Color: NexusGenInputs['ColorCreateOneWithoutOrderitemInput']; // ColorCreateOneWithoutOrderitemInput!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     image: string; // String!
     itemid: string; // String!
     largeImage: string; // String!
@@ -833,7 +833,7 @@ export interface NexusGenInputs {
     Color: NexusGenInputs['ColorCreateOneWithoutOrderitemInput']; // ColorCreateOneWithoutOrderitemInput!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     image: string; // String!
     itemid: string; // String!
     largeImage: string; // String!
@@ -946,7 +946,7 @@ export interface NexusGenInputs {
   }
   SizeCreateWithoutItemInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id: string; // String!
+    id?: string | null; // String
     itemvariants?: NexusGenInputs['ItemVariantsCreateManyWithoutSizeInput'] | null; // ItemVariantsCreateManyWithoutSizeInput
     label?: string | null; // String
     name: string; // String!
@@ -955,7 +955,7 @@ export interface NexusGenInputs {
   }
   SizeCreateWithoutItemvariantsInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id: string; // String!
+    id?: string | null; // String
     item?: NexusGenInputs['ItemCreateManyWithoutSizeInput'] | null; // ItemCreateManyWithoutSizeInput
     label?: string | null; // String
     name: string; // String!
@@ -964,7 +964,7 @@ export interface NexusGenInputs {
   }
   SizeCreateWithoutOrderitemInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id: string; // String!
+    id?: string | null; // String
     item?: NexusGenInputs['ItemCreateManyWithoutSizeInput'] | null; // ItemCreateManyWithoutSizeInput
     itemvariants?: NexusGenInputs['ItemVariantsCreateManyWithoutSizeInput'] | null; // ItemVariantsCreateManyWithoutSizeInput
     label?: string | null; // String
@@ -1032,7 +1032,7 @@ export interface NexusGenInputs {
     address?: NexusGenInputs['AddressCreateManyWithoutUserInput'] | null; // AddressCreateManyWithoutUserInput
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     items?: NexusGenInputs['ItemCreateManyWithoutUserInput'] | null; // ItemCreateManyWithoutUserInput
     itemvariants?: NexusGenInputs['ItemVariantsCreateManyWithoutUserInput'] | null; // ItemVariantsCreateManyWithoutUserInput
     name: string; // String!
@@ -1050,7 +1050,7 @@ export interface NexusGenInputs {
     cart?: NexusGenInputs['CartItemCreateManyWithoutUserInput'] | null; // CartItemCreateManyWithoutUserInput
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     itemvariants?: NexusGenInputs['ItemVariantsCreateManyWithoutUserInput'] | null; // ItemVariantsCreateManyWithoutUserInput
     name: string; // String!
     order?: NexusGenInputs['OrderCreateManyWithoutUserInput'] | null; // OrderCreateManyWithoutUserInput
@@ -1067,7 +1067,7 @@ export interface NexusGenInputs {
     cart?: NexusGenInputs['CartItemCreateManyWithoutUserInput'] | null; // CartItemCreateManyWithoutUserInput
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     items?: NexusGenInputs['ItemCreateManyWithoutUserInput'] | null; // ItemCreateManyWithoutUserInput
     name: string; // String!
     order?: NexusGenInputs['OrderCreateManyWithoutUserInput'] | null; // OrderCreateManyWithoutUserInput
@@ -1084,7 +1084,7 @@ export interface NexusGenInputs {
     cart?: NexusGenInputs['CartItemCreateManyWithoutUserInput'] | null; // CartItemCreateManyWithoutUserInput
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     items?: NexusGenInputs['ItemCreateManyWithoutUserInput'] | null; // ItemCreateManyWithoutUserInput
     itemvariants?: NexusGenInputs['ItemVariantsCreateManyWithoutUserInput'] | null; // ItemVariantsCreateManyWithoutUserInput
     name: string; // String!
@@ -1101,7 +1101,7 @@ export interface NexusGenInputs {
     cart?: NexusGenInputs['CartItemCreateManyWithoutUserInput'] | null; // CartItemCreateManyWithoutUserInput
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
-    id: string; // String!
+    id?: string | null; // String
     items?: NexusGenInputs['ItemCreateManyWithoutUserInput'] | null; // ItemCreateManyWithoutUserInput
     itemvariants?: NexusGenInputs['ItemVariantsCreateManyWithoutUserInput'] | null; // ItemVariantsCreateManyWithoutUserInput
     name: string; // String!
@@ -1625,6 +1625,7 @@ export interface NexusGenFieldTypes {
     itemvariants: NexusGenRootTypes['ItemVariants'][]; // [ItemVariants!]!
     name: string; // String!
     order: NexusGenRootTypes['Order'][]; // [Order!]!
+    OrderItem: NexusGenRootTypes['OrderItem'][]; // [OrderItem!]!
     password: string; // String!
     permissions2: NexusGenEnums['Permission2'][]; // [Permission2!]!
     resetToken: string | null; // String
@@ -1841,6 +1842,11 @@ export interface NexusGenArgTypes {
       skip?: number | null; // Int
       take?: number | null; // Int
     }
+    OrderItem: { // args
+      cursor?: NexusGenInputs['OrderItemWhereUniqueInput'] | null; // OrderItemWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
   }
 }
 
@@ -1862,7 +1868,7 @@ export type NexusGenScalarNames = "Boolean" | "Date" | "DateTime" | "Float" | "I
 export type NexusGenUnionNames = never;
 
 export interface NexusGenTypes {
-  context: any;
+  context: {};
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   argTypes: NexusGenArgTypes;

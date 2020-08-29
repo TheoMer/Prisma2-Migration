@@ -18,7 +18,7 @@ export const Mutation = mutationType({
   
       t.crud.createOneItem({
         alias: 'createItem',
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
 
           const { userId } = ctx.req
   
@@ -50,7 +50,7 @@ export const Mutation = mutationType({
           country: stringArg({ nullable: false}), 
           card_name: stringArg({ nullable: false}),
         },
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
 
           const {userId } = ctx.req;
   
@@ -104,7 +104,7 @@ export const Mutation = mutationType({
                   id: userId,
                 },
               },
-              id: '-1',  // An error is issued on data: if I don't add an id
+              //id: '-1',  // An error is issued on data: if I don't add an id
               ...args,
             },
           })
@@ -127,7 +127,7 @@ export const Mutation = mutationType({
           country: stringArg({ nullable: false}), 
           card_name: stringArg({ nullable: false}),
         },
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
 
           const { userId } = ctx.req;
   
@@ -169,11 +169,11 @@ export const Mutation = mutationType({
           userIP: stringArg({ nullable: true}), 
           urlReferer: stringArg({ nullable: true})
         },
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
   
           const item = await ctx.prisma.siteVisits.create({
             data: {
-              id: '-1',
+              //id: '-1',
               ...args,
             },
           })
@@ -198,7 +198,7 @@ export const Mutation = mutationType({
           size: arg({ type: "SizeCreateOneWithoutItemInput" }), 
           color: arg({ type: "ColorCreateOneWithoutItemInput"}),
         },
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
   
           // remove the id and email from args
           delete args.id;
@@ -224,7 +224,7 @@ export const Mutation = mutationType({
         args: {
           id: idArg({ nullable: false }),
         },
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
           
           const { userId } = ctx.req;
 
@@ -279,7 +279,7 @@ export const Mutation = mutationType({
           password: stringArg({ nullable: false }), 
           name: stringArg({ nullable: false }), 
         },
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
           
           const { userId } = ctx.req;
           let user;
@@ -303,7 +303,7 @@ export const Mutation = mutationType({
   
           // If userId already exists and the user has guest_user permissions then
           // update the existing user details with the new user details
-          const hasPermissions = ctx.prisma.user.permissions2.some((permission2: any) =>
+          const hasPermissions = ctx.req.user.permissions2.some((permission2: any) =>
             ['GUEST_USER'].includes(permission2));
   
           if (userId && hasPermissions) {
@@ -322,22 +322,22 @@ export const Mutation = mutationType({
             });
           } else {
             
-            // Check if a user with this email email already exists
+            // Check if a user with this mail already exists
             const emailTest = args.email;
   
             // You may get an error because of email: emailTest. If so revert back to just
             // where { emailTest }
             const userTest = await ctx.prisma.user.findOne({ where: { email: emailTest } });
   
-            if (userTest) {
+            if (userTest != null) {
               throw new Error(`A user with the email: ${emailTest} already exists.`);
             }
-      
+
             // create the user in the database
             user = await ctx.prisma.user.create(
               {
                 data: {
-                  id: '-1', // May have to comment this line out if -1 is returned as the user id
+                  //id: '-1', // May have to comment this line out if -1 is returned as the user id
                   ...args,
                   password,
                   permissions2: { set: ['USER'] },
@@ -371,10 +371,12 @@ export const Mutation = mutationType({
           email: stringArg({ nullable: false }), 
           password: stringArg({ nullable: false }),         
         },
-        resolve: async (_, { email, password }, ctx) => {
+        resolve: async (root: any, { email, password }: {email: any, password: any}, ctx: any) => {
           
           let user: any;
           const { userId } = ctx.req;
+          //console.log("userId = ", userId);
+          //console.log("User  = ", ctx.req.user);
           
           //Check that the email and password aren't empty
           if (email.length == 0) {
@@ -394,13 +396,8 @@ export const Mutation = mutationType({
             }
           }).catch(handleSubmitErr);
   
-          /*console.log("cart = ", cart);
-          const temp = cart.map(async (cartVal: any, index: any) => {
-            console.log("Itemvariants id = ", await cartVal.itemvariants);
-          })*/
-  
           // Get user's permission rights
-          const hasPermissions = ctx.prisma.user.permissions2.some((permission2: any) => ['GUEST_USER'].includes(permission2));
+          const hasPermissions = ctx.req.user.permissions2.some((permission2: any) => ['GUEST_USER'].includes(permission2));
   
           // 1. check if there is a user with that email
           user = await ctx.prisma.user.findOne({
@@ -412,7 +409,7 @@ export const Mutation = mutationType({
           }
   
           // 2. Check if their password is correct
-          const valid = await bcrypt.compare('dogs123', user.password);
+          const valid = await bcrypt.compare(password, user.password);
           if (!valid) {
             throw new Error('Invalid Password!');
           }
@@ -511,7 +508,7 @@ export const Mutation = mutationType({
               // Create the newly transfered order
               ctx.prisma.order.create({
                 data: {
-                  id: '-1',   
+                  //id: '-1',   
                   total: userOrders.total,
                   charge: userOrders.charge,
                   card_brand: userOrders.card_brand,
@@ -528,7 +525,7 @@ export const Mutation = mutationType({
           }
           
           // 5. Transfer user address only if an address for the user doesn't already exist
-          if (user.address.length === 0) {
+          if (user.address === null) {
             const userAddress = await ctx.prisma.address.findMany({
               where: {
                 user: { 
@@ -541,7 +538,7 @@ export const Mutation = mutationType({
             if (ctx.req.userId && hasPermissions && userAddress != null) {
               ctx.prisma.address.create({
                 data: {
-                  id: '-1',   
+                  //id: '-1',   
                   User: { connect: { id: user.id } },
                   address_line: userAddress.address_line,
                   city: userAddress.city,
@@ -585,7 +582,7 @@ export const Mutation = mutationType({
       t.field('signout', {
         type: "SuccessMessage",
         nullable: true,
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
           
           // Set logged out flag
           // 1. Generate number
@@ -617,7 +614,7 @@ export const Mutation = mutationType({
         args: {
           email: stringArg({ nullable: false }), 
         },
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
           
           //Check that the email isn't empty
           if (args.email.length == 0) {
@@ -663,7 +660,7 @@ export const Mutation = mutationType({
           password: stringArg({ nullable: false }),
           confirmPassword: stringArg({ nullable: false })
         },
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
           
           // 1. check if the passwords match
           if (args.password !== args.confirmPassword) {
@@ -724,7 +721,7 @@ export const Mutation = mutationType({
           permissions2: arg({ type: "Permission2", list: true }),
           userId: idArg({ nullable: false }),
         },
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
           
           const { userId } = ctx.req;
   
@@ -765,7 +762,7 @@ export const Mutation = mutationType({
           userId: idArg({ nullable: false }),
           email: stringArg({ nullable: false }), 
         },
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
 
           const { userId } = ctx.req;
   
@@ -818,7 +815,7 @@ export const Mutation = mutationType({
         args: {
           id: idArg({ nullable: false }),
         },
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
   
           // 1. Make sure they are signed in
           const { userId } = ctx.req;
@@ -860,7 +857,7 @@ export const Mutation = mutationType({
           // 4. If its not, create a fresh CartItem for that user!
           return ctx.prisma.cartItem.create({
             data: {
-              id: '-1',
+              //id: '-1',
               User: {
                 connect: { id: userId },
               },
@@ -878,7 +875,7 @@ export const Mutation = mutationType({
         args: {
           id: idArg({ nullable: false }),
         },
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
   
           // 1. Make sure they are signed in
           const { userId } = ctx.req;
@@ -920,7 +917,7 @@ export const Mutation = mutationType({
           // 4. If its not, create a fresh CartItem for that user!
           return ctx.prisma.cartItem.create({
             data: {
-              id: '-1',
+              //id: '-1',
               User: {
                 connect: { id: userId },
               },
@@ -943,7 +940,7 @@ export const Mutation = mutationType({
           id: idArg({ nullable: false }),
           itemId: stringArg({ nullable: false })
         },
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
 
           const { userId } = ctx.req;
   
@@ -983,7 +980,7 @@ export const Mutation = mutationType({
           last4card_digits: stringArg({ nullable: false }), 
           card_name: stringArg({ nullable: false })
         },
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
   
           // console.log("createOrder args = ", args);
           // 1. Query the current user and make sure they are signed in
@@ -1026,7 +1023,7 @@ export const Mutation = mutationType({
           // to return the actual error message (charge.raw.code) to the client
           if (chargeFailed) {
             const errorObj = {
-              id: -1,
+              //id: -1,
               charge: charge.raw.message,
               total: 123,
               //code: charge.raw.code,
@@ -1074,7 +1071,7 @@ export const Mutation = mutationType({
           // 5. create the Order
           const order = await ctx.prisma.order.create({
             data: {
-              id: '-1',
+              //id: '-1',
               total: charge.amount,
               charge: charge.id,
               card_brand: args.card_brand,
@@ -1133,7 +1130,7 @@ export const Mutation = mutationType({
           id: idArg({ nullable: false }),
           quantity: intArg({ nullable: true })
         },
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
   
           // 1. Check if they are logged in
           const { userId } = ctx.req;

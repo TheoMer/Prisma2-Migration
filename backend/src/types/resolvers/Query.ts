@@ -32,7 +32,7 @@ export const Query = queryType({
       t.field('me', {
         type: 'User',
         nullable: true,
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
   
             const { userId } = ctx.req;
 
@@ -88,7 +88,7 @@ export const Query = queryType({
       t.crud.users({
         filtering: true,
         ordering: true,
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
   
           const { userId } = ctx.req;
 
@@ -111,7 +111,7 @@ export const Query = queryType({
         args: {
           id: idArg({ nullable: false}),
         },
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
 
           const { userId } = ctx.req;
 
@@ -143,7 +143,7 @@ export const Query = queryType({
       t.crud.orders({
         filtering: true,
         ordering: true,
-        resolve: async (_, args, ctx) => {
+        resolve: async (root: any, args: any, ctx: any) => {
   
           const { userId } = ctx.req;
   
@@ -166,5 +166,4 @@ export const Query = queryType({
   
     }
   })
-  
   

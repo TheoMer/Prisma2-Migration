@@ -14,7 +14,7 @@ model Address {
   city         String
   country      String
   createdAt    DateTime @default(now())
-  id           String   @id
+  id           String   @default(cuid()) @id
   postcode     String
   updatedAt    DateTime @updatedAt
   user         String
@@ -23,7 +23,7 @@ model Address {
 
 model CartItem {
   createdAt    DateTime      @default(now())
-  id           String        @id
+  id           String        @default(cuid()) @id
   item         String?
   itemvariants String?
   quantity     Int           @default(1)
@@ -36,7 +36,7 @@ model CartItem {
 
 model Color {
   createdAt    DateTime       @default(now())
-  id           String         @id
+  id           String         @default(cuid()) @id
   label        String?
   name         String         @unique
   updatedAt    DateTime       @updatedAt
@@ -49,7 +49,7 @@ model Item {
   color           String
   createdAt       DateTime       @default(now())
   description     String
-  id              String         @id
+  id              String         @default(cuid()) @id
   image           String?
   image2          String?
   image3          String?
@@ -81,7 +81,7 @@ model ItemVariants {
   color           String
   createdAt       DateTime   @default(now())
   description     String
-  id              String     @id
+  id              String     @default(cuid()) @id
   image           String?
   image2          String?
   image3          String?
@@ -117,7 +117,7 @@ model Order {
   city             String
   country          String
   createdAt        DateTime    @default(now())
-  id               String      @id
+  id               String      @default(cuid()) @id
   last4card_digits String
   postcode         String
   total            Int
@@ -131,7 +131,7 @@ model OrderItem {
   color           String
   createdAt       DateTime @default(now())
   description     String
-  id              String   @id
+  id              String   @default(cuid()) @id
   image           String
   itemid          String
   largeImage      String
@@ -151,7 +151,7 @@ model OrderItem {
 
 model SiteVisits {
   createdAt  DateTime @default(now())
-  id         String   @id
+  id         String   @default(cuid()) @id
   updatedAt  DateTime @updatedAt
   url        String?
   urlReferer String?
@@ -163,7 +163,7 @@ model SiteVisits {
 
 model Size {
   createdAt    DateTime       @default(now())
-  id           String         @id
+  id           String         @default(cuid()) @id
   label        String?
   name         String         @unique
   updatedAt    DateTime       @updatedAt
@@ -175,7 +175,7 @@ model Size {
 model User {
   createdAt        DateTime           @default(now())
   email            String             @unique
-  id               String             @id
+  id               String             @default(cuid()) @id
   name             String
   password         String
   permissions2     Permission2[]

@@ -18,7 +18,7 @@ export const User = objectType({
       t.model.items()
       t.model.itemvariants()
       t.model.order()
-      //t.model.OrderItem()
+      t.model.OrderItem()
       t.date("createdAt")
       t.date("updatedAt")
     }

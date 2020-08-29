@@ -19,12 +19,17 @@ app.use(cookieParser());
 app.use((req: any, res: any, next: any) => {
 
     const { token, uuid } = req.cookies;
+    //console.log("token = ", token);
+    //console.log("uuid = ", uuid);
+
+    req.userId = 'cjo7q048b000408312h9c2fo0';
 
     if(token) {
 
         try {
 
           const { userId } = jwtt.verify(token, process.env.APP_SECRET);
+          console.log("UserId = ", userId);
         
           // Put the userId onto the req for future requests to access
           req.userId = userId;
@@ -60,7 +65,7 @@ app.use(async (req: any, res: any, next: any) => {
       });
 
       req.user = user;
-      console.log("User = ", req.user);
+      //console.log("User = ", req.user);
 
     } catch (e) {
 
