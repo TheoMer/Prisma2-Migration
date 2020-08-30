@@ -1,3 +1,3 @@
 export * from './Mutation';
 export * from './Query';
-//export * from './Subscription';
+export * from './Subscription';

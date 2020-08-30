@@ -3,7 +3,7 @@
  * Do not make changes to this file directly
  */
 
-
+import * as ctx from "../types2"
 import { core } from "@nexus/schema"
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
@@ -1310,6 +1310,7 @@ export interface NexusGenRootTypes {
     name: string; // String!
     updatedAt: NexusGenScalars['Date']; // Date!
   }
+  Subscription: {};
   SuccessMessage: { // root type
     message: string; // String!
   }
@@ -1612,6 +1613,10 @@ export interface NexusGenFieldTypes {
     name: string; // String!
     updatedAt: NexusGenScalars['Date']; // Date!
   }
+  Subscription: { // field return type
+    itemCreate: NexusGenRootTypes['Item']; // Item!
+    itemDeleted: NexusGenRootTypes['Item']; // Item!
+  }
   SuccessMessage: { // field return type
     message: string; // String!
   }
@@ -1855,7 +1860,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Address" | "CartItem" | "Color" | "Item" | "ItemVariants" | "Mutation" | "Order" | "OrderItem" | "Query" | "SiteVisits" | "Size" | "SuccessMessage" | "User";
+export type NexusGenObjectNames = "Address" | "CartItem" | "Color" | "Item" | "ItemVariants" | "Mutation" | "Order" | "OrderItem" | "Query" | "SiteVisits" | "Size" | "Subscription" | "SuccessMessage" | "User";
 
 export type NexusGenInputNames = "AddressCreateManyWithoutUserInput" | "AddressCreateWithoutUserInput" | "AddressFilter" | "AddressOrderByInput" | "AddressWhereInput" | "AddressWhereUniqueInput" | "CartItemCreateManyWithoutItemInput" | "CartItemCreateManyWithoutItemVariantsInput" | "CartItemCreateManyWithoutUserInput" | "CartItemCreateWithoutItemInput" | "CartItemCreateWithoutItemVariantsInput" | "CartItemCreateWithoutUserInput" | "CartItemFilter" | "CartItemOrderByInput" | "CartItemWhereInput" | "CartItemWhereUniqueInput" | "ColorCreateOneWithoutItemInput" | "ColorCreateOneWithoutItemvariantsInput" | "ColorCreateOneWithoutOrderitemInput" | "ColorCreateWithoutItemInput" | "ColorCreateWithoutItemvariantsInput" | "ColorCreateWithoutOrderitemInput" | "ColorOrderByInput" | "ColorWhereInput" | "ColorWhereUniqueInput" | "DateTimeFilter" | "IntFilter" | "ItemCreateInput" | "ItemCreateManyWithoutColorInput" | "ItemCreateManyWithoutSizeInput" | "ItemCreateManyWithoutUserInput" | "ItemCreateOneWithoutCartitemsInput" | "ItemCreateOneWithoutItemvariantsInput" | "ItemCreateWithoutCartitemsInput" | "ItemCreateWithoutColorInput" | "ItemCreateWithoutItemvariantsInput" | "ItemCreateWithoutSizeInput" | "ItemCreateWithoutUserInput" | "ItemFilter" | "ItemOrderByInput" | "ItemVariantsCreateManyWithoutColorInput" | "ItemVariantsCreateManyWithoutItemInput" | "ItemVariantsCreateManyWithoutSizeInput" | "ItemVariantsCreateManyWithoutUserInput" | "ItemVariantsCreateOneWithoutCartitemsInput" | "ItemVariantsCreateWithoutCartitemsInput" | "ItemVariantsCreateWithoutColorInput" | "ItemVariantsCreateWithoutItemInput" | "ItemVariantsCreateWithoutSizeInput" | "ItemVariantsCreateWithoutUserInput" | "ItemVariantsFilter" | "ItemVariantsOrderByInput" | "ItemVariantsWhereInput" | "ItemVariantsWhereUniqueInput" | "ItemWhereInput" | "ItemWhereUniqueInput" | "NodeIdPositionCompoundUniqueInput" | "NullableFloatFilter" | "NullableStringFilter" | "OrderCreateManyWithoutUserInput" | "OrderCreateOneWithoutItemsInput" | "OrderCreateWithoutItemsInput" | "OrderCreateWithoutUserInput" | "OrderFilter" | "OrderItemCreateManyWithoutColorInput" | "OrderItemCreateManyWithoutOrderInput" | "OrderItemCreateManyWithoutSizeInput" | "OrderItemCreateManyWithoutUserInput" | "OrderItemCreateWithoutColorInput" | "OrderItemCreateWithoutOrderInput" | "OrderItemCreateWithoutSizeInput" | "OrderItemCreateWithoutUserInput" | "OrderItemFilter" | "OrderItemOrderByInput" | "OrderItemWhereInput" | "OrderItemWhereUniqueInput" | "OrderOrderByInput" | "OrderWhereInput" | "OrderWhereUniqueInput" | "SizeCreateOneWithoutItemInput" | "SizeCreateOneWithoutItemvariantsInput" | "SizeCreateOneWithoutOrderitemInput" | "SizeCreateWithoutItemInput" | "SizeCreateWithoutItemvariantsInput" | "SizeCreateWithoutOrderitemInput" | "SizeOrderByInput" | "SizeWhereInput" | "SizeWhereUniqueInput" | "StringFilter" | "UserCreateOneWithoutCartInput" | "UserCreateOneWithoutItemsInput" | "UserCreateOneWithoutItemvariantsInput" | "UserCreateOneWithoutOrderInput" | "UserCreateOneWithoutOrderItemInput" | "UserCreateWithoutCartInput" | "UserCreateWithoutItemsInput" | "UserCreateWithoutItemvariantsInput" | "UserCreateWithoutOrderInput" | "UserCreateWithoutOrderItemInput" | "UserCreatepermissions2Input" | "UserOrderByInput" | "UserWhereInput" | "UserWhereUniqueInput" | "User_permissionsCreateManyWithoutUserInput" | "User_permissionsCreateWithoutUserInput" | "User_permissionsFilter" | "User_permissionsWhereInput" | "User_permissionsWhereUniqueInput";
 
@@ -1868,7 +1873,7 @@ export type NexusGenScalarNames = "Boolean" | "Date" | "DateTime" | "Float" | "I
 export type NexusGenUnionNames = never;
 
 export interface NexusGenTypes {
-  context: {};
+  context: ctx.Context;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   argTypes: NexusGenArgTypes;

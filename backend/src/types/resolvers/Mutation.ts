@@ -22,7 +22,7 @@ export const Mutation = mutationType({
 
           const { userId } = ctx.req
   
-          return await ctx.prisma.item.create(
+          const newItem = await ctx.prisma.item.create(
             {
               data: {
                 User: {
@@ -34,6 +34,9 @@ export const Mutation = mutationType({
               },
             },
           ).catch(handleSubmitErr);
+
+          ctx.pubsub.publish('itemCreate', newItem);
+          return newItem;
         }
       })
   
@@ -203,7 +206,7 @@ export const Mutation = mutationType({
           delete args.id;
   
           // run the update method
-          return ctx.prisma.item.update(
+          const updateItem =  await ctx.prisma.item.update(
             {
               data: {
                 ...args,
@@ -213,6 +216,9 @@ export const Mutation = mutationType({
               },
             }
           ).catch(handleSubmitErr);
+
+          ctx.pubsub.publish('itemCreate', updateItem);
+          return updateItem;
   
         }
       })
@@ -252,7 +258,9 @@ export const Mutation = mutationType({
           }).catch(handleSubmitErr);
       
           // 3b. Delete it!
-          const deletedItem = await ctx.prisma.item.delete({ where });
+          const deletedItem = await ctx.prisma.item.delete({ 
+            where 
+          }).catch(handleSubmitErr);
       
           // 4. If the item was deleted from db, delete image from Cloudinary
           if (deletedItem) {
@@ -264,7 +272,8 @@ export const Mutation = mutationType({
             const file = item?.image?.substr(60).replace('.jpg', '');
             await cloudinary.uploader.destroy(file);
           }
-      
+
+          ctx.pubsub.publish('itemDeleted', deletedItem);
           return deletedItem;
   
         }
@@ -1161,5 +1170,3 @@ export const Mutation = mutationType({
   
     }  
   })
-
-  
