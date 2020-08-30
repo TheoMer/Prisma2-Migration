@@ -33,8 +33,7 @@ export const Mutation = mutationType({
                 ...args           
               },
             },
-          )
-  
+          ).catch(handleSubmitErr);
         }
       })
   
@@ -71,7 +70,7 @@ export const Mutation = mutationType({
                 }
               }
             },
-          )
+          ).catch(handleSubmitErr);
   
           // I'm having to check the users.length as am [Object: null prototype] is returned
           // See: https://stackoverflow.com/questions/53983315/is-there-a-way-to-get-rid-of-object-null-prototype-in-graphql
@@ -89,7 +88,7 @@ export const Mutation = mutationType({
             where: {
               id: args.userId,
             },
-          })
+          }).catch(handleSubmitErr);
   
           // 4. create an address for the user
   
@@ -107,7 +106,7 @@ export const Mutation = mutationType({
               //id: '-1',  // An error is issued on data: if I don't add an id
               ...args,
             },
-          })
+          }).catch(handleSubmitErr);
   
           // add the email to the return object
           return address;
@@ -140,7 +139,7 @@ export const Mutation = mutationType({
             where: {
               id: userId, //args.userId,
             },
-          })
+          }).catch(handleSubmitErr);
   
           // remove the id and email from args
           let addressID = args.userId; // taken from userUpdateID in MyAccount.js
@@ -153,7 +152,7 @@ export const Mutation = mutationType({
             where: {
               id: addressID,
             },
-          })
+          }).catch(handleSubmitErr);
   
         }      
       })
@@ -213,7 +212,7 @@ export const Mutation = mutationType({
                 id: args.id,
               },
             }
-          )
+          ).catch(handleSubmitErr);
   
         }
       })
@@ -250,7 +249,7 @@ export const Mutation = mutationType({
             where: {
               id: args.id,
             },
-          });
+          }).catch(handleSubmitErr);
       
           // 3b. Delete it!
           const deletedItem = await ctx.prisma.item.delete({ where });
@@ -307,8 +306,9 @@ export const Mutation = mutationType({
             ['GUEST_USER'].includes(permission2));
   
           if (userId && hasPermissions) {
+
             // Update the permissions
-            user = ctx.prisma.user.update({
+            user = await ctx.prisma.user.update({
               data: {
                 ...args,
                 password,
@@ -319,7 +319,8 @@ export const Mutation = mutationType({
               where: {
                 id: userId,
               },
-            });
+            }).catch(handleSubmitErr);
+
           } else {
             
             // Check if a user with this mail already exists
@@ -327,7 +328,9 @@ export const Mutation = mutationType({
   
             // You may get an error because of email: emailTest. If so revert back to just
             // where { emailTest }
-            const userTest = await ctx.prisma.user.findOne({ where: { email: emailTest } });
+            const userTest = await ctx.prisma.user.findOne({ 
+              where: { email: emailTest } 
+            }).catch(handleSubmitErr);
   
             if (userTest != null) {
               throw new Error(`A user with the email: ${emailTest} already exists.`);
@@ -343,7 +346,7 @@ export const Mutation = mutationType({
                   permissions2: { set: ['USER'] },
                 },
               }
-            );
+            ).catch(handleSubmitErr);
       
             // create the JWT token for them
             const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
@@ -741,7 +744,7 @@ export const Mutation = mutationType({
           hasPermission(currentUser, ['ADMIN', 'PERMISSIONUPDATE']);
   
           // 4. Update the permissions
-          return ctx.prisma.user.update({
+          return await ctx.prisma.user.update({
             data: {
               permissions2: {
                 set: args.permissions2,
@@ -750,7 +753,7 @@ export const Mutation = mutationType({
             where: {
               id: args.userId,
             },          
-          })
+          }).catch(handleSubmitErr);
         
         }
       })
@@ -1158,3 +1161,5 @@ export const Mutation = mutationType({
   
     }  
   })
+
+  

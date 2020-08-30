@@ -4,6 +4,10 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { hasPermission } = require('../../utils');
 
+const handleSubmitErr = (err: any) => {
+  console.error(err.message);
+}
+
 export const Query = queryType({
     definition(t) {
       t.crud.item()
@@ -37,7 +41,9 @@ export const Query = queryType({
             const { userId } = ctx.req;
 
             // Cookie userId exists but Guest user has been deleted from table
-            const userExists = await ctx.prisma.user.findOne({ where: { id: userId } })
+            const userExists = await ctx.prisma.user.findOne({ 
+              where: { id: userId } 
+            }).catch(handleSubmitErr);
   
             if(!userId || !userExists) {
               // create guest user
@@ -59,7 +65,7 @@ export const Query = queryType({
                   password,
                   permissions2: { set: ['GUEST_USER'] },
                 },                    
-              })
+              }).catch(handleSubmitErr);
   
               // create the jwt token for them
               const token = jwt.sign({ userId: ctx._user.id }, process.env.APP_SECRET);
@@ -100,7 +106,7 @@ export const Query = queryType({
           // 2. Check if the user has the permissions to query all the users
           hasPermission(ctx._user, ['ADMIN', 'PERMISSIONUPDATE']);
   
-          return ctx.prisma.user.findMany();
+          return await ctx.prisma.user.findMany().catch(handleSubmitErr);
   
         } 
       })
@@ -125,7 +131,7 @@ export const Query = queryType({
             {
               where: { id: args.id },
             },
-          );
+          ).catch(handleSubmitErr);
   
           // 3. Check if the have the permissions to see this order
           const ownsOrder = order?.user === userId;
@@ -159,7 +165,7 @@ export const Query = queryType({
                   equals: userId 
                 },
               },
-          });
+          }).catch(handleSubmitErr);
   
         } 
       })
