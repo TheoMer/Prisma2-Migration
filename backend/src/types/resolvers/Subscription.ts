@@ -31,7 +31,7 @@ export const ItemDeleted = subscriptionField('itemDeleted', {
     },
 });
 
-export const ItemCreate = subscriptionField('itemCreate', {
+export const ItemWatch = subscriptionField('itemWatch', {
     type: 'Item',
     /*args: {
       userId: stringArg({ nullable: false }),
@@ -39,7 +39,7 @@ export const ItemCreate = subscriptionField('itemCreate', {
     subscribe: withFilter(
       (_, args: any, ctx: any) => {
         const { pubsub } = ctx;
-        return pubsub.asyncIterator('itemCreate');
+        return pubsub.asyncIterator('itemWatch');
       },
       (payload: any, args: any, ctx: any) => {
         const { userId } = ctx;

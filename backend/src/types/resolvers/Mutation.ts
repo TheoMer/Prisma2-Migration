@@ -35,7 +35,7 @@ export const Mutation = mutationType({
             },
           ).catch(handleSubmitErr);
 
-          ctx.pubsub.publish('itemCreate', newItem);
+          ctx.pubsub.publish('itemWatch', newItem);
           return newItem;
         }
       })
@@ -217,7 +217,7 @@ export const Mutation = mutationType({
             }
           ).catch(handleSubmitErr);
 
-          ctx.pubsub.publish('itemCreate', updateItem);
+          ctx.pubsub.publish('itemWatch', updateItem);
           return updateItem;
   
         }
