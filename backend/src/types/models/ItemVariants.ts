@@ -21,16 +21,16 @@ export const ItemVariants = objectType({
       t.model.mainDescription()
       t.model.price()
       t.model.quantity()
-      //t.model.user()
+      t.model.user()
       t.model.User()
       t.model.cartitems({
         filtering: true,
         ordering: true,
       })
       t.model.item()
-      //t.model.size()
+      t.model.size()
       t.model.Size()
-      //t.model.color()
+      t.model.color()
       t.model.Color()
       t.date("createdAt")
       t.date("updatedAt")

@@ -187,7 +187,7 @@ model User {
   items            Item[]
   itemvariants     ItemVariants[]
   order            Order[]
-  OrderItem        OrderItem[]
+  orderitem        OrderItem[]
   User_permissions User_permissions[]
 }
 

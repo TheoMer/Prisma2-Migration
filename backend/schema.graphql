@@ -11,6 +11,7 @@ type Address {
   id: String!
   postcode: String!
   updatedAt: Date!
+  user: String!
   User: User!
 }
 
@@ -77,10 +78,13 @@ input AddressWhereUniqueInput {
 type CartItem {
   createdAt: Date!
   id: String!
+  item: String
   Item: Item
+  itemvariants: String
   ItemVariants: ItemVariants
   quantity: Int!
   updatedAt: Date!
+  user: String!
   User: User!
 }
 
@@ -183,8 +187,11 @@ input CartItemWhereUniqueInput {
 type Color {
   createdAt: Date!
   id: String!
+  item(cursor: ItemWhereUniqueInput, orderBy: [ItemOrderByInput!], skip: Int, take: Int, where: ItemWhereInput): [Item!]!
+  itemvariants(cursor: ItemVariantsWhereUniqueInput, orderBy: [ItemVariantsOrderByInput!], skip: Int, take: Int, where: ItemVariantsWhereInput): [ItemVariants!]!
   label: String
   name: String!
+  orderitem(cursor: OrderItemWhereUniqueInput, orderBy: [OrderItemOrderByInput!], skip: Int, take: Int, where: OrderItemWhereInput): [OrderItem!]!
   updatedAt: Date!
 }
 
@@ -322,6 +329,7 @@ input IntFilter {
 
 type Item {
   cartitems(cursor: CartItemWhereUniqueInput, orderBy: [CartItemOrderByInput!], skip: Int, take: Int, where: CartItemWhereInput): [CartItem!]!
+  color: String!
   Color: Color!
   createdAt: Date!
   description: String!
@@ -342,9 +350,11 @@ type Item {
   mainDescription: String!
   price: Int!
   quantity: Int!
+  size: String!
   Size: Size!
   title: String!
   updatedAt: Date!
+  user: String!
   User: User!
   userIdentity: String!
 }
@@ -612,6 +622,7 @@ input ItemOrderByInput {
 
 type ItemVariants {
   cartitems(cursor: CartItemWhereUniqueInput, orderBy: [CartItemOrderByInput!], skip: Int, take: Int, where: CartItemWhereInput): [CartItem!]!
+  color: String!
   Color: Color!
   createdAt: Date!
   description: String!
@@ -632,9 +643,11 @@ type ItemVariants {
   mainDescription: String!
   price: Int!
   quantity: Int!
+  size: String!
   Size: Size!
   title: String!
   updatedAt: Date!
+  user: String!
   User: User!
 }
 
@@ -1040,6 +1053,7 @@ type Order {
   postcode: String!
   total: Int!
   updatedAt: Date!
+  user: String!
   User: User!
 }
 
@@ -1098,6 +1112,7 @@ input OrderCreateWithoutUserInput {
 }
 
 type OrderItem {
+  color: String!
   Color: Color!
   createdAt: Date!
   description: String!
@@ -1110,9 +1125,11 @@ type OrderItem {
   Order: Order!
   price: Int!
   quantity: Int!
+  size: String!
   Size: Size!
   title: String!
   updatedAt: Date!
+  user: String!
   User: User!
 }
 
@@ -1174,7 +1191,7 @@ input OrderItemCreateWithoutColorInput {
   Size: SizeCreateOneWithoutOrderitemInput!
   title: String!
   updatedAt: DateTime
-  User: UserCreateOneWithoutOrderItemInput!
+  User: UserCreateOneWithoutOrderitemInput!
 }
 
 input OrderItemCreateWithoutOrderInput {
@@ -1191,7 +1208,7 @@ input OrderItemCreateWithoutOrderInput {
   Size: SizeCreateOneWithoutOrderitemInput!
   title: String!
   updatedAt: DateTime
-  User: UserCreateOneWithoutOrderItemInput!
+  User: UserCreateOneWithoutOrderitemInput!
 }
 
 input OrderItemCreateWithoutSizeInput {
@@ -1208,7 +1225,7 @@ input OrderItemCreateWithoutSizeInput {
   quantity: Int
   title: String!
   updatedAt: DateTime
-  User: UserCreateOneWithoutOrderItemInput!
+  User: UserCreateOneWithoutOrderitemInput!
 }
 
 input OrderItemCreateWithoutUserInput {
@@ -1366,8 +1383,11 @@ type SiteVisits {
 type Size {
   createdAt: Date!
   id: String!
+  item(cursor: ItemWhereUniqueInput, orderBy: [ItemOrderByInput!], skip: Int, take: Int, where: ItemWhereInput): [Item!]!
+  itemvariants(cursor: ItemVariantsWhereUniqueInput, orderBy: [ItemVariantsOrderByInput!], skip: Int, take: Int, where: ItemVariantsWhereInput): [ItemVariants!]!
   label: String
   name: String!
+  orderitem(cursor: OrderItemWhereUniqueInput, orderBy: [OrderItemOrderByInput!], skip: Int, take: Int, where: OrderItemWhereInput): [OrderItem!]!
   updatedAt: Date!
 }
 
@@ -1505,15 +1525,15 @@ type SuccessMessage {
 
 type User {
   address(cursor: AddressWhereUniqueInput, orderBy: [AddressOrderByInput!], skip: Int, take: Int, where: AddressWhereInput): [Address!]!
-  cart(cursor: CartItemWhereUniqueInput, skip: Int, take: Int): [CartItem!]!
+  cart(cursor: CartItemWhereUniqueInput, orderBy: [CartItemOrderByInput!], skip: Int, take: Int, where: CartItemWhereInput): [CartItem!]!
   createdAt: Date!
   email: String!
   id: String!
-  items(cursor: ItemWhereUniqueInput, skip: Int, take: Int): [Item!]!
-  itemvariants(cursor: ItemVariantsWhereUniqueInput, skip: Int, take: Int): [ItemVariants!]!
+  items(cursor: ItemWhereUniqueInput, orderBy: [ItemOrderByInput!], skip: Int, take: Int, where: ItemWhereInput): [Item!]!
+  itemvariants(cursor: ItemVariantsWhereUniqueInput, orderBy: [ItemVariantsOrderByInput!], skip: Int, take: Int, where: ItemVariantsWhereInput): [ItemVariants!]!
   name: String!
-  order(cursor: OrderWhereUniqueInput, skip: Int, take: Int): [Order!]!
-  OrderItem(cursor: OrderItemWhereUniqueInput, skip: Int, take: Int): [OrderItem!]!
+  order(cursor: OrderWhereUniqueInput, orderBy: [OrderOrderByInput!], skip: Int, take: Int, where: OrderWhereInput): [Order!]!
+  orderitem(cursor: OrderItemWhereUniqueInput, orderBy: [OrderItemOrderByInput!], skip: Int, take: Int, where: OrderItemWhereInput): [OrderItem!]!
   password: String!
   permissions2: [Permission2!]!
   resetToken: String
@@ -1581,10 +1601,10 @@ input UserCreateOneWithoutOrderInput {
   create: UserCreateWithoutOrderInput
 }
 
-input UserCreateOneWithoutOrderItemInput {
+input UserCreateOneWithoutOrderitemInput {
   connect: UserWhereUniqueInput
   connectOrCreate: UserCreateOrConnectWithoutOrderItemInput
-  create: UserCreateWithoutOrderItemInput
+  create: UserCreateWithoutOrderitemInput
 }
 
 input UserCreateOrConnectWithoutCartItemInput {
@@ -1608,7 +1628,7 @@ input UserCreateOrConnectWithoutOrderInput {
 }
 
 input UserCreateOrConnectWithoutOrderItemInput {
-  create: UserCreateWithoutOrderItemInput!
+  create: UserCreateWithoutOrderitemInput!
   where: UserWhereUniqueInput!
 }
 
@@ -1625,7 +1645,7 @@ input UserCreateWithoutCartInput {
   itemvariants: ItemVariantsCreateManyWithoutUserInput
   name: String!
   order: OrderCreateManyWithoutUserInput
-  OrderItem: OrderItemCreateManyWithoutUserInput
+  orderitem: OrderItemCreateManyWithoutUserInput
   password: String!
   permissions2: UserCreatepermissions2Input
   resetToken: String
@@ -1643,7 +1663,7 @@ input UserCreateWithoutItemsInput {
   itemvariants: ItemVariantsCreateManyWithoutUserInput
   name: String!
   order: OrderCreateManyWithoutUserInput
-  OrderItem: OrderItemCreateManyWithoutUserInput
+  orderitem: OrderItemCreateManyWithoutUserInput
   password: String!
   permissions2: UserCreatepermissions2Input
   resetToken: String
@@ -1661,7 +1681,7 @@ input UserCreateWithoutItemvariantsInput {
   items: ItemCreateManyWithoutUserInput
   name: String!
   order: OrderCreateManyWithoutUserInput
-  OrderItem: OrderItemCreateManyWithoutUserInput
+  orderitem: OrderItemCreateManyWithoutUserInput
   password: String!
   permissions2: UserCreatepermissions2Input
   resetToken: String
@@ -1679,7 +1699,7 @@ input UserCreateWithoutOrderInput {
   items: ItemCreateManyWithoutUserInput
   itemvariants: ItemVariantsCreateManyWithoutUserInput
   name: String!
-  OrderItem: OrderItemCreateManyWithoutUserInput
+  orderitem: OrderItemCreateManyWithoutUserInput
   password: String!
   permissions2: UserCreatepermissions2Input
   resetToken: String
@@ -1688,7 +1708,7 @@ input UserCreateWithoutOrderInput {
   User_permissions: User_permissionsCreateManyWithoutUserInput
 }
 
-input UserCreateWithoutOrderItemInput {
+input UserCreateWithoutOrderitemInput {
   address: AddressCreateManyWithoutUserInput
   cart: CartItemCreateManyWithoutUserInput
   createdAt: DateTime
@@ -1731,7 +1751,7 @@ input UserWhereInput {
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
   order: OrderListRelationFilter
-  OrderItem: OrderItemListRelationFilter
+  orderitem: OrderItemListRelationFilter
   password: StringFilter
   permissions2: [Permission2!]
   resetToken: StringNullableFilter

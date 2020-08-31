@@ -9,7 +9,7 @@ export const Address = objectType({
         t.model.city()
         t.model.country()
         t.model.postcode()
-        //t.model.user()
+        t.model.user()
         t.model.User()
         t.date("createdAt")
         t.date("updatedAt")

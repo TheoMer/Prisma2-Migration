@@ -21,7 +21,7 @@ export const Item = objectType({
       t.model.largeImage6()
       t.model.price()
       t.model.quantity()
-      //t.model.user()
+      t.model.user()
       t.model.User()
       t.model.userIdentity()
       t.model.cartitems({
@@ -32,9 +32,9 @@ export const Item = objectType({
         filtering: true,
         ordering: true,
       })
-      //t.model.size()
+      t.model.size()
       t.model.Size()
-      //t.model.color()
+      t.model.color()
       t.model.Color()
       t.date("createdAt")
       t.date("updatedAt")

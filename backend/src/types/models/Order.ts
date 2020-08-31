@@ -13,7 +13,7 @@ export const Order = objectType({
         t.model.last4card_digits()
         t.model.postcode()
         t.model.total()
-        //t.model.user()
+        t.model.user()
         t.model.User()
         t.model.items({
           filtering: true,

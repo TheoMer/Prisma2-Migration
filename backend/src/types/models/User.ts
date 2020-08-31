@@ -14,11 +14,26 @@ export const User = objectType({
         filtering: true,
         ordering: true,  
       })
-      t.model.cart()
-      t.model.items()
-      t.model.itemvariants()
-      t.model.order()
-      t.model.OrderItem()
+      t.model.cart({
+        filtering: true,
+        ordering: true,  
+      })
+      t.model.items({
+        filtering: true,
+        ordering: true,  
+      })
+      t.model.itemvariants({
+        filtering: true,
+        ordering: true,  
+      })
+      t.model.order({
+        filtering: true,
+        ordering: true,  
+      })
+      t.model.orderitem({
+        filtering: true,
+        ordering: true,  
+      })
       t.date("createdAt")
       t.date("updatedAt")
     }

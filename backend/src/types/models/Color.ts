@@ -6,7 +6,7 @@ export const Color = objectType({
       t.model.id()
       t.model.name()
       t.model.label()
-      /*t.model.item({
+      t.model.item({
         filtering: true,
         ordering: true,
       })
@@ -17,7 +17,7 @@ export const Color = objectType({
       t.model.orderitem({
         filtering: true,
         ordering: true,
-      })*/
+      })
       t.date("createdAt")
       t.date("updatedAt")
     },
