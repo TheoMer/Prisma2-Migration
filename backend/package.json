@@ -57,7 +57,7 @@
     "graphql-iso-date": "^3.6.1",
     "graphql-subscriptions": "^1.1.0",
     "jsonwebtoken": "^8.4.0",
-    "nexus-plugin-prisma": "^0.16.1",
+    "nexus-plugin-prisma": "^0.17.0",
     "nodemailer": "^5.1.1",
     "nodemailer-juice": "^1.0.1",
     "nodemon": "^1.18.9",

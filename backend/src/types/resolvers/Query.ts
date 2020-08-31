@@ -20,22 +20,19 @@ export const Query = queryType({
 
       t.field('itemsConnection', {
         type: 'ItemConnection',
-        nullable: true,
+        nullable: false,
         args: {
           where: arg({ type: "ItemWhereInput" }),
         },
         resolve: async (root: any, args: any, ctx: any) => {
-          let count: number;
-          const { userId } = ctx.req;
 
           const result = await ctx.prisma.item.aggregate({
             where: args.where, // optional
             count: true,
           })
 
-          console.log("Result = ", result);
-
           return { count: result.count };
+
         }
       })
   

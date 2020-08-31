@@ -2,6 +2,1745 @@
 ### Do not make changes to this file directly
 
 
+type Address {
+  address_line: String!
+  card_name: String!
+  city: String!
+  country: String!
+  createdAt: Date!
+  id: String!
+  postcode: String!
+  updatedAt: Date!
+  User: User!
+}
+
+input AddressCreateManyWithoutUserInput {
+  connect: [AddressWhereUniqueInput!]
+  connectOrCreate: [AddressCreateOrConnectWithoutUserInput!]
+  create: [AddressCreateWithoutUserInput!]
+}
+
+input AddressCreateOrConnectWithoutUserInput {
+  create: AddressCreateWithoutUserInput!
+  where: AddressWhereUniqueInput!
+}
+
+input AddressCreateWithoutUserInput {
+  address_line: String!
+  card_name: String!
+  city: String!
+  country: String!
+  createdAt: DateTime
+  id: String
+  postcode: String!
+  updatedAt: DateTime
+}
+
+input AddressListRelationFilter {
+  every: AddressWhereInput
+  none: AddressWhereInput
+  some: AddressWhereInput
+}
+
+input AddressOrderByInput {
+  address_line: SortOrder
+  card_name: SortOrder
+  city: SortOrder
+  country: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  postcode: SortOrder
+  updatedAt: SortOrder
+  user: SortOrder
+}
+
+input AddressWhereInput {
+  address_line: StringFilter
+  AND: [AddressWhereInput!]
+  card_name: StringFilter
+  city: StringFilter
+  country: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  NOT: [AddressWhereInput!]
+  OR: [AddressWhereInput!]
+  postcode: StringFilter
+  updatedAt: DateTimeFilter
+  user: StringFilter
+  User: UserWhereInput
+}
+
+input AddressWhereUniqueInput {
+  id: String
+}
+
+type CartItem {
+  createdAt: Date!
+  id: String!
+  Item: Item
+  ItemVariants: ItemVariants
+  quantity: Int!
+  updatedAt: Date!
+  User: User!
+}
+
+input CartItemCreateManyWithoutItemInput {
+  connect: [CartItemWhereUniqueInput!]
+  connectOrCreate: [CartItemCreateOrConnectWithoutItemInput!]
+  create: [CartItemCreateWithoutItemInput!]
+}
+
+input CartItemCreateManyWithoutItemVariantsInput {
+  connect: [CartItemWhereUniqueInput!]
+  connectOrCreate: [CartItemCreateOrConnectWithoutItemVariantsInput!]
+  create: [CartItemCreateWithoutItemVariantsInput!]
+}
+
+input CartItemCreateManyWithoutUserInput {
+  connect: [CartItemWhereUniqueInput!]
+  connectOrCreate: [CartItemCreateOrConnectWithoutUserInput!]
+  create: [CartItemCreateWithoutUserInput!]
+}
+
+input CartItemCreateOrConnectWithoutItemInput {
+  create: CartItemCreateWithoutItemInput!
+  where: CartItemWhereUniqueInput!
+}
+
+input CartItemCreateOrConnectWithoutItemVariantsInput {
+  create: CartItemCreateWithoutItemVariantsInput!
+  where: CartItemWhereUniqueInput!
+}
+
+input CartItemCreateOrConnectWithoutUserInput {
+  create: CartItemCreateWithoutUserInput!
+  where: CartItemWhereUniqueInput!
+}
+
+input CartItemCreateWithoutItemInput {
+  createdAt: DateTime
+  id: String
+  ItemVariants: ItemVariantsCreateOneWithoutCartitemsInput
+  quantity: Int
+  updatedAt: DateTime
+  User: UserCreateOneWithoutCartInput!
+}
+
+input CartItemCreateWithoutItemVariantsInput {
+  createdAt: DateTime
+  id: String
+  Item: ItemCreateOneWithoutCartitemsInput
+  quantity: Int
+  updatedAt: DateTime
+  User: UserCreateOneWithoutCartInput!
+}
+
+input CartItemCreateWithoutUserInput {
+  createdAt: DateTime
+  id: String
+  Item: ItemCreateOneWithoutCartitemsInput
+  ItemVariants: ItemVariantsCreateOneWithoutCartitemsInput
+  quantity: Int
+  updatedAt: DateTime
+}
+
+input CartItemListRelationFilter {
+  every: CartItemWhereInput
+  none: CartItemWhereInput
+  some: CartItemWhereInput
+}
+
+input CartItemOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  item: SortOrder
+  itemvariants: SortOrder
+  quantity: SortOrder
+  updatedAt: SortOrder
+  user: SortOrder
+}
+
+input CartItemWhereInput {
+  AND: [CartItemWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  item: StringNullableFilter
+  Item: ItemWhereInput
+  itemvariants: StringNullableFilter
+  ItemVariants: ItemVariantsWhereInput
+  NOT: [CartItemWhereInput!]
+  OR: [CartItemWhereInput!]
+  quantity: IntFilter
+  updatedAt: DateTimeFilter
+  user: StringFilter
+  User: UserWhereInput
+}
+
+input CartItemWhereUniqueInput {
+  id: String
+}
+
+type Color {
+  createdAt: Date!
+  id: String!
+  label: String
+  name: String!
+  updatedAt: Date!
+}
+
+input ColorCreateOneWithoutItemInput {
+  connect: ColorWhereUniqueInput
+  connectOrCreate: ColorCreateOrConnectWithoutItemInput
+  create: ColorCreateWithoutItemInput
+}
+
+input ColorCreateOneWithoutItemvariantsInput {
+  connect: ColorWhereUniqueInput
+  connectOrCreate: ColorCreateOrConnectWithoutItemVariantsInput
+  create: ColorCreateWithoutItemvariantsInput
+}
+
+input ColorCreateOneWithoutOrderitemInput {
+  connect: ColorWhereUniqueInput
+  connectOrCreate: ColorCreateOrConnectWithoutOrderItemInput
+  create: ColorCreateWithoutOrderitemInput
+}
+
+input ColorCreateOrConnectWithoutItemInput {
+  create: ColorCreateWithoutItemInput!
+  where: ColorWhereUniqueInput!
+}
+
+input ColorCreateOrConnectWithoutItemVariantsInput {
+  create: ColorCreateWithoutItemvariantsInput!
+  where: ColorWhereUniqueInput!
+}
+
+input ColorCreateOrConnectWithoutOrderItemInput {
+  create: ColorCreateWithoutOrderitemInput!
+  where: ColorWhereUniqueInput!
+}
+
+input ColorCreateWithoutItemInput {
+  createdAt: DateTime
+  id: String
+  itemvariants: ItemVariantsCreateManyWithoutColorInput
+  label: String
+  name: String!
+  orderitem: OrderItemCreateManyWithoutColorInput
+  updatedAt: DateTime
+}
+
+input ColorCreateWithoutItemvariantsInput {
+  createdAt: DateTime
+  id: String
+  item: ItemCreateManyWithoutColorInput
+  label: String
+  name: String!
+  orderitem: OrderItemCreateManyWithoutColorInput
+  updatedAt: DateTime
+}
+
+input ColorCreateWithoutOrderitemInput {
+  createdAt: DateTime
+  id: String
+  item: ItemCreateManyWithoutColorInput
+  itemvariants: ItemVariantsCreateManyWithoutColorInput
+  label: String
+  name: String!
+  updatedAt: DateTime
+}
+
+input ColorOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  label: SortOrder
+  name: SortOrder
+  updatedAt: SortOrder
+}
+
+input ColorWhereInput {
+  AND: [ColorWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  item: ItemListRelationFilter
+  itemvariants: ItemVariantsListRelationFilter
+  label: StringNullableFilter
+  name: StringFilter
+  NOT: [ColorWhereInput!]
+  OR: [ColorWhereInput!]
+  orderitem: OrderItemListRelationFilter
+  updatedAt: DateTimeFilter
+}
+
+input ColorWhereUniqueInput {
+  id: String
+  name: String
+}
+
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format
+outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for
+representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+scalar DateTime
+
+input DateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
+input FloatNullableFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatNullableFilter
+  notIn: [Float!]
+}
+
+input IntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
+
+type Item {
+  cartitems(cursor: CartItemWhereUniqueInput, orderBy: [CartItemOrderByInput!], skip: Int, take: Int, where: CartItemWhereInput): [CartItem!]!
+  Color: Color!
+  createdAt: Date!
+  description: String!
+  id: String!
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  itemvariants(cursor: ItemVariantsWhereUniqueInput, orderBy: [ItemVariantsOrderByInput!], skip: Int, take: Int, where: ItemVariantsWhereInput): [ItemVariants!]!
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String!
+  price: Int!
+  quantity: Int!
+  Size: Size!
+  title: String!
+  updatedAt: Date!
+  User: User!
+  userIdentity: String!
+}
+
+type ItemConnection {
+  count: Int!
+}
+
+input ItemCreateInput {
+  cartitems: CartItemCreateManyWithoutItemInput
+  Color: ColorCreateOneWithoutItemInput!
+  createdAt: DateTime
+  description: String!
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  itemvariants: ItemVariantsCreateManyWithoutItemInput
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String!
+  price: Int!
+  quantity: Int
+  Size: SizeCreateOneWithoutItemInput!
+  title: String!
+  updatedAt: DateTime
+  User: UserCreateOneWithoutItemsInput!
+  userIdentity: String
+}
+
+input ItemCreateManyWithoutColorInput {
+  connect: [ItemWhereUniqueInput!]
+  connectOrCreate: [ItemCreateOrConnectWithoutColorInput!]
+  create: [ItemCreateWithoutColorInput!]
+}
+
+input ItemCreateManyWithoutSizeInput {
+  connect: [ItemWhereUniqueInput!]
+  connectOrCreate: [ItemCreateOrConnectWithoutSizeInput!]
+  create: [ItemCreateWithoutSizeInput!]
+}
+
+input ItemCreateManyWithoutUserInput {
+  connect: [ItemWhereUniqueInput!]
+  connectOrCreate: [ItemCreateOrConnectWithoutUserInput!]
+  create: [ItemCreateWithoutUserInput!]
+}
+
+input ItemCreateOneWithoutCartitemsInput {
+  connect: ItemWhereUniqueInput
+  connectOrCreate: ItemCreateOrConnectWithoutCartItemInput
+  create: ItemCreateWithoutCartitemsInput
+}
+
+input ItemCreateOneWithoutItemvariantsInput {
+  connect: ItemWhereUniqueInput
+  connectOrCreate: ItemCreateOrConnectWithoutItemVariantsInput
+  create: ItemCreateWithoutItemvariantsInput
+}
+
+input ItemCreateOrConnectWithoutCartItemInput {
+  create: ItemCreateWithoutCartitemsInput!
+  where: ItemWhereUniqueInput!
+}
+
+input ItemCreateOrConnectWithoutColorInput {
+  create: ItemCreateWithoutColorInput!
+  where: ItemWhereUniqueInput!
+}
+
+input ItemCreateOrConnectWithoutItemVariantsInput {
+  create: ItemCreateWithoutItemvariantsInput!
+  where: ItemWhereUniqueInput!
+}
+
+input ItemCreateOrConnectWithoutSizeInput {
+  create: ItemCreateWithoutSizeInput!
+  where: ItemWhereUniqueInput!
+}
+
+input ItemCreateOrConnectWithoutUserInput {
+  create: ItemCreateWithoutUserInput!
+  where: ItemWhereUniqueInput!
+}
+
+input ItemCreateWithoutCartitemsInput {
+  Color: ColorCreateOneWithoutItemInput!
+  createdAt: DateTime
+  description: String!
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  itemvariants: ItemVariantsCreateManyWithoutItemInput
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String!
+  price: Int!
+  quantity: Int
+  Size: SizeCreateOneWithoutItemInput!
+  title: String!
+  updatedAt: DateTime
+  User: UserCreateOneWithoutItemsInput!
+  userIdentity: String
+}
+
+input ItemCreateWithoutColorInput {
+  cartitems: CartItemCreateManyWithoutItemInput
+  createdAt: DateTime
+  description: String!
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  itemvariants: ItemVariantsCreateManyWithoutItemInput
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String!
+  price: Int!
+  quantity: Int
+  Size: SizeCreateOneWithoutItemInput!
+  title: String!
+  updatedAt: DateTime
+  User: UserCreateOneWithoutItemsInput!
+  userIdentity: String
+}
+
+input ItemCreateWithoutItemvariantsInput {
+  cartitems: CartItemCreateManyWithoutItemInput
+  Color: ColorCreateOneWithoutItemInput!
+  createdAt: DateTime
+  description: String!
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String!
+  price: Int!
+  quantity: Int
+  Size: SizeCreateOneWithoutItemInput!
+  title: String!
+  updatedAt: DateTime
+  User: UserCreateOneWithoutItemsInput!
+  userIdentity: String
+}
+
+input ItemCreateWithoutSizeInput {
+  cartitems: CartItemCreateManyWithoutItemInput
+  Color: ColorCreateOneWithoutItemInput!
+  createdAt: DateTime
+  description: String!
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  itemvariants: ItemVariantsCreateManyWithoutItemInput
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String!
+  price: Int!
+  quantity: Int
+  title: String!
+  updatedAt: DateTime
+  User: UserCreateOneWithoutItemsInput!
+  userIdentity: String
+}
+
+input ItemCreateWithoutUserInput {
+  cartitems: CartItemCreateManyWithoutItemInput
+  Color: ColorCreateOneWithoutItemInput!
+  createdAt: DateTime
+  description: String!
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  itemvariants: ItemVariantsCreateManyWithoutItemInput
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String!
+  price: Int!
+  quantity: Int
+  Size: SizeCreateOneWithoutItemInput!
+  title: String!
+  updatedAt: DateTime
+  userIdentity: String
+}
+
+input ItemListRelationFilter {
+  every: ItemWhereInput
+  none: ItemWhereInput
+  some: ItemWhereInput
+}
+
+input ItemOrderByInput {
+  color: SortOrder
+  createdAt: SortOrder
+  description: SortOrder
+  id: SortOrder
+  image: SortOrder
+  image2: SortOrder
+  image3: SortOrder
+  image4: SortOrder
+  image5: SortOrder
+  image6: SortOrder
+  largeImage: SortOrder
+  largeImage2: SortOrder
+  largeImage3: SortOrder
+  largeImage4: SortOrder
+  largeImage5: SortOrder
+  largeImage6: SortOrder
+  mainDescription: SortOrder
+  price: SortOrder
+  quantity: SortOrder
+  size: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+  user: SortOrder
+  userIdentity: SortOrder
+}
+
+type ItemVariants {
+  cartitems(cursor: CartItemWhereUniqueInput, orderBy: [CartItemOrderByInput!], skip: Int, take: Int, where: CartItemWhereInput): [CartItem!]!
+  Color: Color!
+  createdAt: Date!
+  description: String!
+  id: String!
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  item: String!
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String!
+  price: Int!
+  quantity: Int!
+  Size: Size!
+  title: String!
+  updatedAt: Date!
+  User: User!
+}
+
+input ItemVariantsCreateManyWithoutColorInput {
+  connect: [ItemVariantsWhereUniqueInput!]
+  connectOrCreate: [ItemVariantsCreateOrConnectWithoutColorInput!]
+  create: [ItemVariantsCreateWithoutColorInput!]
+}
+
+input ItemVariantsCreateManyWithoutItemInput {
+  connect: [ItemVariantsWhereUniqueInput!]
+  connectOrCreate: [ItemVariantsCreateOrConnectWithoutItemInput!]
+  create: [ItemVariantsCreateWithoutItemInput!]
+}
+
+input ItemVariantsCreateManyWithoutSizeInput {
+  connect: [ItemVariantsWhereUniqueInput!]
+  connectOrCreate: [ItemVariantsCreateOrConnectWithoutSizeInput!]
+  create: [ItemVariantsCreateWithoutSizeInput!]
+}
+
+input ItemVariantsCreateManyWithoutUserInput {
+  connect: [ItemVariantsWhereUniqueInput!]
+  connectOrCreate: [ItemVariantsCreateOrConnectWithoutUserInput!]
+  create: [ItemVariantsCreateWithoutUserInput!]
+}
+
+input ItemVariantsCreateOneWithoutCartitemsInput {
+  connect: ItemVariantsWhereUniqueInput
+  connectOrCreate: ItemVariantsCreateOrConnectWithoutCartItemInput
+  create: ItemVariantsCreateWithoutCartitemsInput
+}
+
+input ItemVariantsCreateOrConnectWithoutCartItemInput {
+  create: ItemVariantsCreateWithoutCartitemsInput!
+  where: ItemVariantsWhereUniqueInput!
+}
+
+input ItemVariantsCreateOrConnectWithoutColorInput {
+  create: ItemVariantsCreateWithoutColorInput!
+  where: ItemVariantsWhereUniqueInput!
+}
+
+input ItemVariantsCreateOrConnectWithoutItemInput {
+  create: ItemVariantsCreateWithoutItemInput!
+  where: ItemVariantsWhereUniqueInput!
+}
+
+input ItemVariantsCreateOrConnectWithoutSizeInput {
+  create: ItemVariantsCreateWithoutSizeInput!
+  where: ItemVariantsWhereUniqueInput!
+}
+
+input ItemVariantsCreateOrConnectWithoutUserInput {
+  create: ItemVariantsCreateWithoutUserInput!
+  where: ItemVariantsWhereUniqueInput!
+}
+
+input ItemVariantsCreateWithoutCartitemsInput {
+  Color: ColorCreateOneWithoutItemvariantsInput!
+  createdAt: DateTime
+  description: String!
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  Item: ItemCreateOneWithoutItemvariantsInput!
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String!
+  price: Int!
+  quantity: Int
+  Size: SizeCreateOneWithoutItemvariantsInput!
+  title: String!
+  updatedAt: DateTime
+  User: UserCreateOneWithoutItemvariantsInput!
+}
+
+input ItemVariantsCreateWithoutColorInput {
+  cartitems: CartItemCreateManyWithoutItemVariantsInput
+  createdAt: DateTime
+  description: String!
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  Item: ItemCreateOneWithoutItemvariantsInput!
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String!
+  price: Int!
+  quantity: Int
+  Size: SizeCreateOneWithoutItemvariantsInput!
+  title: String!
+  updatedAt: DateTime
+  User: UserCreateOneWithoutItemvariantsInput!
+}
+
+input ItemVariantsCreateWithoutItemInput {
+  cartitems: CartItemCreateManyWithoutItemVariantsInput
+  Color: ColorCreateOneWithoutItemvariantsInput!
+  createdAt: DateTime
+  description: String!
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String!
+  price: Int!
+  quantity: Int
+  Size: SizeCreateOneWithoutItemvariantsInput!
+  title: String!
+  updatedAt: DateTime
+  User: UserCreateOneWithoutItemvariantsInput!
+}
+
+input ItemVariantsCreateWithoutSizeInput {
+  cartitems: CartItemCreateManyWithoutItemVariantsInput
+  Color: ColorCreateOneWithoutItemvariantsInput!
+  createdAt: DateTime
+  description: String!
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  Item: ItemCreateOneWithoutItemvariantsInput!
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String!
+  price: Int!
+  quantity: Int
+  title: String!
+  updatedAt: DateTime
+  User: UserCreateOneWithoutItemvariantsInput!
+}
+
+input ItemVariantsCreateWithoutUserInput {
+  cartitems: CartItemCreateManyWithoutItemVariantsInput
+  Color: ColorCreateOneWithoutItemvariantsInput!
+  createdAt: DateTime
+  description: String!
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  Item: ItemCreateOneWithoutItemvariantsInput!
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String!
+  price: Int!
+  quantity: Int
+  Size: SizeCreateOneWithoutItemvariantsInput!
+  title: String!
+  updatedAt: DateTime
+}
+
+input ItemVariantsListRelationFilter {
+  every: ItemVariantsWhereInput
+  none: ItemVariantsWhereInput
+  some: ItemVariantsWhereInput
+}
+
+input ItemVariantsOrderByInput {
+  color: SortOrder
+  createdAt: SortOrder
+  description: SortOrder
+  id: SortOrder
+  image: SortOrder
+  image2: SortOrder
+  image3: SortOrder
+  image4: SortOrder
+  image5: SortOrder
+  image6: SortOrder
+  item: SortOrder
+  largeImage: SortOrder
+  largeImage2: SortOrder
+  largeImage3: SortOrder
+  largeImage4: SortOrder
+  largeImage5: SortOrder
+  largeImage6: SortOrder
+  mainDescription: SortOrder
+  price: SortOrder
+  quantity: SortOrder
+  size: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+  user: SortOrder
+}
+
+input ItemVariantsWhereInput {
+  AND: [ItemVariantsWhereInput!]
+  cartitems: CartItemListRelationFilter
+  color: StringFilter
+  Color: ColorWhereInput
+  createdAt: DateTimeFilter
+  description: StringFilter
+  id: StringFilter
+  image: StringNullableFilter
+  image2: StringNullableFilter
+  image3: StringNullableFilter
+  image4: StringNullableFilter
+  image5: StringNullableFilter
+  image6: StringNullableFilter
+  item: StringFilter
+  Item: ItemWhereInput
+  largeImage: StringNullableFilter
+  largeImage2: StringNullableFilter
+  largeImage3: StringNullableFilter
+  largeImage4: StringNullableFilter
+  largeImage5: StringNullableFilter
+  largeImage6: StringNullableFilter
+  mainDescription: StringFilter
+  NOT: [ItemVariantsWhereInput!]
+  OR: [ItemVariantsWhereInput!]
+  price: IntFilter
+  quantity: IntFilter
+  size: StringFilter
+  Size: SizeWhereInput
+  title: StringFilter
+  updatedAt: DateTimeFilter
+  user: StringFilter
+  User: UserWhereInput
+}
+
+input ItemVariantsWhereUniqueInput {
+  id: String
+}
+
+input ItemWhereInput {
+  AND: [ItemWhereInput!]
+  cartitems: CartItemListRelationFilter
+  color: StringFilter
+  Color: ColorWhereInput
+  createdAt: DateTimeFilter
+  description: StringFilter
+  id: StringFilter
+  image: StringNullableFilter
+  image2: StringNullableFilter
+  image3: StringNullableFilter
+  image4: StringNullableFilter
+  image5: StringNullableFilter
+  image6: StringNullableFilter
+  itemvariants: ItemVariantsListRelationFilter
+  largeImage: StringNullableFilter
+  largeImage2: StringNullableFilter
+  largeImage3: StringNullableFilter
+  largeImage4: StringNullableFilter
+  largeImage5: StringNullableFilter
+  largeImage6: StringNullableFilter
+  mainDescription: StringFilter
+  NOT: [ItemWhereInput!]
+  OR: [ItemWhereInput!]
+  price: IntFilter
+  quantity: IntFilter
+  size: StringFilter
+  Size: SizeWhereInput
+  title: StringFilter
+  updatedAt: DateTimeFilter
+  user: StringFilter
+  User: UserWhereInput
+  userIdentity: StringFilter
+}
+
+input ItemWhereUniqueInput {
+  id: String
+}
+
+type Mutation {
+  addItemVariantsToCart(id: ID!): CartItem
+  addToCart(id: ID!): CartItem
+  createAddress(address_line: String!, card_name: String!, city: String!, country: String!, email: String!, postcode: String!, userId: ID!): Address!
+  createItem(data: ItemCreateInput!): Item!
+  createOrder(address_line: String!, card_brand: String!, card_name: String!, city: String!, country: String!, last4card_digits: String!, postcode: String!, token: String!): Order!
+  createSiteVisits(url: String, urlReferer: String, userAgent: String, userID: String, userIP: String, userType: String): SiteVisits
+  deleteItem(id: ID!): Item
+  removeFromCart(id: ID!, itemId: String!): CartItem
+  requestReset(email: String!): SuccessMessage
+  resetPassword(confirmPassword: String!, password: String!, resetToken: String!): User!
+  signin(email: String!, password: String!): User!
+  signout: SuccessMessage
+  signup(email: String!, name: String!, password: String!): User!
+  updateAddress(address_line: String!, card_name: String!, city: String!, country: String!, email: String!, postcode: String!, userId: ID!): Address!
+  updateCartItem(id: ID!, quantity: Int): CartItem
+  updateGuestEmail(email: String!, userId: ID!): User!
+  updateItem(color: ColorCreateOneWithoutItemInput, description: String!, id: ID!, image: String, largeImage: String, mainDescription: String!, price: Int!, quantity: Int!, size: SizeCreateOneWithoutItemInput, title: String!): Item!
+  updatePermissions(permissions2: [Permission2!], userId: ID!): User
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
+input NestedFloatNullableFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatNullableFilter
+  notIn: [Float!]
+}
+
+input NestedIntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
+
+input NestedStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NestedStringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NodeIdPositionCompoundUniqueInput {
+  nodeId: String!
+  position: Int!
+}
+
+type Order {
+  address_line: String!
+  card_brand: String!
+  card_name: String!
+  charge: String!
+  city: String!
+  country: String!
+  createdAt: Date!
+  id: String!
+  items(cursor: OrderItemWhereUniqueInput, orderBy: [OrderItemOrderByInput!], skip: Int, take: Int, where: OrderItemWhereInput): [OrderItem!]!
+  last4card_digits: String!
+  postcode: String!
+  total: Int!
+  updatedAt: Date!
+  User: User!
+}
+
+input OrderCreateManyWithoutUserInput {
+  connect: [OrderWhereUniqueInput!]
+  connectOrCreate: [OrderCreateOrConnectWithoutUserInput!]
+  create: [OrderCreateWithoutUserInput!]
+}
+
+input OrderCreateOneWithoutItemsInput {
+  connect: OrderWhereUniqueInput
+  connectOrCreate: OrderCreateOrConnectWithoutOrderItemInput
+  create: OrderCreateWithoutItemsInput
+}
+
+input OrderCreateOrConnectWithoutOrderItemInput {
+  create: OrderCreateWithoutItemsInput!
+  where: OrderWhereUniqueInput!
+}
+
+input OrderCreateOrConnectWithoutUserInput {
+  create: OrderCreateWithoutUserInput!
+  where: OrderWhereUniqueInput!
+}
+
+input OrderCreateWithoutItemsInput {
+  address_line: String!
+  card_brand: String!
+  card_name: String!
+  charge: String!
+  city: String!
+  country: String!
+  createdAt: DateTime
+  id: String
+  last4card_digits: String!
+  postcode: String!
+  total: Int!
+  updatedAt: DateTime
+  User: UserCreateOneWithoutOrderInput!
+}
+
+input OrderCreateWithoutUserInput {
+  address_line: String!
+  card_brand: String!
+  card_name: String!
+  charge: String!
+  city: String!
+  country: String!
+  createdAt: DateTime
+  id: String
+  items: OrderItemCreateManyWithoutOrderInput
+  last4card_digits: String!
+  postcode: String!
+  total: Int!
+  updatedAt: DateTime
+}
+
+type OrderItem {
+  Color: Color!
+  createdAt: Date!
+  description: String!
+  id: String!
+  image: String!
+  itemid: String!
+  largeImage: String!
+  mainDescription: String!
+  order: String!
+  Order: Order!
+  price: Int!
+  quantity: Int!
+  Size: Size!
+  title: String!
+  updatedAt: Date!
+  User: User!
+}
+
+input OrderItemCreateManyWithoutColorInput {
+  connect: [OrderItemWhereUniqueInput!]
+  connectOrCreate: [OrderItemCreateOrConnectWithoutColorInput!]
+  create: [OrderItemCreateWithoutColorInput!]
+}
+
+input OrderItemCreateManyWithoutOrderInput {
+  connect: [OrderItemWhereUniqueInput!]
+  connectOrCreate: [OrderItemCreateOrConnectWithoutOrderInput!]
+  create: [OrderItemCreateWithoutOrderInput!]
+}
+
+input OrderItemCreateManyWithoutSizeInput {
+  connect: [OrderItemWhereUniqueInput!]
+  connectOrCreate: [OrderItemCreateOrConnectWithoutSizeInput!]
+  create: [OrderItemCreateWithoutSizeInput!]
+}
+
+input OrderItemCreateManyWithoutUserInput {
+  connect: [OrderItemWhereUniqueInput!]
+  connectOrCreate: [OrderItemCreateOrConnectWithoutUserInput!]
+  create: [OrderItemCreateWithoutUserInput!]
+}
+
+input OrderItemCreateOrConnectWithoutColorInput {
+  create: OrderItemCreateWithoutColorInput!
+  where: OrderItemWhereUniqueInput!
+}
+
+input OrderItemCreateOrConnectWithoutOrderInput {
+  create: OrderItemCreateWithoutOrderInput!
+  where: OrderItemWhereUniqueInput!
+}
+
+input OrderItemCreateOrConnectWithoutSizeInput {
+  create: OrderItemCreateWithoutSizeInput!
+  where: OrderItemWhereUniqueInput!
+}
+
+input OrderItemCreateOrConnectWithoutUserInput {
+  create: OrderItemCreateWithoutUserInput!
+  where: OrderItemWhereUniqueInput!
+}
+
+input OrderItemCreateWithoutColorInput {
+  createdAt: DateTime
+  description: String!
+  id: String
+  image: String!
+  itemid: String!
+  largeImage: String!
+  mainDescription: String!
+  Order: OrderCreateOneWithoutItemsInput!
+  price: Int!
+  quantity: Int
+  Size: SizeCreateOneWithoutOrderitemInput!
+  title: String!
+  updatedAt: DateTime
+  User: UserCreateOneWithoutOrderItemInput!
+}
+
+input OrderItemCreateWithoutOrderInput {
+  Color: ColorCreateOneWithoutOrderitemInput!
+  createdAt: DateTime
+  description: String!
+  id: String
+  image: String!
+  itemid: String!
+  largeImage: String!
+  mainDescription: String!
+  price: Int!
+  quantity: Int
+  Size: SizeCreateOneWithoutOrderitemInput!
+  title: String!
+  updatedAt: DateTime
+  User: UserCreateOneWithoutOrderItemInput!
+}
+
+input OrderItemCreateWithoutSizeInput {
+  Color: ColorCreateOneWithoutOrderitemInput!
+  createdAt: DateTime
+  description: String!
+  id: String
+  image: String!
+  itemid: String!
+  largeImage: String!
+  mainDescription: String!
+  Order: OrderCreateOneWithoutItemsInput!
+  price: Int!
+  quantity: Int
+  title: String!
+  updatedAt: DateTime
+  User: UserCreateOneWithoutOrderItemInput!
+}
+
+input OrderItemCreateWithoutUserInput {
+  Color: ColorCreateOneWithoutOrderitemInput!
+  createdAt: DateTime
+  description: String!
+  id: String
+  image: String!
+  itemid: String!
+  largeImage: String!
+  mainDescription: String!
+  Order: OrderCreateOneWithoutItemsInput!
+  price: Int!
+  quantity: Int
+  Size: SizeCreateOneWithoutOrderitemInput!
+  title: String!
+  updatedAt: DateTime
+}
+
+input OrderItemListRelationFilter {
+  every: OrderItemWhereInput
+  none: OrderItemWhereInput
+  some: OrderItemWhereInput
+}
+
+input OrderItemOrderByInput {
+  color: SortOrder
+  createdAt: SortOrder
+  description: SortOrder
+  id: SortOrder
+  image: SortOrder
+  itemid: SortOrder
+  largeImage: SortOrder
+  mainDescription: SortOrder
+  order: SortOrder
+  price: SortOrder
+  quantity: SortOrder
+  size: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+  user: SortOrder
+}
+
+input OrderItemWhereInput {
+  AND: [OrderItemWhereInput!]
+  color: StringFilter
+  Color: ColorWhereInput
+  createdAt: DateTimeFilter
+  description: StringFilter
+  id: StringFilter
+  image: StringFilter
+  itemid: StringFilter
+  largeImage: StringFilter
+  mainDescription: StringFilter
+  NOT: [OrderItemWhereInput!]
+  OR: [OrderItemWhereInput!]
+  order: StringFilter
+  Order: OrderWhereInput
+  price: IntFilter
+  quantity: IntFilter
+  size: StringFilter
+  Size: SizeWhereInput
+  title: StringFilter
+  updatedAt: DateTimeFilter
+  user: StringFilter
+  User: UserWhereInput
+}
+
+input OrderItemWhereUniqueInput {
+  id: String
+}
+
+input OrderListRelationFilter {
+  every: OrderWhereInput
+  none: OrderWhereInput
+  some: OrderWhereInput
+}
+
+input OrderOrderByInput {
+  address_line: SortOrder
+  card_brand: SortOrder
+  card_name: SortOrder
+  charge: SortOrder
+  city: SortOrder
+  country: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  last4card_digits: SortOrder
+  postcode: SortOrder
+  total: SortOrder
+  updatedAt: SortOrder
+  user: SortOrder
+}
+
+input OrderWhereInput {
+  address_line: StringFilter
+  AND: [OrderWhereInput!]
+  card_brand: StringFilter
+  card_name: StringFilter
+  charge: StringFilter
+  city: StringFilter
+  country: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  items: OrderItemListRelationFilter
+  last4card_digits: StringFilter
+  NOT: [OrderWhereInput!]
+  OR: [OrderWhereInput!]
+  postcode: StringFilter
+  total: IntFilter
+  updatedAt: DateTimeFilter
+  user: StringFilter
+  User: UserWhereInput
+}
+
+input OrderWhereUniqueInput {
+  id: String
+}
+
+enum Permission2 {
+  ADMIN
+  GUEST_USER
+  ITEMCREATE
+  ITEMDELETE
+  ITEMUPDATE
+  PERMISSIONUPDATE
+  USER
+}
+
 type Query {
-  ok: Boolean!
+  colors(cursor: ColorWhereUniqueInput, orderBy: [ColorOrderByInput!], skip: Int, take: Int, where: ColorWhereInput): [Color!]!
+  item(where: ItemWhereUniqueInput!): Item
+  items(cursor: ItemWhereUniqueInput, orderBy: [ItemOrderByInput!], skip: Int, take: Int, where: ItemWhereInput): [Item!]!
+  itemsConnection(where: ItemWhereInput): ItemConnection!
+  itemVariants(cursor: ItemVariantsWhereUniqueInput, orderBy: [ItemVariantsOrderByInput!], skip: Int, take: Int, where: ItemVariantsWhereInput): [ItemVariants!]!
+  me: User
+  order(id: ID!): Order
+  orders(cursor: OrderWhereUniqueInput, orderBy: [OrderOrderByInput!], skip: Int, take: Int, where: OrderWhereInput): [Order!]!
+  sizes(cursor: SizeWhereUniqueInput, orderBy: [SizeOrderByInput!], skip: Int, take: Int, where: SizeWhereInput): [Size!]!
+  users(cursor: UserWhereUniqueInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
+}
+
+type SiteVisits {
+  createdAt: Date!
+  id: String!
+  updatedAt: Date!
+  url: String
+  urlReferer: String
+  userAgent: String
+  userID: String
+  userIP: String
+  userType: String
+}
+
+type Size {
+  createdAt: Date!
+  id: String!
+  label: String
+  name: String!
+  updatedAt: Date!
+}
+
+input SizeCreateOneWithoutItemInput {
+  connect: SizeWhereUniqueInput
+  connectOrCreate: SizeCreateOrConnectWithoutItemInput
+  create: SizeCreateWithoutItemInput
+}
+
+input SizeCreateOneWithoutItemvariantsInput {
+  connect: SizeWhereUniqueInput
+  connectOrCreate: SizeCreateOrConnectWithoutItemVariantsInput
+  create: SizeCreateWithoutItemvariantsInput
+}
+
+input SizeCreateOneWithoutOrderitemInput {
+  connect: SizeWhereUniqueInput
+  connectOrCreate: SizeCreateOrConnectWithoutOrderItemInput
+  create: SizeCreateWithoutOrderitemInput
+}
+
+input SizeCreateOrConnectWithoutItemInput {
+  create: SizeCreateWithoutItemInput!
+  where: SizeWhereUniqueInput!
+}
+
+input SizeCreateOrConnectWithoutItemVariantsInput {
+  create: SizeCreateWithoutItemvariantsInput!
+  where: SizeWhereUniqueInput!
+}
+
+input SizeCreateOrConnectWithoutOrderItemInput {
+  create: SizeCreateWithoutOrderitemInput!
+  where: SizeWhereUniqueInput!
+}
+
+input SizeCreateWithoutItemInput {
+  createdAt: DateTime
+  id: String
+  itemvariants: ItemVariantsCreateManyWithoutSizeInput
+  label: String
+  name: String!
+  orderitem: OrderItemCreateManyWithoutSizeInput
+  updatedAt: DateTime
+}
+
+input SizeCreateWithoutItemvariantsInput {
+  createdAt: DateTime
+  id: String
+  item: ItemCreateManyWithoutSizeInput
+  label: String
+  name: String!
+  orderitem: OrderItemCreateManyWithoutSizeInput
+  updatedAt: DateTime
+}
+
+input SizeCreateWithoutOrderitemInput {
+  createdAt: DateTime
+  id: String
+  item: ItemCreateManyWithoutSizeInput
+  itemvariants: ItemVariantsCreateManyWithoutSizeInput
+  label: String
+  name: String!
+  updatedAt: DateTime
+}
+
+input SizeOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  label: SortOrder
+  name: SortOrder
+  updatedAt: SortOrder
+}
+
+input SizeWhereInput {
+  AND: [SizeWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  item: ItemListRelationFilter
+  itemvariants: ItemVariantsListRelationFilter
+  label: StringNullableFilter
+  name: StringFilter
+  NOT: [SizeWhereInput!]
+  OR: [SizeWhereInput!]
+  orderitem: OrderItemListRelationFilter
+  updatedAt: DateTimeFilter
+}
+
+input SizeWhereUniqueInput {
+  id: String
+  name: String
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+type Subscription {
+  itemDeleted: Item!
+  itemWatch: Item!
+}
+
+type SuccessMessage {
+  message: String!
+}
+
+type User {
+  address(cursor: AddressWhereUniqueInput, orderBy: [AddressOrderByInput!], skip: Int, take: Int, where: AddressWhereInput): [Address!]!
+  cart(cursor: CartItemWhereUniqueInput, skip: Int, take: Int): [CartItem!]!
+  createdAt: Date!
+  email: String!
+  id: String!
+  items(cursor: ItemWhereUniqueInput, skip: Int, take: Int): [Item!]!
+  itemvariants(cursor: ItemVariantsWhereUniqueInput, skip: Int, take: Int): [ItemVariants!]!
+  name: String!
+  order(cursor: OrderWhereUniqueInput, skip: Int, take: Int): [Order!]!
+  OrderItem(cursor: OrderItemWhereUniqueInput, skip: Int, take: Int): [OrderItem!]!
+  password: String!
+  permissions2: [Permission2!]!
+  resetToken: String
+  resetTokenExpiry: Float
+  updatedAt: Date!
+}
+
+input User_permissionsCreateManyWithoutUserInput {
+  connect: [User_permissionsWhereUniqueInput!]
+  connectOrCreate: [User_permissionsCreateOrConnectWithoutUserInput!]
+  create: [User_permissionsCreateWithoutUserInput!]
+}
+
+input User_permissionsCreateOrConnectWithoutUserInput {
+  create: User_permissionsCreateWithoutUserInput!
+  where: User_permissionsWhereUniqueInput!
+}
+
+input User_permissionsCreateWithoutUserInput {
+  position: Int!
+  value: String!
+}
+
+input User_permissionsListRelationFilter {
+  every: User_permissionsWhereInput
+  none: User_permissionsWhereInput
+  some: User_permissionsWhereInput
+}
+
+input User_permissionsWhereInput {
+  AND: [User_permissionsWhereInput!]
+  nodeId: StringFilter
+  NOT: [User_permissionsWhereInput!]
+  OR: [User_permissionsWhereInput!]
+  position: IntFilter
+  User: UserWhereInput
+  value: StringFilter
+}
+
+input User_permissionsWhereUniqueInput {
+  nodeId_position: NodeIdPositionCompoundUniqueInput
+}
+
+input UserCreateOneWithoutCartInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutCartItemInput
+  create: UserCreateWithoutCartInput
+}
+
+input UserCreateOneWithoutItemsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutItemInput
+  create: UserCreateWithoutItemsInput
+}
+
+input UserCreateOneWithoutItemvariantsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutItemVariantsInput
+  create: UserCreateWithoutItemvariantsInput
+}
+
+input UserCreateOneWithoutOrderInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutOrderInput
+  create: UserCreateWithoutOrderInput
+}
+
+input UserCreateOneWithoutOrderItemInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutOrderItemInput
+  create: UserCreateWithoutOrderItemInput
+}
+
+input UserCreateOrConnectWithoutCartItemInput {
+  create: UserCreateWithoutCartInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutItemInput {
+  create: UserCreateWithoutItemsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutItemVariantsInput {
+  create: UserCreateWithoutItemvariantsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutOrderInput {
+  create: UserCreateWithoutOrderInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutOrderItemInput {
+  create: UserCreateWithoutOrderItemInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreatepermissions2Input {
+  set: [Permission2!]
+}
+
+input UserCreateWithoutCartInput {
+  address: AddressCreateManyWithoutUserInput
+  createdAt: DateTime
+  email: String!
+  id: String
+  items: ItemCreateManyWithoutUserInput
+  itemvariants: ItemVariantsCreateManyWithoutUserInput
+  name: String!
+  order: OrderCreateManyWithoutUserInput
+  OrderItem: OrderItemCreateManyWithoutUserInput
+  password: String!
+  permissions2: UserCreatepermissions2Input
+  resetToken: String
+  resetTokenExpiry: Float
+  updatedAt: DateTime
+  User_permissions: User_permissionsCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutItemsInput {
+  address: AddressCreateManyWithoutUserInput
+  cart: CartItemCreateManyWithoutUserInput
+  createdAt: DateTime
+  email: String!
+  id: String
+  itemvariants: ItemVariantsCreateManyWithoutUserInput
+  name: String!
+  order: OrderCreateManyWithoutUserInput
+  OrderItem: OrderItemCreateManyWithoutUserInput
+  password: String!
+  permissions2: UserCreatepermissions2Input
+  resetToken: String
+  resetTokenExpiry: Float
+  updatedAt: DateTime
+  User_permissions: User_permissionsCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutItemvariantsInput {
+  address: AddressCreateManyWithoutUserInput
+  cart: CartItemCreateManyWithoutUserInput
+  createdAt: DateTime
+  email: String!
+  id: String
+  items: ItemCreateManyWithoutUserInput
+  name: String!
+  order: OrderCreateManyWithoutUserInput
+  OrderItem: OrderItemCreateManyWithoutUserInput
+  password: String!
+  permissions2: UserCreatepermissions2Input
+  resetToken: String
+  resetTokenExpiry: Float
+  updatedAt: DateTime
+  User_permissions: User_permissionsCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutOrderInput {
+  address: AddressCreateManyWithoutUserInput
+  cart: CartItemCreateManyWithoutUserInput
+  createdAt: DateTime
+  email: String!
+  id: String
+  items: ItemCreateManyWithoutUserInput
+  itemvariants: ItemVariantsCreateManyWithoutUserInput
+  name: String!
+  OrderItem: OrderItemCreateManyWithoutUserInput
+  password: String!
+  permissions2: UserCreatepermissions2Input
+  resetToken: String
+  resetTokenExpiry: Float
+  updatedAt: DateTime
+  User_permissions: User_permissionsCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutOrderItemInput {
+  address: AddressCreateManyWithoutUserInput
+  cart: CartItemCreateManyWithoutUserInput
+  createdAt: DateTime
+  email: String!
+  id: String
+  items: ItemCreateManyWithoutUserInput
+  itemvariants: ItemVariantsCreateManyWithoutUserInput
+  name: String!
+  order: OrderCreateManyWithoutUserInput
+  password: String!
+  permissions2: UserCreatepermissions2Input
+  resetToken: String
+  resetTokenExpiry: Float
+  updatedAt: DateTime
+  User_permissions: User_permissionsCreateManyWithoutUserInput
+}
+
+input UserOrderByInput {
+  createdAt: SortOrder
+  email: SortOrder
+  id: SortOrder
+  name: SortOrder
+  password: SortOrder
+  permissions2: SortOrder
+  resetToken: SortOrder
+  resetTokenExpiry: SortOrder
+  updatedAt: SortOrder
+}
+
+input UserWhereInput {
+  address: AddressListRelationFilter
+  AND: [UserWhereInput!]
+  cart: CartItemListRelationFilter
+  createdAt: DateTimeFilter
+  email: StringFilter
+  id: StringFilter
+  items: ItemListRelationFilter
+  itemvariants: ItemVariantsListRelationFilter
+  name: StringFilter
+  NOT: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  order: OrderListRelationFilter
+  OrderItem: OrderItemListRelationFilter
+  password: StringFilter
+  permissions2: [Permission2!]
+  resetToken: StringNullableFilter
+  resetTokenExpiry: FloatNullableFilter
+  updatedAt: DateTimeFilter
+  User_permissions: User_permissionsListRelationFilter
+}
+
+input UserWhereUniqueInput {
+  email: String
+  id: String
 }
