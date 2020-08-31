@@ -17,6 +17,27 @@ export const Query = queryType({
         ordering: true,
         pagination: true,
       })
+
+      t.field('itemsConnection', {
+        type: 'ItemConnection',
+        nullable: true,
+        args: {
+          where: arg({ type: "ItemWhereInput" }),
+        },
+        resolve: async (root: any, args: any, ctx: any) => {
+          let count: number;
+          const { userId } = ctx.req;
+
+          const result = await ctx.prisma.item.aggregate({
+            where: args.where, // optional
+            count: true,
+          })
+
+          console.log("Result = ", result);
+
+          return { count: result.count };
+        }
+      })
   
       t.crud.itemVariants({
         filtering: true,
