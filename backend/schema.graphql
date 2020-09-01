@@ -634,6 +634,7 @@ type ItemVariants {
   image5: String
   image6: String
   item: String!
+  Item: Item!
   largeImage: String
   largeImage2: String
   largeImage3: String

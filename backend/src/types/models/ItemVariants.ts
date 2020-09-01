@@ -28,6 +28,7 @@ export const ItemVariants = objectType({
         ordering: true,
       })
       t.model.item()
+      t.model.Item()
       t.model.size()
       t.model.Size()
       t.model.color()

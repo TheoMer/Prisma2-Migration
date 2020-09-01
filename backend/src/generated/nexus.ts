@@ -1802,6 +1802,7 @@ export interface NexusGenFieldTypes {
     image5: string | null; // String
     image6: string | null; // String
     item: string; // String!
+    Item: NexusGenRootTypes['Item']; // Item!
     largeImage: string | null; // String
     largeImage2: string | null; // String
     largeImage3: string | null; // String

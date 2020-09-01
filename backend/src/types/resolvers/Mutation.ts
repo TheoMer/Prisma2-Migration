@@ -882,7 +882,7 @@ export const Mutation = mutationType({
           }
   
           // 4. If its not, create a fresh CartItem for that user!
-          return ctx.prisma.cartItem.create({
+          const newCartItem = await ctx.prisma.cartItem.create({
             data: {
               //id: '-1',
               User: {
@@ -892,7 +892,15 @@ export const Mutation = mutationType({
                 connect: { id: args.id },
               },
             },
-          }).catch(handleSubmitErr);
+          }).catch((err: any) => {
+
+            return err;
+
+          });
+
+          console.log("newCartItem = ", newCartItem);
+          return newCartItem;
+
         }
       })
   
@@ -903,10 +911,10 @@ export const Mutation = mutationType({
           id: stringArg({ nullable: false }),
         },
         resolve: async (root: any, args: any, ctx: any) => {
-  
+          
           // 1. Make sure they are signed in
           const { userId } = ctx.req;
-
+          
           if (!userId) {
             throw new Error('Please register/login to begin purchasing items.');
           }
@@ -918,33 +926,36 @@ export const Mutation = mutationType({
               itemvariants: { equals: args.id },
             },
           }).catch(handleSubmitErr);
-  
+
           // 2b. Check that the existingCartItem count is not > the Item quantity available
           const currentItemState = await ctx.prisma.itemVariants.findOne({
             where: {
               id: args.id,
             },
           }).catch(handleSubmitErr);
-  
+
           let totalCheck = ((existingCartItem && existingCartItem.quantity + 1) > currentItemState.quantity || 1 > currentItemState.quantity)? true : false;
-          if (totalCheck) {
+
+          if (totalCheck === true) {
             // return null; // Don't add the item to the cart
             throw new Error(`Only ${currentItemState.quantity} of these items ${currentItemState.quantity === 1 ? 'is' : 'are'} available for purchase.`);
           }
-  
+
           // 3. Check if that item is already in their cart and increment by 1 if it is
-          if (existingCartItem) {
-            //console.log('This item is already in their cart');
-            return ctx.prisma.cartItem.update({
+          if (existingCartItem.length >= 1) {
+            
+            const updatedCartItem = await ctx.prisma.cartItem.update({
               where: { id: existingCartItem[0].id },
               data: { quantity: existingCartItem[0].quantity + 1 },
             }).catch(handleSubmitErr);
+
+            return updatedCartItem;
+
           }
   
           // 4. If its not, create a fresh CartItem for that user!
-          return ctx.prisma.cartItem.create({
+          const newCartItem = await ctx.prisma.cartItem.create({
             data: {
-              //id: '-1',
               User: {
                 connect: { id: userId },
               },
@@ -955,7 +966,13 @@ export const Mutation = mutationType({
                 connect: { id: currentItemState.item } // If this throws error try currentItemState.item.id
               }
             },
-          }).catch(handleSubmitErr);
+          }).catch((err: any) => {
+
+            return err;
+
+          });
+
+          return newCartItem;
   
         }
       })
