@@ -35,6 +35,11 @@ export const Mutation = mutationType({
             },
           ).catch(handleSubmitErr);
 
+          // Manually add that an item was created
+          newItem.push({
+            mutation: 'CREATED'
+          });
+
           ctx.pubsub.publish('itemWatch', newItem);
           return newItem;
         }
@@ -44,7 +49,7 @@ export const Mutation = mutationType({
         type: 'Address',
         nullable: false,
         args: {
-          userId: idArg({ nullable: false}), 
+          userId: stringArg({ nullable: false}), 
           email: stringArg({ nullable: false}), 
           address_line: stringArg({ nullable: false}),
           city: stringArg({ nullable: false}), 
@@ -189,7 +194,7 @@ export const Mutation = mutationType({
         type: 'Item',
         nullable: false,
         args: {
-          id: idArg({ nullable: false }),
+          id: stringArg({ nullable: false }),
           title: stringArg({ nullable: false}), 
           description: stringArg({ nullable: false}), 
           mainDescription: stringArg({ nullable: false}), 
@@ -217,6 +222,11 @@ export const Mutation = mutationType({
             }
           ).catch(handleSubmitErr);
 
+          // Manually add that an item was updated
+          updateItem.push({
+            mutation: 'UPDATED'
+          });
+
           ctx.pubsub.publish('itemWatch', updateItem);
           return updateItem;
   
@@ -227,7 +237,7 @@ export const Mutation = mutationType({
         type: 'Item',
         nullable: true,
         args: {
-          id: idArg({ nullable: false }),
+          id: stringArg({ nullable: false }),
         },
         resolve: async (root: any, args: any, ctx: any) => {
           
@@ -272,6 +282,11 @@ export const Mutation = mutationType({
             const file = item?.image?.substr(60).replace('.jpg', '');
             await cloudinary.uploader.destroy(file);
           }
+
+          // Manually add that an item was deleted
+          deletedItem.push({
+            mutation: 'DELETED'
+          });
 
           ctx.pubsub.publish('itemDeleted', deletedItem);
           return deletedItem;
@@ -731,7 +746,7 @@ export const Mutation = mutationType({
         nullable: true,
         args: {
           permissions2: arg({ type: "Permission2", list: true }),
-          userId: idArg({ nullable: false }),
+          userId: stringArg({ nullable: false }),
         },
         resolve: async (root: any, args: any, ctx: any) => {
           
@@ -771,7 +786,7 @@ export const Mutation = mutationType({
         type: "User",
         nullable: false,
         args: {
-          userId: idArg({ nullable: false }),
+          userId: stringArg({ nullable: false }),
           email: stringArg({ nullable: false }), 
         },
         resolve: async (root: any, args: any, ctx: any) => {
@@ -825,7 +840,7 @@ export const Mutation = mutationType({
         type: "CartItem",
         nullable: true,
         args: {
-          id: idArg({ nullable: false }),
+          id: stringArg({ nullable: false }),
         },
         resolve: async (root: any, args: any, ctx: any) => {
   
@@ -885,7 +900,7 @@ export const Mutation = mutationType({
         type: "CartItem",
         nullable: true,
         args: {
-          id: idArg({ nullable: false }),
+          id: stringArg({ nullable: false }),
         },
         resolve: async (root: any, args: any, ctx: any) => {
   
@@ -921,8 +936,8 @@ export const Mutation = mutationType({
           if (existingCartItem) {
             //console.log('This item is already in their cart');
             return ctx.prisma.cartItem.update({
-              where: { id: existingCartItem.id },
-              data: { quantity: existingCartItem.quantity + 1 },
+              where: { id: existingCartItem[0].id },
+              data: { quantity: existingCartItem[0].quantity + 1 },
             }).catch(handleSubmitErr);
           }
   
@@ -949,7 +964,7 @@ export const Mutation = mutationType({
         type: "CartItem",
         nullable: true,
         args: {
-          id: idArg({ nullable: false }),
+          id: stringArg({ nullable: false }),
           itemId: stringArg({ nullable: false })
         },
         resolve: async (root: any, args: any, ctx: any) => {
@@ -1139,7 +1154,7 @@ export const Mutation = mutationType({
         type: "CartItem",
         nullable: true,
         args: {
-          id: idArg({ nullable: false }),
+          id: stringArg({ nullable: false }),
           quantity: intArg({ nullable: true })
         },
         resolve: async (root: any, args: any, ctx: any) => {

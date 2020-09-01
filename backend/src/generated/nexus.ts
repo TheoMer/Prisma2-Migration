@@ -1986,10 +1986,10 @@ export interface NexusGenArgTypes {
   }
   Mutation: {
     addItemVariantsToCart: { // args
-      id: string; // ID!
+      id: string; // String!
     }
     addToCart: { // args
-      id: string; // ID!
+      id: string; // String!
     }
     createAddress: { // args
       address_line: string; // String!
@@ -1998,7 +1998,7 @@ export interface NexusGenArgTypes {
       country: string; // String!
       email: string; // String!
       postcode: string; // String!
-      userId: string; // ID!
+      userId: string; // String!
     }
     createItem: { // args
       data: NexusGenInputs['ItemCreateInput']; // ItemCreateInput!
@@ -2022,10 +2022,10 @@ export interface NexusGenArgTypes {
       userType?: string | null; // String
     }
     deleteItem: { // args
-      id: string; // ID!
+      id: string; // String!
     }
     removeFromCart: { // args
-      id: string; // ID!
+      id: string; // String!
       itemId: string; // String!
     }
     requestReset: { // args
@@ -2055,17 +2055,17 @@ export interface NexusGenArgTypes {
       userId: string; // ID!
     }
     updateCartItem: { // args
-      id: string; // ID!
+      id: string; // String!
       quantity?: number | null; // Int
     }
     updateGuestEmail: { // args
       email: string; // String!
-      userId: string; // ID!
+      userId: string; // String!
     }
     updateItem: { // args
       color?: NexusGenInputs['ColorCreateOneWithoutItemInput'] | null; // ColorCreateOneWithoutItemInput
       description: string; // String!
-      id: string; // ID!
+      id: string; // String!
       image?: string | null; // String
       largeImage?: string | null; // String
       mainDescription: string; // String!
@@ -2076,7 +2076,7 @@ export interface NexusGenArgTypes {
     }
     updatePermissions: { // args
       permissions2?: NexusGenEnums['Permission2'][] | null; // [Permission2!]
-      userId: string; // ID!
+      userId: string; // String!
     }
   }
   Order: {
@@ -2117,7 +2117,7 @@ export interface NexusGenArgTypes {
       where?: NexusGenInputs['ItemVariantsWhereInput'] | null; // ItemVariantsWhereInput
     }
     order: { // args
-      id: string; // ID!
+      id: string; // String!
     }
     orders: { // args
       cursor?: NexusGenInputs['OrderWhereUniqueInput'] | null; // OrderWhereUniqueInput

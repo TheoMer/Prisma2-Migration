@@ -953,24 +953,24 @@ input ItemWhereUniqueInput {
 }
 
 type Mutation {
-  addItemVariantsToCart(id: ID!): CartItem
-  addToCart(id: ID!): CartItem
-  createAddress(address_line: String!, card_name: String!, city: String!, country: String!, email: String!, postcode: String!, userId: ID!): Address!
+  addItemVariantsToCart(id: String!): CartItem
+  addToCart(id: String!): CartItem
+  createAddress(address_line: String!, card_name: String!, city: String!, country: String!, email: String!, postcode: String!, userId: String!): Address!
   createItem(data: ItemCreateInput!): Item!
   createOrder(address_line: String!, card_brand: String!, card_name: String!, city: String!, country: String!, last4card_digits: String!, postcode: String!, token: String!): Order!
   createSiteVisits(url: String, urlReferer: String, userAgent: String, userID: String, userIP: String, userType: String): SiteVisits
-  deleteItem(id: ID!): Item
-  removeFromCart(id: ID!, itemId: String!): CartItem
+  deleteItem(id: String!): Item
+  removeFromCart(id: String!, itemId: String!): CartItem
   requestReset(email: String!): SuccessMessage
   resetPassword(confirmPassword: String!, password: String!, resetToken: String!): User!
   signin(email: String!, password: String!): User!
   signout: SuccessMessage
   signup(email: String!, name: String!, password: String!): User!
   updateAddress(address_line: String!, card_name: String!, city: String!, country: String!, email: String!, postcode: String!, userId: ID!): Address!
-  updateCartItem(id: ID!, quantity: Int): CartItem
-  updateGuestEmail(email: String!, userId: ID!): User!
-  updateItem(color: ColorCreateOneWithoutItemInput, description: String!, id: ID!, image: String, largeImage: String, mainDescription: String!, price: Int!, quantity: Int!, size: SizeCreateOneWithoutItemInput, title: String!): Item!
-  updatePermissions(permissions2: [Permission2!], userId: ID!): User
+  updateCartItem(id: String!, quantity: Int): CartItem
+  updateGuestEmail(email: String!, userId: String!): User!
+  updateItem(color: ColorCreateOneWithoutItemInput, description: String!, id: String!, image: String, largeImage: String, mainDescription: String!, price: Int!, quantity: Int!, size: SizeCreateOneWithoutItemInput, title: String!): Item!
+  updatePermissions(permissions2: [Permission2!], userId: String!): User
 }
 
 input NestedDateTimeFilter {
@@ -1362,7 +1362,7 @@ type Query {
   itemsConnection(where: ItemWhereInput): ItemConnection!
   itemVariants(cursor: ItemVariantsWhereUniqueInput, orderBy: [ItemVariantsOrderByInput!], skip: Int, take: Int, where: ItemVariantsWhereInput): [ItemVariants!]!
   me: User
-  order(id: ID!): Order
+  order(id: String!): Order
   orders(cursor: OrderWhereUniqueInput, orderBy: [OrderOrderByInput!], skip: Int, take: Int, where: OrderWhereInput): [Order!]!
   sizes(cursor: SizeWhereUniqueInput, orderBy: [SizeOrderByInput!], skip: Int, take: Int, where: SizeWhereInput): [Size!]!
   users(cursor: UserWhereUniqueInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!

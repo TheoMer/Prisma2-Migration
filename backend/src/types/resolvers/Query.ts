@@ -133,7 +133,7 @@ export const Query = queryType({
         type: "Order",
         nullable: true,
         args: {
-          id: idArg({ nullable: false}),
+          id: stringArg({ nullable: false}),
         },
         resolve: async (root: any, args: any, ctx: any) => {
 
