@@ -79,16 +79,18 @@ export const Mutation = mutationType({
               }
             },
           ).catch(handleSubmitErr);
+
+          console.log("users in createUser - Mutations.js = ", users);
   
           // I'm having to check the users.length as am [Object: null prototype] is returned
           // See: https://stackoverflow.com/questions/53983315/is-there-a-way-to-get-rid-of-object-null-prototype-in-graphql
   
-          if (users != null) {
+          if (users.length >= 1) {
             throw new Error(`A user with this email currently exists. Please select a different one.`);
           }
   
           // 3. Update the permissions
-          await ctx.prisma.user.update({
+          const updateUser  = await ctx.prisma.user.update({
             data: {
               email: args.email,
               name: args.card_name,
@@ -97,6 +99,8 @@ export const Mutation = mutationType({
               id: args.userId,
             },
           }).catch(handleSubmitErr);
+
+          console.log("updateUser = ", updateUser);
   
           // 4. create an address for the user
   
@@ -115,6 +119,8 @@ export const Mutation = mutationType({
               ...args,
             },
           }).catch(handleSubmitErr);
+
+          console.log("address = ", address);
   
           // add the email to the return object
           return address;
@@ -137,9 +143,12 @@ export const Mutation = mutationType({
         resolve: async (root: any, args: any, ctx: any) => {
 
           const { userId } = ctx.req;
+
+          console.log("args.email in updateAddress - Mutations.js = ", args.email);
+          console.log("args.card_name in updateAddress - Mutations.js = ", args.card_name);
   
           // Update the user details
-          await ctx.prisma.user.update({
+          const updateUser = await ctx.prisma.user.update({
             data: {
               email: args.email,
               name: args.card_name,
@@ -148,6 +157,8 @@ export const Mutation = mutationType({
               id: userId, //args.userId,
             },
           }).catch(handleSubmitErr);
+
+          console.log("updateUser in updateAddress - Mutations.js = ", updateUser);
   
           // remove the id and email from args
           let addressID = args.userId; // taken from userUpdateID in MyAccount.js
@@ -155,12 +166,16 @@ export const Mutation = mutationType({
           delete args.email;
   
           // run the update method
-          return ctx.prisma.address.update({
+          const updateAddress = await ctx.prisma.address.update({
             data: {...args},
             where: {
               id: addressID,
             },
           }).catch(handleSubmitErr);
+
+          console.log("updateAddress = ", updateAddress);
+
+          return updateAddress;
   
         }      
       })
@@ -420,47 +435,82 @@ export const Mutation = mutationType({
               user: {
                 equals: userId
               }
+            },
+            include: {
+              User: {
+                select: {
+                  id: true
+                }
+              },
+              Item: {
+                select: {
+                  id: true
+                }
+              },
+              ItemVariants: {
+                select: {
+                  id: true
+                }
+              },
             }
           }).catch(handleSubmitErr);
+
+          console.log("cart in Mutation.ts = ", cart);
   
           // Get user's permission rights
           const hasPermissions = ctx.req.user.permissions2.some((permission2: any) => ['GUEST_USER'].includes(permission2));
+          console.log("hasPermissions = ", hasPermissions);
   
           // 1. check if there is a user with that email
           user = await ctx.prisma.user.findOne({
             where: { email: email },
+            include: { 
+              address: { 
+                select: {
+                  id: true
+                } 
+              } 
+            },
           }).catch(handleSubmitErr);
+
+          console.log("user in Mutation.ts = ", user);
   
-          if (!user) {
+          if (user === null) {
             throw new Error(`No such user found for email ${email}`);
           }
   
           // 2. Check if their password is correct
           const valid = await bcrypt.compare(password, user.password);
-          if (!valid) {
+          
+          if (valid === false) {
             throw new Error('Invalid Password!');
           }
   
           // 3. Copy guest_user cart if they have items in it
-          if (userId && hasPermissions && cart != null) {
+          if (userId && hasPermissions && cart.length >= 1) {
             console.log("Yes! We are here!!");
             
             let cartItemz = {};
+
             cart.map(async (cartVal: any, index: any) => {
   
               //console.log("Itemvariants id = ", await cartVal.itemvariants);
-              let registered_userCart = await ctx.prisma.cartItem.findMany(
+              let [registered_userCart] = await ctx.prisma.cartItem.findMany(
                 {
                   where: {
-                    user: {
-                      equals: user.id   
+                    User: {
+                      //equals: user.id
+                      id: user.id,
                     },
-                    itemvariants: {
-                      equals: cartVal.itemvariants 
+                    ItemVariants: {
+                      id: cartVal.ItemVariants.id 
                     },
                   },
                 },
               ).catch(handleSubmitErr);
+
+              console.log("registered_userCart = ", registered_userCart);
+              console.log("cartVal = ", cartVal);
   
               // Check whether the guest_user cart item exists in the registered User's cart
               if (registered_userCart) {
@@ -478,19 +528,21 @@ export const Mutation = mutationType({
               }else{
                 // Write the guest_user item to the User's cart
                 cartItemz = {
-                  user: {
+                  User: {
                     connect: { id: user.id }
                   },
                   quantity: cartVal.quantity,
-                  itemvariants: {
-                    connect: { id: cartVal.itemvariants },
+                  ItemVariants: {
+                    connect: { id: cartVal.ItemVariants.id },
                   },
-                  item: {
-                    connect: { id: cartVal.item },
+                  Item: {
+                    connect: { id: cartVal.Item.id },
                   },
                 };
+
+                console.log("cartItemz = ", cartItemz);
   
-                ctx.prisma.item.create({
+                ctx.prisma.cartItem.create({
                   data: cartItemz
                 }).catch(handleSubmitErr);
               }
@@ -506,53 +558,67 @@ export const Mutation = mutationType({
                   equals: userId 
                 },
               },
+              include: { 
+                items: true,
+              },
             }
           ).catch(handleSubmitErr);
+
+          console.log("userOrders = ", userOrders);
+          console.log("next check = ", ctx.req.userId && hasPermissions && userOrders.length >= 1)
   
-          if (ctx.req.userId && hasPermissions && userOrders != null) {
-              const orderItems = userOrders.items.map((orderItemFromOrder: any) => {
-  
-                // Construct the orderItems list
-                const orderItem = {
-                  id: orderItemFromOrder.itemid,
-                  user: { connect: { id: user.id } },
-                  itemid: orderItemFromOrder.itemid,
-                  title: orderItemFromOrder.title,
-                  description: orderItemFromOrder.description,
-                  mainDescription: orderItemFromOrder.mainDescription,
-                  price: orderItemFromOrder.price,
-                  image: orderItemFromOrder.image,
-                  largeImage: orderItemFromOrder.largeImage,
-                  quantity: orderItemFromOrder.quantity,
-                  color: { connect: { name: orderItemFromOrder.color.name } },
-                  size: { connect: { name: orderItemFromOrder.size.name } }
-                };
-      
-                delete orderItem.id;
-                return orderItem;
-              });
-  
-              // Create the newly transfered order
-              ctx.prisma.order.create({
-                data: {
-                  //id: '-1',   
-                  total: userOrders.total,
-                  charge: userOrders.charge,
-                  card_brand: userOrders.card_brand,
-                  last4card_digits: userOrders.last4card_digits,
-                  items: { create: orderItems },
-                  User: { connect: { id: user.id } },
-                  address_line: userOrders.address_line,
-                  city: userOrders.city,
-                  postcode: userOrders.postcode,
-                  country: userOrders.country,
-                  card_name: userOrders.card_name,
-                },
-              }).catch(handleSubmitErr);
+          if (ctx.req.userId && hasPermissions && userOrders.length >= 1) {
+            userOrders.map(async (cartVal: any, index: any) => {
+                const orderItems = userOrders[index].items.map((orderItemFromOrder: any) => {
+    
+                  // Construct the orderItems list
+                  const orderItem = {
+                    id: orderItemFromOrder.itemid,
+                    User: { connect: { id: user.id } },
+                    itemid: orderItemFromOrder.itemid,
+                    title: orderItemFromOrder.title,
+                    description: orderItemFromOrder.description,
+                    mainDescription: orderItemFromOrder.mainDescription,
+                    price: orderItemFromOrder.price,
+                    image: orderItemFromOrder.image,
+                    largeImage: orderItemFromOrder.largeImage,
+                    quantity: orderItemFromOrder.quantity,
+                    Color: { connect: { name: orderItemFromOrder.Color.name } },
+                    Size: { connect: { name: orderItemFromOrder.Size.name } }
+                  };
+
+                  console.log("orderItem = ", orderItem);
+        
+                  delete orderItem.id;
+                  return orderItem;
+                });
+
+    
+                // Create the newly transfered order
+                const createOrder = await ctx.prisma.order.create({
+                  data: {
+                    total: userOrders[index].total,
+                    charge: userOrders[index].charge,
+                    card_brand: userOrders[index].card_brand,
+                    last4card_digits: userOrders[index].last4card_digits,
+                    items: { create: orderItems },
+                    User: { connect: { id: user.id } },
+                    address_line: userOrders[index].address_line,
+                    city: userOrders[index].city,
+                    postcode: userOrders[index].postcode,
+                    country: userOrders[index].country,
+                    card_name: userOrders.card_name,
+                  },
+                }).catch(handleSubmitErr);
+
+                console.log("createOrder = ", createOrder);
+              }
+            )
           }
           
           // 5. Transfer user address only if an address for the user doesn't already exist
-          if (user.address === null) {
+          console.log("user.address.length = ", user.address.length);
+          if (user.address.length === 0) {
             const userAddress = await ctx.prisma.address.findMany({
               where: {
                 user: { 
@@ -560,18 +626,19 @@ export const Mutation = mutationType({
                 },
               },
             }).catch(handleSubmitErr);
+            console.log("userAddress = ", userAddress);
         
             // create new address object
-            if (ctx.req.userId && hasPermissions && userAddress != null) {
+            if (ctx.req.userId && hasPermissions && userAddress.length >= 1) {
               ctx.prisma.address.create({
                 data: {
                   //id: '-1',   
                   User: { connect: { id: user.id } },
-                  address_line: userAddress.address_line,
-                  city: userAddress.city,
-                  postcode: userAddress.postcode,
-                  country: userAddress.country,
-                  card_name: userAddress.card_name,
+                  address_line: userAddress[0].address_line,
+                  city: userAddress[0].city,
+                  postcode: userAddress[0].postcode,
+                  country: userAddress[0].country,
+                  card_name: userAddress[0].card_name,
                 },
               }).catch(handleSubmitErr);
             }
@@ -816,8 +883,10 @@ export const Mutation = mutationType({
               }
             },
           ).catch(handleSubmitErr);
+
+          console.log("users in UpdateGuestEmail = ", users);
   
-          if (users != null) {
+          if (users.length >= 1) {
             throw new Error(`A user with this email currently exists. Please select a different one.`);
           }
   
@@ -1026,21 +1095,40 @@ export const Mutation = mutationType({
         },
         resolve: async (root: any, args: any, ctx: any) => {
   
-          // console.log("createOrder args = ", args);
           // 1. Query the current user and make sure they are signed in
           const { userId } = ctx.req;
   
           if (!userId) throw new Error('You must be signed in to complete this order.');
   
           const user = await ctx.prisma.user.findOne({ 
-            where: { id: userId } 
+            where: { id: userId },
+            include: {
+              cart: {
+                include: {
+                  ItemVariants: {
+                    include: {
+                      Size: true,
+                      Color: true,
+                      Item: true,
+                    },
+                  },
+                  Item: {
+                    include: {
+                      Size: true,
+                      Color: true,
+                    }
+                  },
+                }
+              },
+            }
           }).catch(handleSubmitErr);
-  
-          // 2. recalculate the total for the price
+
+           // 2. recalculate the total for the price
           const amount = user && user.cart.reduce(
-            (tally: any, cartItem: any) => tally + cartItem.itemvariants.price * cartItem.quantity,
+            (tally: any, cartItem: any) => tally + cartItem.ItemVariants.price * cartItem.quantity,
             0
           );
+
           // console.log(`Going to charge for a total of ${amount}`);
           // 3. Create the stripe charge (turn token into $$$)
           const charge = await stripe.paymentIntents.create({
@@ -1054,7 +1142,7 @@ export const Mutation = mutationType({
             // allows the actual stripe error, instead of a generic graphql error message, to be returned
             return err;
           });
-  
+
           // 3b. Check if the charge has failed and generated an error object
           let chargeFailed = false;
           // console.log("charge object = ", charge.raw && charge.raw.code);
@@ -1067,7 +1155,7 @@ export const Mutation = mutationType({
           // to return the actual error message (charge.raw.code) to the client
           if (chargeFailed) {
             const errorObj = {
-              //id: -1,
+              id: -1,
               charge: charge.raw.message,
               total: 123,
               //code: charge.raw.code,
@@ -1077,37 +1165,39 @@ export const Mutation = mutationType({
           };
           
           // 4. Convert the CartItems to OrderItems and decrement Item quantity by the cartItem.item.quantity
-          const orderItems = user && user.cart.map((cartItem: any) => {
+          const orderItems = user && user.cart.map((cartItem: any, index: any) => {
+
             const orderItem = {
               //...cartItem.itemvariants,
-              id: cartItem.itemvariants.id,
-              user: { connect: { id: userId } },
-              itemid: cartItem.itemvariants.id,
+              id: cartItem.ItemVariants.id,
+              User: { connect: { id: userId } },
+              itemid: cartItem.ItemVariants.id,
               // Pull in the standard product info
-              title: cartItem.item.title,
-              description: cartItem.item.description,
-              mainDescription: cartItem.item.mainDescription,
+              title: cartItem.Item.title,
+              description: cartItem.Item.description,
+              mainDescription: cartItem.Item.mainDescription,
               // price: cartItem.item.price,
               // Now pull in the item variant info
-              price: cartItem.itemvariants.price,
-              image: cartItem.itemvariants.image,
-              largeImage: cartItem.itemvariants.largeImage,
+              price: cartItem.ItemVariants.price,
+              image: cartItem.ItemVariants.image,
+              largeImage: cartItem.ItemVariants.largeImage,
               quantity: cartItem.quantity,
-              color: { connect: { name: cartItem.itemvariants.color.name } },
-              size: { connect: { name: cartItem.itemvariants.size.name } }
+              Color: { connect: { name: cartItem.ItemVariants.Color.name } },
+              Size: { connect: { name: cartItem.ItemVariants.Size.name } }
             };
-            
+
             // Update the quantity sold of each Item variant
-            const quantityValItemVariant = cartItem.itemvariants.quantity - cartItem.quantity;
+            const quantityValItemVariant = cartItem.ItemVariants.quantity - cartItem.quantity;
+            
             const updateItemVariantQuantity = ctx.prisma.itemVariants.update({
               data: {
                 quantity: quantityValItemVariant,
               },
               where: {
-                id: cartItem.itemvariants.id,
+                id: cartItem.ItemVariants.id,
               },
             }).catch(handleSubmitErr);
-            
+
             delete orderItem.id;
             return orderItem;
           });
@@ -1115,7 +1205,6 @@ export const Mutation = mutationType({
           // 5. create the Order
           const order = await ctx.prisma.order.create({
             data: {
-              //id: '-1',
               total: charge.amount,
               charge: charge.id,
               card_brand: args.card_brand,
@@ -1128,9 +1217,20 @@ export const Mutation = mutationType({
               country: args.country,
               card_name: args.card_name,
             },
+            include: {
+              User: {
+                select: {
+                  name: true,
+                }
+              },
+              items: {
+                include: {
+                  Size: true,
+                  Color: true,
+                }
+              },
+            }
           }).catch(handleSubmitErr);
-  
-          //console.log("order = ", order);
   
           // 6. Clean up - clear the users cart, delete cartItems
           const cartItemIds = user && user.cart.map((cartItem: any) => cartItem.id);
@@ -1144,6 +1244,9 @@ export const Mutation = mutationType({
   
           // 7. Send an email order request and customer receipt. Use the format in 
           // frontend/Order to create the email 
+
+          console.log("user = ", user);
+          console.log("order = ", order);
   
           // Order request
           const clientOrder = await transport.sendMail({
@@ -1152,14 +1255,18 @@ export const Mutation = mutationType({
             subject: 'Customer Order',
             html: orderRequest(order),
           }).catch(handleSubmitErr);
+
+          console.log("clientOrder = ", clientOrder);
   
           // Customer receipt
-          const customerReceipt = await transport.sendMail({
+          /*const customerReceipt = await transport.sendMail({
             from: 'sales@flamingo.com',
             to: user.email,
             subject: 'Your Flamingo Receipt',
             html: mailReceipt(order, orderItems),
           }).catch(handleSubmitErr);
+
+          console.log("customerReceipt = ", customerReceipt);*/
   
           // 8. Return the Order to the client
           return order;

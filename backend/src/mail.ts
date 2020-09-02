@@ -23,8 +23,6 @@ const transport1 = nodemailer.createTransport({
     },
   });
 
-  transport1.use('compile', inLineCss());
-
   const makeANiceEmail1 = (text: string) => `
     <div 
         style="border: 1px solid black;
@@ -190,14 +188,14 @@ const transport1 = nodemailer.createTransport({
                 margin: 0;
               }
               </style> 
-              <p><span>Colour:</span> <span>${item.color.label}</span></p>
+              <p><span>Colour:</span> <span>${item.Color.label}</span></p>
               <style>p { 
                 display: grid;
                 grid-template-columns: 1fr 5fr;
                 margin: 0;
               }
               </style>               
-              <p><span>Size:</span> <span>${item.size.label}</span></p>
+              <p><span>Size:</span> <span>${item.Size.label}</span></p>
               <style>p { 
                 display: grid;
                 grid-template-columns: 1fr 5fr;
@@ -365,14 +363,14 @@ const transport1 = nodemailer.createTransport({
                 margin: 0;
               }
               </style> 
-              <p><span>Colour:</span> <span>${item.color.label}</span></p>
+              <p><span>Colour:</span> <span>${item.Color.label}</span></p>
               <style>p { 
                 display: grid;
                 grid-template-columns: 1fr 5fr;
                 margin: 0;
               }
               </style>               
-              <p><span>Size:</span> <span>${item.size.label}</span></p>
+              <p><span>Size:</span> <span>${item.Size.label}</span></p>
               <style>p { 
                 display: grid;
                 grid-template-columns: 1fr 5fr;

@@ -11,8 +11,8 @@ type Address {
   id: String!
   postcode: String!
   updatedAt: Date!
-  user: String!
-  User: User!
+  user: String
+  User: User
 }
 
 input AddressCreateManyWithoutUserInput {
@@ -67,7 +67,7 @@ input AddressWhereInput {
   OR: [AddressWhereInput!]
   postcode: StringFilter
   updatedAt: DateTimeFilter
-  user: StringFilter
+  user: StringNullableFilter
   User: UserWhereInput
 }
 
@@ -84,8 +84,8 @@ type CartItem {
   ItemVariants: ItemVariants
   quantity: Int!
   updatedAt: Date!
-  user: String!
-  User: User!
+  user: String
+  User: User
 }
 
 input CartItemCreateManyWithoutItemInput {
@@ -127,7 +127,7 @@ input CartItemCreateWithoutItemInput {
   ItemVariants: ItemVariantsCreateOneWithoutCartitemsInput
   quantity: Int
   updatedAt: DateTime
-  User: UserCreateOneWithoutCartInput!
+  User: UserCreateOneWithoutCartInput
 }
 
 input CartItemCreateWithoutItemVariantsInput {
@@ -136,7 +136,7 @@ input CartItemCreateWithoutItemVariantsInput {
   Item: ItemCreateOneWithoutCartitemsInput
   quantity: Int
   updatedAt: DateTime
-  User: UserCreateOneWithoutCartInput!
+  User: UserCreateOneWithoutCartInput
 }
 
 input CartItemCreateWithoutUserInput {
@@ -176,7 +176,7 @@ input CartItemWhereInput {
   OR: [CartItemWhereInput!]
   quantity: IntFilter
   updatedAt: DateTimeFilter
-  user: StringFilter
+  user: StringNullableFilter
   User: UserWhereInput
 }
 
@@ -354,8 +354,8 @@ type Item {
   Size: Size!
   title: String!
   updatedAt: Date!
-  user: String!
-  User: User!
+  user: String
+  User: User
   userIdentity: String!
 }
 
@@ -388,7 +388,7 @@ input ItemCreateInput {
   Size: SizeCreateOneWithoutItemInput!
   title: String!
   updatedAt: DateTime
-  User: UserCreateOneWithoutItemsInput!
+  User: UserCreateOneWithoutItemsInput
   userIdentity: String
 }
 
@@ -471,7 +471,7 @@ input ItemCreateWithoutCartitemsInput {
   Size: SizeCreateOneWithoutItemInput!
   title: String!
   updatedAt: DateTime
-  User: UserCreateOneWithoutItemsInput!
+  User: UserCreateOneWithoutItemsInput
   userIdentity: String
 }
 
@@ -499,7 +499,7 @@ input ItemCreateWithoutColorInput {
   Size: SizeCreateOneWithoutItemInput!
   title: String!
   updatedAt: DateTime
-  User: UserCreateOneWithoutItemsInput!
+  User: UserCreateOneWithoutItemsInput
   userIdentity: String
 }
 
@@ -527,7 +527,7 @@ input ItemCreateWithoutItemvariantsInput {
   Size: SizeCreateOneWithoutItemInput!
   title: String!
   updatedAt: DateTime
-  User: UserCreateOneWithoutItemsInput!
+  User: UserCreateOneWithoutItemsInput
   userIdentity: String
 }
 
@@ -555,7 +555,7 @@ input ItemCreateWithoutSizeInput {
   quantity: Int
   title: String!
   updatedAt: DateTime
-  User: UserCreateOneWithoutItemsInput!
+  User: UserCreateOneWithoutItemsInput
   userIdentity: String
 }
 
@@ -648,8 +648,8 @@ type ItemVariants {
   Size: Size!
   title: String!
   updatedAt: Date!
-  user: String!
-  User: User!
+  user: String
+  User: User
 }
 
 input ItemVariantsCreateManyWithoutColorInput {
@@ -731,7 +731,7 @@ input ItemVariantsCreateWithoutCartitemsInput {
   Size: SizeCreateOneWithoutItemvariantsInput!
   title: String!
   updatedAt: DateTime
-  User: UserCreateOneWithoutItemvariantsInput!
+  User: UserCreateOneWithoutItemvariantsInput
 }
 
 input ItemVariantsCreateWithoutColorInput {
@@ -758,7 +758,7 @@ input ItemVariantsCreateWithoutColorInput {
   Size: SizeCreateOneWithoutItemvariantsInput!
   title: String!
   updatedAt: DateTime
-  User: UserCreateOneWithoutItemvariantsInput!
+  User: UserCreateOneWithoutItemvariantsInput
 }
 
 input ItemVariantsCreateWithoutItemInput {
@@ -785,7 +785,7 @@ input ItemVariantsCreateWithoutItemInput {
   Size: SizeCreateOneWithoutItemvariantsInput!
   title: String!
   updatedAt: DateTime
-  User: UserCreateOneWithoutItemvariantsInput!
+  User: UserCreateOneWithoutItemvariantsInput
 }
 
 input ItemVariantsCreateWithoutSizeInput {
@@ -812,7 +812,7 @@ input ItemVariantsCreateWithoutSizeInput {
   quantity: Int
   title: String!
   updatedAt: DateTime
-  User: UserCreateOneWithoutItemvariantsInput!
+  User: UserCreateOneWithoutItemvariantsInput
 }
 
 input ItemVariantsCreateWithoutUserInput {
@@ -906,7 +906,7 @@ input ItemVariantsWhereInput {
   Size: SizeWhereInput
   title: StringFilter
   updatedAt: DateTimeFilter
-  user: StringFilter
+  user: StringNullableFilter
   User: UserWhereInput
 }
 
@@ -944,7 +944,7 @@ input ItemWhereInput {
   Size: SizeWhereInput
   title: StringFilter
   updatedAt: DateTimeFilter
-  user: StringFilter
+  user: StringNullableFilter
   User: UserWhereInput
   userIdentity: StringFilter
 }
@@ -1054,8 +1054,8 @@ type Order {
   postcode: String!
   total: Int!
   updatedAt: Date!
-  user: String!
-  User: User!
+  user: String
+  User: User
 }
 
 input OrderCreateManyWithoutUserInput {
@@ -1093,7 +1093,7 @@ input OrderCreateWithoutItemsInput {
   postcode: String!
   total: Int!
   updatedAt: DateTime
-  User: UserCreateOneWithoutOrderInput!
+  User: UserCreateOneWithoutOrderInput
 }
 
 input OrderCreateWithoutUserInput {
@@ -1130,8 +1130,8 @@ type OrderItem {
   Size: Size!
   title: String!
   updatedAt: Date!
-  user: String!
-  User: User!
+  user: String
+  User: User
 }
 
 input OrderItemCreateManyWithoutColorInput {
@@ -1192,7 +1192,7 @@ input OrderItemCreateWithoutColorInput {
   Size: SizeCreateOneWithoutOrderitemInput!
   title: String!
   updatedAt: DateTime
-  User: UserCreateOneWithoutOrderitemInput!
+  User: UserCreateOneWithoutOrderitemInput
 }
 
 input OrderItemCreateWithoutOrderInput {
@@ -1209,7 +1209,7 @@ input OrderItemCreateWithoutOrderInput {
   Size: SizeCreateOneWithoutOrderitemInput!
   title: String!
   updatedAt: DateTime
-  User: UserCreateOneWithoutOrderitemInput!
+  User: UserCreateOneWithoutOrderitemInput
 }
 
 input OrderItemCreateWithoutSizeInput {
@@ -1226,7 +1226,7 @@ input OrderItemCreateWithoutSizeInput {
   quantity: Int
   title: String!
   updatedAt: DateTime
-  User: UserCreateOneWithoutOrderitemInput!
+  User: UserCreateOneWithoutOrderitemInput
 }
 
 input OrderItemCreateWithoutUserInput {
@@ -1291,7 +1291,7 @@ input OrderItemWhereInput {
   Size: SizeWhereInput
   title: StringFilter
   updatedAt: DateTimeFilter
-  user: StringFilter
+  user: StringNullableFilter
   User: UserWhereInput
 }
 
@@ -1338,7 +1338,7 @@ input OrderWhereInput {
   postcode: StringFilter
   total: IntFilter
   updatedAt: DateTimeFilter
-  user: StringFilter
+  user: StringNullableFilter
   User: UserWhereInput
 }
 

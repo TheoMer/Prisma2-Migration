@@ -57,36 +57,38 @@ export const Query = queryType({
         resolve: async (root: any, args: any, ctx: any) => {
   
             const { userId } = ctx.req;
+            let userExists = null;
 
             // Cookie userId exists but Guest user has been deleted from table
-            const userExists = await ctx.prisma.user.findOne({ 
-              where: { id: userId } 
-            }).catch(handleSubmitErr);
-  
-            if(!userId || !userExists) {
+            if (userId !== undefined) {
+              userExists = await ctx.prisma.user.findOne({ 
+                where: { id: userId } 
+              }).catch(handleSubmitErr);
+            }
+
+            if(userExists === undefined || userExists === null) {
+
               // create guest user
-  
               // 1. Create email address
               const newUUID = process.env.NODE_ENV === 'development' ? uuidv3(process.env.FRONTEND_URL, uuidv3.URL) : uuidv3(process.env.APP_DOMAIN, uuidv3.DNS);
               const email = await bcrypt.hash(newUUID, 10) + '@guestuser.com';
-              
+
               // 2. Create Password
               const password = await bcrypt.hash(newUUID, 10);
               const name = "Guest User";
   
               // 3. create the user in the database
-              const user = ctx.prisma.user.create({
+              const user = await ctx.prisma.user.create({
                 data: {
-                  id: userId,
                   name,
                   email,
                   password,
                   permissions2: { set: ['GUEST_USER'] },
                 },                    
               }).catch(handleSubmitErr);
-  
+
               // create the jwt token for them
-              const token = jwt.sign({ userId: ctx._user.id }, process.env.APP_SECRET);
+              const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
   
               // We set the jwt as a cookie on the response
               ctx.res.cookie('token', token, {
@@ -122,7 +124,7 @@ export const Query = queryType({
           }
   
           // 2. Check if the user has the permissions to query all the users
-          hasPermission(ctx._user, ['ADMIN', 'PERMISSIONUPDATE']);
+          hasPermission(ctx.req.user, ['ADMIN', 'PERMISSIONUPDATE']);
   
           return await ctx.prisma.user.findMany().catch(handleSubmitErr);
   
@@ -148,13 +150,17 @@ export const Query = queryType({
           const order = await ctx.prisma.order.findOne(
             {
               where: { id: args.id },
+              include: {
+                User: true,
+                items: true,
+              }
             },
           ).catch(handleSubmitErr);
-  
+
           // 3. Check if the have the permissions to see this order
-          const ownsOrder = order?.user === userId;
-          const hasPermissionToSeeOrder = ctx._user.permissions.includes('ADMIN');
-  
+          const ownsOrder = order.user === userId;
+          const hasPermissionToSeeOrder = ctx.req.user.permissions2.includes('ADMIN');
+          
           if (!ownsOrder && !hasPermissionToSeeOrder) {
             throw new Error('You must be signed in to see your orders.');
           }

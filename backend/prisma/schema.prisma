@@ -17,8 +17,8 @@ model Address {
   id           String   @default(cuid()) @id
   postcode     String
   updatedAt    DateTime @updatedAt
-  user         String
-  User         User     @relation(fields: [user], references: [id])
+  user         String?
+  User         User?    @relation(fields: [user], references: [id])
 }
 
 model CartItem {
@@ -28,10 +28,10 @@ model CartItem {
   itemvariants String?
   quantity     Int           @default(1)
   updatedAt    DateTime      @updatedAt
-  user         String
+  user         String?
   Item         Item?         @relation(fields: [item], references: [id])
   ItemVariants ItemVariants? @relation(fields: [itemvariants], references: [id])
-  User         User          @relation(fields: [user], references: [id])
+  User         User?         @relation(fields: [user], references: [id])
 }
 
 model Color {
@@ -68,11 +68,11 @@ model Item {
   size            String
   title           String
   updatedAt       DateTime       @updatedAt
-  user            String
+  user            String?
   userIdentity    String         @default("no-button")
   Color           Color          @relation(fields: [color], references: [id])
   Size            Size           @relation(fields: [size], references: [id])
-  User            User           @relation(fields: [user], references: [id])
+  User            User?          @relation(fields: [user], references: [id])
   cartitems       CartItem[]
   itemvariants    ItemVariants[]
 }
@@ -101,11 +101,11 @@ model ItemVariants {
   size            String
   title           String
   updatedAt       DateTime   @updatedAt
-  user            String
+  user            String?
   Color           Color     @relation(fields: [color], references: [id])
   Item            Item      @relation(fields: [item], references: [id])
   Size            Size      @relation(fields: [size], references: [id])
-  User            User      @relation(fields: [user], references: [id])
+  User            User?     @relation(fields: [user], references: [id])
   cartitems       CartItem[]
 }
 
@@ -122,8 +122,8 @@ model Order {
   postcode         String
   total            Int
   updatedAt        DateTime    @updatedAt
-  user             String
-  User             User       @relation(fields: [user], references: [id])
+  user             String?
+  User             User?       @relation(fields: [user], references: [id])
   items            OrderItem[]
 }
 
@@ -142,11 +142,11 @@ model OrderItem {
   size            String
   title           String
   updatedAt       DateTime @updatedAt
-  user            String
+  user            String?
   Color           Color    @relation(fields: [color], references: [id])
   Order           Order    @relation(fields: [order], references: [id])
   Size            Size     @relation(fields: [size], references: [id])
-  User            User     @relation(fields: [user], references: [id])
+  User            User?    @relation(fields: [user], references: [id])
 }
 
 model SiteVisits {

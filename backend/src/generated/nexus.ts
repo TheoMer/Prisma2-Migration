@@ -74,7 +74,7 @@ export interface NexusGenInputs {
     OR?: NexusGenInputs['AddressWhereInput'][] | null; // [AddressWhereInput!]
     postcode?: NexusGenInputs['StringFilter'] | null; // StringFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-    user?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    user?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     User?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
   }
   AddressWhereUniqueInput: { // input type
@@ -113,7 +113,7 @@ export interface NexusGenInputs {
     ItemVariants?: NexusGenInputs['ItemVariantsCreateOneWithoutCartitemsInput'] | null; // ItemVariantsCreateOneWithoutCartitemsInput
     quantity?: number | null; // Int
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User: NexusGenInputs['UserCreateOneWithoutCartInput']; // UserCreateOneWithoutCartInput!
+    User?: NexusGenInputs['UserCreateOneWithoutCartInput'] | null; // UserCreateOneWithoutCartInput
   }
   CartItemCreateWithoutItemVariantsInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -121,7 +121,7 @@ export interface NexusGenInputs {
     Item?: NexusGenInputs['ItemCreateOneWithoutCartitemsInput'] | null; // ItemCreateOneWithoutCartitemsInput
     quantity?: number | null; // Int
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User: NexusGenInputs['UserCreateOneWithoutCartInput']; // UserCreateOneWithoutCartInput!
+    User?: NexusGenInputs['UserCreateOneWithoutCartInput'] | null; // UserCreateOneWithoutCartInput
   }
   CartItemCreateWithoutUserInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -157,7 +157,7 @@ export interface NexusGenInputs {
     OR?: NexusGenInputs['CartItemWhereInput'][] | null; // [CartItemWhereInput!]
     quantity?: NexusGenInputs['IntFilter'] | null; // IntFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-    user?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    user?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     User?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
   }
   CartItemWhereUniqueInput: { // input type
@@ -296,7 +296,7 @@ export interface NexusGenInputs {
     Size: NexusGenInputs['SizeCreateOneWithoutItemInput']; // SizeCreateOneWithoutItemInput!
     title: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User: NexusGenInputs['UserCreateOneWithoutItemsInput']; // UserCreateOneWithoutItemsInput!
+    User?: NexusGenInputs['UserCreateOneWithoutItemsInput'] | null; // UserCreateOneWithoutItemsInput
     userIdentity?: string | null; // String
   }
   ItemCreateManyWithoutColorInput: { // input type
@@ -368,7 +368,7 @@ export interface NexusGenInputs {
     Size: NexusGenInputs['SizeCreateOneWithoutItemInput']; // SizeCreateOneWithoutItemInput!
     title: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User: NexusGenInputs['UserCreateOneWithoutItemsInput']; // UserCreateOneWithoutItemsInput!
+    User?: NexusGenInputs['UserCreateOneWithoutItemsInput'] | null; // UserCreateOneWithoutItemsInput
     userIdentity?: string | null; // String
   }
   ItemCreateWithoutColorInput: { // input type
@@ -395,7 +395,7 @@ export interface NexusGenInputs {
     Size: NexusGenInputs['SizeCreateOneWithoutItemInput']; // SizeCreateOneWithoutItemInput!
     title: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User: NexusGenInputs['UserCreateOneWithoutItemsInput']; // UserCreateOneWithoutItemsInput!
+    User?: NexusGenInputs['UserCreateOneWithoutItemsInput'] | null; // UserCreateOneWithoutItemsInput
     userIdentity?: string | null; // String
   }
   ItemCreateWithoutItemvariantsInput: { // input type
@@ -422,7 +422,7 @@ export interface NexusGenInputs {
     Size: NexusGenInputs['SizeCreateOneWithoutItemInput']; // SizeCreateOneWithoutItemInput!
     title: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User: NexusGenInputs['UserCreateOneWithoutItemsInput']; // UserCreateOneWithoutItemsInput!
+    User?: NexusGenInputs['UserCreateOneWithoutItemsInput'] | null; // UserCreateOneWithoutItemsInput
     userIdentity?: string | null; // String
   }
   ItemCreateWithoutSizeInput: { // input type
@@ -449,7 +449,7 @@ export interface NexusGenInputs {
     quantity?: number | null; // Int
     title: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User: NexusGenInputs['UserCreateOneWithoutItemsInput']; // UserCreateOneWithoutItemsInput!
+    User?: NexusGenInputs['UserCreateOneWithoutItemsInput'] | null; // UserCreateOneWithoutItemsInput
     userIdentity?: string | null; // String
   }
   ItemCreateWithoutUserInput: { // input type
@@ -579,7 +579,7 @@ export interface NexusGenInputs {
     Size: NexusGenInputs['SizeCreateOneWithoutItemvariantsInput']; // SizeCreateOneWithoutItemvariantsInput!
     title: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User: NexusGenInputs['UserCreateOneWithoutItemvariantsInput']; // UserCreateOneWithoutItemvariantsInput!
+    User?: NexusGenInputs['UserCreateOneWithoutItemvariantsInput'] | null; // UserCreateOneWithoutItemvariantsInput
   }
   ItemVariantsCreateWithoutColorInput: { // input type
     cartitems?: NexusGenInputs['CartItemCreateManyWithoutItemVariantsInput'] | null; // CartItemCreateManyWithoutItemVariantsInput
@@ -605,7 +605,7 @@ export interface NexusGenInputs {
     Size: NexusGenInputs['SizeCreateOneWithoutItemvariantsInput']; // SizeCreateOneWithoutItemvariantsInput!
     title: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User: NexusGenInputs['UserCreateOneWithoutItemvariantsInput']; // UserCreateOneWithoutItemvariantsInput!
+    User?: NexusGenInputs['UserCreateOneWithoutItemvariantsInput'] | null; // UserCreateOneWithoutItemvariantsInput
   }
   ItemVariantsCreateWithoutItemInput: { // input type
     cartitems?: NexusGenInputs['CartItemCreateManyWithoutItemVariantsInput'] | null; // CartItemCreateManyWithoutItemVariantsInput
@@ -631,7 +631,7 @@ export interface NexusGenInputs {
     Size: NexusGenInputs['SizeCreateOneWithoutItemvariantsInput']; // SizeCreateOneWithoutItemvariantsInput!
     title: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User: NexusGenInputs['UserCreateOneWithoutItemvariantsInput']; // UserCreateOneWithoutItemvariantsInput!
+    User?: NexusGenInputs['UserCreateOneWithoutItemvariantsInput'] | null; // UserCreateOneWithoutItemvariantsInput
   }
   ItemVariantsCreateWithoutSizeInput: { // input type
     cartitems?: NexusGenInputs['CartItemCreateManyWithoutItemVariantsInput'] | null; // CartItemCreateManyWithoutItemVariantsInput
@@ -657,7 +657,7 @@ export interface NexusGenInputs {
     quantity?: number | null; // Int
     title: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User: NexusGenInputs['UserCreateOneWithoutItemvariantsInput']; // UserCreateOneWithoutItemvariantsInput!
+    User?: NexusGenInputs['UserCreateOneWithoutItemvariantsInput'] | null; // UserCreateOneWithoutItemvariantsInput
   }
   ItemVariantsCreateWithoutUserInput: { // input type
     cartitems?: NexusGenInputs['CartItemCreateManyWithoutItemVariantsInput'] | null; // CartItemCreateManyWithoutItemVariantsInput
@@ -747,7 +747,7 @@ export interface NexusGenInputs {
     Size?: NexusGenInputs['SizeWhereInput'] | null; // SizeWhereInput
     title?: NexusGenInputs['StringFilter'] | null; // StringFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-    user?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    user?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     User?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
   }
   ItemVariantsWhereUniqueInput: { // input type
@@ -783,7 +783,7 @@ export interface NexusGenInputs {
     Size?: NexusGenInputs['SizeWhereInput'] | null; // SizeWhereInput
     title?: NexusGenInputs['StringFilter'] | null; // StringFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-    user?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    user?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     User?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     userIdentity?: NexusGenInputs['StringFilter'] | null; // StringFilter
   }
@@ -881,7 +881,7 @@ export interface NexusGenInputs {
     postcode: string; // String!
     total: number; // Int!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User: NexusGenInputs['UserCreateOneWithoutOrderInput']; // UserCreateOneWithoutOrderInput!
+    User?: NexusGenInputs['UserCreateOneWithoutOrderInput'] | null; // UserCreateOneWithoutOrderInput
   }
   OrderCreateWithoutUserInput: { // input type
     address_line: string; // String!
@@ -948,7 +948,7 @@ export interface NexusGenInputs {
     Size: NexusGenInputs['SizeCreateOneWithoutOrderitemInput']; // SizeCreateOneWithoutOrderitemInput!
     title: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User: NexusGenInputs['UserCreateOneWithoutOrderitemInput']; // UserCreateOneWithoutOrderitemInput!
+    User?: NexusGenInputs['UserCreateOneWithoutOrderitemInput'] | null; // UserCreateOneWithoutOrderitemInput
   }
   OrderItemCreateWithoutOrderInput: { // input type
     Color: NexusGenInputs['ColorCreateOneWithoutOrderitemInput']; // ColorCreateOneWithoutOrderitemInput!
@@ -964,7 +964,7 @@ export interface NexusGenInputs {
     Size: NexusGenInputs['SizeCreateOneWithoutOrderitemInput']; // SizeCreateOneWithoutOrderitemInput!
     title: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User: NexusGenInputs['UserCreateOneWithoutOrderitemInput']; // UserCreateOneWithoutOrderitemInput!
+    User?: NexusGenInputs['UserCreateOneWithoutOrderitemInput'] | null; // UserCreateOneWithoutOrderitemInput
   }
   OrderItemCreateWithoutSizeInput: { // input type
     Color: NexusGenInputs['ColorCreateOneWithoutOrderitemInput']; // ColorCreateOneWithoutOrderitemInput!
@@ -980,7 +980,7 @@ export interface NexusGenInputs {
     quantity?: number | null; // Int
     title: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User: NexusGenInputs['UserCreateOneWithoutOrderitemInput']; // UserCreateOneWithoutOrderitemInput!
+    User?: NexusGenInputs['UserCreateOneWithoutOrderitemInput'] | null; // UserCreateOneWithoutOrderitemInput
   }
   OrderItemCreateWithoutUserInput: { // input type
     Color: NexusGenInputs['ColorCreateOneWithoutOrderitemInput']; // ColorCreateOneWithoutOrderitemInput!
@@ -1041,7 +1041,7 @@ export interface NexusGenInputs {
     Size?: NexusGenInputs['SizeWhereInput'] | null; // SizeWhereInput
     title?: NexusGenInputs['StringFilter'] | null; // StringFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-    user?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    user?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     User?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
   }
   OrderItemWhereUniqueInput: { // input type
@@ -1084,7 +1084,7 @@ export interface NexusGenInputs {
     postcode?: NexusGenInputs['StringFilter'] | null; // StringFilter
     total?: NexusGenInputs['IntFilter'] | null; // IntFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-    user?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    user?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     User?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
   }
   OrderWhereUniqueInput: { // input type
@@ -1420,7 +1420,7 @@ export interface NexusGenRootTypes {
     id: string; // String!
     postcode: string; // String!
     updatedAt: NexusGenScalars['Date']; // Date!
-    user: string; // String!
+    user?: string | null; // String
   }
   CartItem: { // root type
     createdAt: NexusGenScalars['Date']; // Date!
@@ -1429,7 +1429,7 @@ export interface NexusGenRootTypes {
     itemvariants?: string | null; // String
     quantity: number; // Int!
     updatedAt: NexusGenScalars['Date']; // Date!
-    user: string; // String!
+    user?: string | null; // String
   }
   Color: { // root type
     createdAt: NexusGenScalars['Date']; // Date!
@@ -1461,7 +1461,7 @@ export interface NexusGenRootTypes {
     size: string; // String!
     title: string; // String!
     updatedAt: NexusGenScalars['Date']; // Date!
-    user: string; // String!
+    user?: string | null; // String
     userIdentity: string; // String!
   }
   ItemConnection: { // root type
@@ -1491,7 +1491,7 @@ export interface NexusGenRootTypes {
     size: string; // String!
     title: string; // String!
     updatedAt: NexusGenScalars['Date']; // Date!
-    user: string; // String!
+    user?: string | null; // String
   }
   Mutation: {};
   Order: { // root type
@@ -1507,7 +1507,7 @@ export interface NexusGenRootTypes {
     postcode: string; // String!
     total: number; // Int!
     updatedAt: NexusGenScalars['Date']; // Date!
-    user: string; // String!
+    user?: string | null; // String
   }
   OrderItem: { // root type
     color: string; // String!
@@ -1524,7 +1524,7 @@ export interface NexusGenRootTypes {
     size: string; // String!
     title: string; // String!
     updatedAt: NexusGenScalars['Date']; // Date!
-    user: string; // String!
+    user?: string | null; // String
   }
   Query: {};
   SiteVisits: { // root type
@@ -1729,8 +1729,8 @@ export interface NexusGenFieldTypes {
     id: string; // String!
     postcode: string; // String!
     updatedAt: NexusGenScalars['Date']; // Date!
-    user: string; // String!
-    User: NexusGenRootTypes['User']; // User!
+    user: string | null; // String
+    User: NexusGenRootTypes['User'] | null; // User
   }
   CartItem: { // field return type
     createdAt: NexusGenScalars['Date']; // Date!
@@ -1741,8 +1741,8 @@ export interface NexusGenFieldTypes {
     ItemVariants: NexusGenRootTypes['ItemVariants'] | null; // ItemVariants
     quantity: number; // Int!
     updatedAt: NexusGenScalars['Date']; // Date!
-    user: string; // String!
-    User: NexusGenRootTypes['User']; // User!
+    user: string | null; // String
+    User: NexusGenRootTypes['User'] | null; // User
   }
   Color: { // field return type
     createdAt: NexusGenScalars['Date']; // Date!
@@ -1781,8 +1781,8 @@ export interface NexusGenFieldTypes {
     Size: NexusGenRootTypes['Size']; // Size!
     title: string; // String!
     updatedAt: NexusGenScalars['Date']; // Date!
-    user: string; // String!
-    User: NexusGenRootTypes['User']; // User!
+    user: string | null; // String
+    User: NexusGenRootTypes['User'] | null; // User
     userIdentity: string; // String!
   }
   ItemConnection: { // field return type
@@ -1816,8 +1816,8 @@ export interface NexusGenFieldTypes {
     Size: NexusGenRootTypes['Size']; // Size!
     title: string; // String!
     updatedAt: NexusGenScalars['Date']; // Date!
-    user: string; // String!
-    User: NexusGenRootTypes['User']; // User!
+    user: string | null; // String
+    User: NexusGenRootTypes['User'] | null; // User
   }
   Mutation: { // field return type
     addItemVariantsToCart: NexusGenRootTypes['CartItem'] | null; // CartItem
@@ -1853,8 +1853,8 @@ export interface NexusGenFieldTypes {
     postcode: string; // String!
     total: number; // Int!
     updatedAt: NexusGenScalars['Date']; // Date!
-    user: string; // String!
-    User: NexusGenRootTypes['User']; // User!
+    user: string | null; // String
+    User: NexusGenRootTypes['User'] | null; // User
   }
   OrderItem: { // field return type
     color: string; // String!
@@ -1874,8 +1874,8 @@ export interface NexusGenFieldTypes {
     Size: NexusGenRootTypes['Size']; // Size!
     title: string; // String!
     updatedAt: NexusGenScalars['Date']; // Date!
-    user: string; // String!
-    User: NexusGenRootTypes['User']; // User!
+    user: string | null; // String
+    User: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
     colors: NexusGenRootTypes['Color'][]; // [Color!]!

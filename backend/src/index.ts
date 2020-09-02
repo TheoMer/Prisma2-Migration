@@ -22,7 +22,7 @@ app.use((req: any, res: any, next: any) => {
     //console.log("token = ", token);
     //console.log("uuid = ", uuid);
 
-    req.userId = 'cjo7q048b000408312h9c2fo0';
+    //req.userId = 'cjo7q048b000408312h9c2fo0';
 
     if(token) {
 
