@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const inLineCss = require('nodemailer-juice');
-const { format, parseISO } = require('date-fns');
+const { format } = require('date-fns');
 
 function formatMoney(amount: any) {
   const options = {
@@ -38,7 +38,7 @@ const transport1 = nodemailer.createTransport({
     </div>
   `;
 
-  const orderRequest1 = (order: any, orderItems: any) => `
+  const orderRequest1 = (order: any) => `
   <div style="font-family: Arial, Helvetica, sans-serif; max-width: 1000px; margin: 0 auto; border: 1px solid #a5a5a5; box-shadow: '0 12px 24px 0 rgba(0, 0, 0, 0.09)'; padding: 2rem; border-top: 10px solid blue;">
       <h2>Customer order reads as follows:</h2>
       <p style="display: grid; grid-template-columns: 1fr 5fr; margin: 0; border-bottom: 1px solid #a5a5a5;">
@@ -106,7 +106,7 @@ const transport1 = nodemailer.createTransport({
           text-align: left;
         }
         </style>
-        <span>${format(parseISO(order.createdAt), 'MMMM d, yyyy h:mm a', { awareOfUnicodeTokens: true })}</span>
+        <span>${format(new Date(order.createdAt), 'PPPPpp')}</span>
       </p>
 
       <p style="display: grid; grid-template-columns: 1fr 5fr; margin: 0; border-bottom: 1px solid #a5a5a5;">
@@ -219,7 +219,8 @@ const transport1 = nodemailer.createTransport({
               <p><span>SubTotal:</span> <span>${formatMoney(item.price * item.quantity)}</span></p>
             </div>
           </div>`
-        ))}
+        )
+      )}
       </div>
       <style>span { 
         padding: 1rem;
@@ -230,7 +231,7 @@ const transport1 = nodemailer.createTransport({
   </div>
   `;
 
-  const mailReceipt1 = (order: any, orderItems: any) => `
+  const mailReceipt1 = (order: any) => `
   <div style="font-family: Arial, Helvetica, sans-serif; max-width: 1000px; margin: 0 auto; border: 1px solid #a5a5a5; box-shadow: '0 12px 24px 0 rgba(0, 0, 0, 0.09)'; padding: 2rem; border-top: 10px solid blue;">
       <h2>Your receipt reads as follows:</h2>
       <p style="display: grid; grid-template-columns: 1fr 5fr; margin: 0; border-bottom: 1px solid #a5a5a5;">
@@ -281,7 +282,7 @@ const transport1 = nodemailer.createTransport({
           text-align: left;
         }
         </style>
-        <span>${format(parseISO(order.createdAt), 'MMMM d, yyyy h:mm a', { awareOfUnicodeTokens: true })}</span>
+        <span>${format(new Date(order.createdAt), 'PPPPpp')}</span>
       </p>
 
       <p style="display: grid; grid-template-columns: 1fr 5fr; margin: 0; border-bottom: 1px solid #a5a5a5;">

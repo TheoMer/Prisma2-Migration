@@ -8,6 +8,7 @@ const { transport, makeANiceEmail, orderRequest, mailReceipt } = require('../../
 const stripe = require('../../stripe');
 const cloudinary = require('cloudinary');
 const { hasPermission } = require('../../utils');
+import { format } from 'date-fns';
 
 const handleSubmitErr = (err: any) => {
     console.error(err.message);
@@ -716,7 +717,10 @@ export const Mutation = mutationType({
           }
   
           // 1. Check if this is a real user
-          const user = await ctx.prisma.user.findOne({ where: { email: args.email } });
+          const user = await ctx.prisma.user.findOne({ 
+            where: { email: args.email } 
+          });
+
           if (!user) {
             throw new Error(`No such user found for email ${args.email}`);
           }
@@ -725,13 +729,14 @@ export const Mutation = mutationType({
           const randomBytesPromiseified = promisify(randomBytes);
           const resetToken = (await randomBytesPromiseified(20)).toString('hex');
           const resetTokenExpiry = Date.now() + 3600000; // 1 hour from now
-          const res = await ctx.prisma.user.update({
+          
+          await ctx.prisma.user.update({
             where: { email: args.email },
             data: { resetToken, resetTokenExpiry },
           }).catch(handleSubmitErr);
   
           // 3. Email them that reset token
-          const mailRes = await transport.sendMail({
+          await transport.sendMail({
             from: 'techsupport@wflamingo.com',
             to: user.email,
             subject: 'Your Password Reset Token',
@@ -1245,28 +1250,21 @@ export const Mutation = mutationType({
           // 7. Send an email order request and customer receipt. Use the format in 
           // frontend/Order to create the email 
 
-          console.log("user = ", user);
-          console.log("order = ", order);
-  
           // Order request
-          const clientOrder = await transport.sendMail({
+          await transport.sendMail({
             from: user.email,
             to: 'orders@flamingo.com',
             subject: 'Customer Order',
             html: orderRequest(order),
           }).catch(handleSubmitErr);
 
-          console.log("clientOrder = ", clientOrder);
-  
           // Customer receipt
-          /*const customerReceipt = await transport.sendMail({
+          await transport.sendMail({
             from: 'sales@flamingo.com',
             to: user.email,
             subject: 'Your Flamingo Receipt',
-            html: mailReceipt(order, orderItems),
+            html: mailReceipt(order),
           }).catch(handleSubmitErr);
-
-          console.log("customerReceipt = ", customerReceipt);*/
   
           // 8. Return the Order to the client
           return order;
