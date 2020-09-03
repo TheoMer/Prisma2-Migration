@@ -34,7 +34,7 @@ export const Mutation = mutationType({
                 ...args           
               },
             },
-          ).catch(handleSubmitErr);
+          )
 
           // Manually add that an item was created
           newItem.push({
@@ -79,7 +79,7 @@ export const Mutation = mutationType({
                 }
               }
             },
-          ).catch(handleSubmitErr);
+          )
 
           console.log("users in createUser - Mutations.js = ", users);
   
@@ -99,7 +99,7 @@ export const Mutation = mutationType({
             where: {
               id: args.userId,
             },
-          }).catch(handleSubmitErr);
+          })
 
           console.log("updateUser = ", updateUser);
   
@@ -119,7 +119,7 @@ export const Mutation = mutationType({
               //id: '-1',  // An error is issued on data: if I don't add an id
               ...args,
             },
-          }).catch(handleSubmitErr);
+          })
 
           console.log("address = ", address);
   
@@ -157,7 +157,7 @@ export const Mutation = mutationType({
             where: {
               id: userId, //args.userId,
             },
-          }).catch(handleSubmitErr);
+          })
 
           console.log("updateUser in updateAddress - Mutations.js = ", updateUser);
   
@@ -172,7 +172,7 @@ export const Mutation = mutationType({
             where: {
               id: addressID,
             },
-          }).catch(handleSubmitErr);
+          })
 
           console.log("updateAddress = ", updateAddress);
 
@@ -236,7 +236,7 @@ export const Mutation = mutationType({
                 id: args.id,
               },
             }
-          ).catch(handleSubmitErr);
+          )
 
           // Manually add that an item was updated
           updateItem.push({
@@ -281,12 +281,12 @@ export const Mutation = mutationType({
             where: {
               id: args.id,
             },
-          }).catch(handleSubmitErr);
+          })
       
           // 3b. Delete it!
           const deletedItem = await ctx.prisma.item.delete({ 
             where 
-          }).catch(handleSubmitErr);
+          })
       
           // 4. If the item was deleted from db, delete image from Cloudinary
           if (deletedItem) {
@@ -359,7 +359,7 @@ export const Mutation = mutationType({
               where: {
                 id: userId,
               },
-            }).catch(handleSubmitErr);
+            })
 
           } else {
             
@@ -370,7 +370,7 @@ export const Mutation = mutationType({
             // where { emailTest }
             const userTest = await ctx.prisma.user.findOne({ 
               where: { email: emailTest } 
-            }).catch(handleSubmitErr);
+            })
   
             if (userTest != null) {
               throw new Error(`A user with the email: ${emailTest} already exists.`);
@@ -386,7 +386,7 @@ export const Mutation = mutationType({
                   permissions2: { set: ['USER'] },
                 },
               }
-            ).catch(handleSubmitErr);
+            )
       
             // create the JWT token for them
             const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
@@ -415,261 +415,254 @@ export const Mutation = mutationType({
           password: stringArg({ nullable: false }),         
         },
         resolve: async (root: any, { email, password }: {email: any, password: any}, ctx: any) => {
-          
-          let user: any;
-          const { userId } = ctx.req;
-          //console.log("userId = ", userId);
-          //console.log("User  = ", ctx.req.user);
-          
-          //Check that the email and password aren't empty
-          if (email.length == 0) {
-            throw new Error('A valid email address is required.');
-          }
-  
-          if (password.length == 0) {
-            throw new Error('A valid password is required.');
-          }
-  
-          // get cart information for the current user
-          const cart = await ctx.prisma.cartItem.findMany({
-            where: {
-              user: {
-                equals: userId
-              }
-            },
-            include: {
-              User: {
-                select: {
-                  id: true
-                }
-              },
-              Item: {
-                select: {
-                  id: true
-                }
-              },
-              ItemVariants: {
-                select: {
-                  id: true
-                }
-              },
-            }
-          }).catch(handleSubmitErr);
 
-          console.log("cart in Mutation.ts = ", cart);
-  
-          // Get user's permission rights
-          const hasPermissions = ctx.req.user.permissions2.some((permission2: any) => ['GUEST_USER'].includes(permission2));
-          console.log("hasPermissions = ", hasPermissions);
-  
-          // 1. check if there is a user with that email
-          user = await ctx.prisma.user.findOne({
-            where: { email: email },
-            include: { 
-              address: { 
-                select: {
-                  id: true
-                } 
-              } 
-            },
-          }).catch(handleSubmitErr);
+          try {
 
-          console.log("user in Mutation.ts = ", user);
-  
-          if (user === null) {
-            throw new Error(`No such user found for email ${email}`);
-          }
-  
-          // 2. Check if their password is correct
-          const valid = await bcrypt.compare(password, user.password);
-          
-          if (valid === false) {
-            throw new Error('Invalid Password!');
-          }
-  
-          // 3. Copy guest_user cart if they have items in it
-          if (userId && hasPermissions && cart.length >= 1) {
-            console.log("Yes! We are here!!");
+            let user: any;
+            const { userId } = ctx.req;
+            //console.log("userId = ", userId);
+            //console.log("User  = ", ctx.req.user);
             
-            let cartItemz = {};
-
-            cart.map(async (cartVal: any, index: any) => {
-  
-              //console.log("Itemvariants id = ", await cartVal.itemvariants);
-              let [registered_userCart] = await ctx.prisma.cartItem.findMany(
-                {
-                  where: {
-                    User: {
-                      //equals: user.id
-                      id: user.id,
-                    },
-                    ItemVariants: {
-                      id: cartVal.ItemVariants.id 
-                    },
-                  },
+            //Check that the email and password aren't empty
+            if (email.length == 0) {
+              throw new Error('A valid email address is required.');
+            }
+    
+            if (password.length == 0) {
+              throw new Error('A valid password is required.');
+            }
+    
+            // get cart information for the current user
+            const cart = await ctx.prisma.cartItem.findMany({
+              where: {
+                user: {
+                  equals: userId
+                }
+              },
+              include: {
+                User: {
+                  select: {
+                    id: true
+                  }
                 },
-              ).catch(handleSubmitErr);
-
-              console.log("registered_userCart = ", registered_userCart);
-              console.log("cartVal = ", cartVal);
-  
-              // Check whether the guest_user cart item exists in the registered User's cart
-              if (registered_userCart) {
-  
-                // Update the User cart item quantity
-                ctx.prisma.cartItem.update({
-                  data: { 
-                    quantity: registered_userCart.quantity + cartVal.quantity 
-                  },
-                  where: { 
-                    id: registered_userCart.id
-                  },
-                }).catch(handleSubmitErr);
-  
-              }else{
-                // Write the guest_user item to the User's cart
-                cartItemz = {
-                  User: {
-                    connect: { id: user.id }
-                  },
-                  quantity: cartVal.quantity,
-                  ItemVariants: {
-                    connect: { id: cartVal.ItemVariants.id },
-                  },
-                  Item: {
-                    connect: { id: cartVal.Item.id },
-                  },
-                };
-
-                console.log("cartItemz = ", cartItemz);
-  
-                ctx.prisma.cartItem.create({
-                  data: cartItemz
-                }).catch(handleSubmitErr);
+                Item: {
+                  select: {
+                    id: true
+                  }
+                },
+                ItemVariants: {
+                  select: {
+                    id: true
+                  }
+                },
               }
             })
-          }
   
-          // 4. Transfer a guest_users's orders to the registered user logging in
-          // if any exists
-          const userOrders = await ctx.prisma.order.findMany(
-            {
-              where: {
-                user: { 
-                  equals: userId 
-                },
-              },
+            // Get user's permission rights
+            const hasPermissions = ctx.req.user.permissions2.some((permission2: any) => ['GUEST_USER'].includes(permission2));
+            
+            // 1. check if there is a user with that email
+            user = await ctx.prisma.user.findOne({
+              where: { email: email },
               include: { 
-                items: true,
+                address: { 
+                  select: {
+                    id: true
+                  } 
+                } 
               },
-            }
-          ).catch(handleSubmitErr);
-
-          console.log("userOrders = ", userOrders);
-          console.log("next check = ", ctx.req.userId && hasPermissions && userOrders.length >= 1)
+            })
   
-          if (ctx.req.userId && hasPermissions && userOrders.length >= 1) {
-            userOrders.map(async (cartVal: any, index: any) => {
-                const orderItems = userOrders[index].items.map((orderItemFromOrder: any) => {
+            if (user === null) {
+              throw new Error(`No such user found for email ${email}`);
+            }
     
-                  // Construct the orderItems list
-                  const orderItem = {
-                    id: orderItemFromOrder.itemid,
-                    User: { connect: { id: user.id } },
-                    itemid: orderItemFromOrder.itemid,
-                    title: orderItemFromOrder.title,
-                    description: orderItemFromOrder.description,
-                    mainDescription: orderItemFromOrder.mainDescription,
-                    price: orderItemFromOrder.price,
-                    image: orderItemFromOrder.image,
-                    largeImage: orderItemFromOrder.largeImage,
-                    quantity: orderItemFromOrder.quantity,
-                    Color: { connect: { name: orderItemFromOrder.Color.name } },
-                    Size: { connect: { name: orderItemFromOrder.Size.name } }
-                  };
-
-                  console.log("orderItem = ", orderItem);
-        
-                  delete orderItem.id;
-                  return orderItem;
-                });
-
+            // 2. Check if their password is correct
+            const valid = await bcrypt.compare(password, user.password);
+            
+            if (valid === false) {
+              throw new Error('Invalid Password!');
+            }
     
-                // Create the newly transfered order
-                const createOrder = await ctx.prisma.order.create({
-                  data: {
-                    total: userOrders[index].total,
-                    charge: userOrders[index].charge,
-                    card_brand: userOrders[index].card_brand,
-                    last4card_digits: userOrders[index].last4card_digits,
-                    items: { create: orderItems },
-                    User: { connect: { id: user.id } },
-                    address_line: userOrders[index].address_line,
-                    city: userOrders[index].city,
-                    postcode: userOrders[index].postcode,
-                    country: userOrders[index].country,
-                    card_name: userOrders.card_name,
+            // 3. Copy guest_user cart if they have items in it
+            if (userId && hasPermissions && cart.length >= 1) {
+              
+              let cartItemz = {};
+  
+              cart.map(async (cartVal: any, index: any) => {
+    
+                //console.log("Itemvariants id = ", await cartVal.itemvariants);
+                let [registered_userCart] = await ctx.prisma.cartItem.findMany(
+                  {
+                    where: {
+                      User: {
+                        //equals: user.id
+                        id: user.id,
+                      },
+                      ItemVariants: {
+                        id: cartVal.ItemVariants.id 
+                      },
+                    },
                   },
-                }).catch(handleSubmitErr);
-
-                console.log("createOrder = ", createOrder);
+                )
+  
+                // Check whether the guest_user cart item exists in the registered User's cart
+                if (registered_userCart) {
+    
+                  // Update the User cart item quantity
+                  await ctx.prisma.cartItem.update({
+                    data: { 
+                      quantity: registered_userCart.quantity + cartVal.quantity 
+                    },
+                    where: { 
+                      id: registered_userCart.id
+                    },
+                  })
+    
+                }else{
+                  // Write the guest_user item to the User's cart
+                  cartItemz = {
+                    User: {
+                      connect: { id: user.id }
+                    },
+                    quantity: cartVal.quantity,
+                    ItemVariants: {
+                      connect: { id: cartVal.ItemVariants.id },
+                    },
+                    Item: {
+                      connect: { id: cartVal.Item.id },
+                    },
+                  };
+  
+                  await ctx.prisma.cartItem.create({
+                    data: cartItemz
+                  })
+                }
+              })
+            }
+    
+            // 4. Transfer a guest_users's orders to the registered user logging in
+            // if any exists
+            const userOrders = await ctx.prisma.order.findMany(
+              {
+                where: {
+                  user: { 
+                    equals: userId 
+                  },
+                },
+                include: {
+                  items: {
+                    include: {
+                      Size: true,
+                      Color: true,
+                    }
+                  },
+                }
               }
             )
-          }
-          
-          // 5. Transfer user address only if an address for the user doesn't already exist
-          console.log("user.address.length = ", user.address.length);
-          if (user.address.length === 0) {
-            const userAddress = await ctx.prisma.address.findMany({
-              where: {
-                user: { 
-                  equals: userId
-                },
-              },
-            }).catch(handleSubmitErr);
-            console.log("userAddress = ", userAddress);
-        
-            // create new address object
-            if (ctx.req.userId && hasPermissions && userAddress.length >= 1) {
-              ctx.prisma.address.create({
-                data: {
-                  //id: '-1',   
-                  User: { connect: { id: user.id } },
-                  address_line: userAddress[0].address_line,
-                  city: userAddress[0].city,
-                  postcode: userAddress[0].postcode,
-                  country: userAddress[0].country,
-                  card_name: userAddress[0].card_name,
-                },
-              }).catch(handleSubmitErr);
+  
+            if (ctx.req.userId && hasPermissions && userOrders.length >= 1) {
+              userOrders.map(async (cartVal: any, index: any) => {
+                  const orderItems = userOrders[index].items.map((orderItemFromOrder: any) => {
+      
+                    // Construct the orderItems list
+                    const orderItem = {
+                      id: orderItemFromOrder.itemid,
+                      User: { connect: { id: user.id } },
+                      itemid: orderItemFromOrder.itemid,
+                      title: orderItemFromOrder.title,
+                      description: orderItemFromOrder.description,
+                      mainDescription: orderItemFromOrder.mainDescription,
+                      price: orderItemFromOrder.price,
+                      image: orderItemFromOrder.image,
+                      largeImage: orderItemFromOrder.largeImage,
+                      quantity: orderItemFromOrder.quantity,
+                      Color: { connect: { name: orderItemFromOrder.Color.name } },
+                      Size: { connect: { name: orderItemFromOrder.Size.name } }
+                    };
+  
+                    delete orderItem.id;
+                    return orderItem;
+                  });
+  
+      
+                  // Create the newly transfered order
+                  const createOrder = await ctx.prisma.order.create({
+                    data: {
+                      total: userOrders[index].total,
+                      charge: userOrders[index].charge,
+                      card_brand: userOrders[index].card_brand,
+                      last4card_digits: userOrders[index].last4card_digits,
+                      items: { create: orderItems },
+                      User: { connect: { id: user.id } },
+                      address_line: userOrders[index].address_line,
+                      city: userOrders[index].city,
+                      postcode: userOrders[index].postcode,
+                      country: userOrders[index].country,
+                      card_name: userOrders[index].card_name,
+                    },
+                  })
+                }
+              )
             }
+            
+            // 5. Transfer user address only if an address for the user doesn't already exist
+            console.log("user.address.length = ", user.address.length);
+            if (user.address.length === 0) {
+              const userAddress = await ctx.prisma.address.findMany({
+                where: {
+                  user: { 
+                    equals: userId
+                  },
+                },
+              })
+              
+              // create new address object
+              if (ctx.req.userId && hasPermissions && userAddress.length >= 1) {
+                await ctx.prisma.address.create({
+                  data: {
+                    //id: '-1',   
+                    User: { connect: { id: user.id } },
+                    address_line: userAddress[0].address_line,
+                    city: userAddress[0].city,
+                    postcode: userAddress[0].postcode,
+                    country: userAddress[0].country,
+                    card_name: userAddress[0].card_name,
+                  },
+                })
+              }
+            }
+    
+            // 6. Delete guest_user
+            if (userId && hasPermissions) {
+              const deleteUser = await ctx.prisma.user.delete({
+                where: { id: userId },
+              })
+  
+              // Delete existing gues_user cookie
+              await ctx.res.clearCookie('token', { domain: process.env.NODE_ENV === 'development' ? process.env.LOCAL_DOMAIN : process.env.APP_DOMAIN });
+            }
+    
+            // 7. generate the JWT Token
+            const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+            
+            // 8. Set the cookie with the token
+            ctx.res.cookie('token', token, {
+              //Set domain to custom domain name to resolve issue with non custom heroku/now domain names
+              domain: process.env.NODE_ENV === 'development' ? process.env.LOCAL_DOMAIN : process.env.APP_DOMAIN,
+              secure: process.env.NODE_ENV === 'development' ? false : true,
+              httpOnly: true,
+              maxAge: 1000 * 60 * 60 * 24 * 365,
+              sameSite: 'lax',
+            });
+    
+            // 9. Return the user
+            return user;
+
+          } catch (err) {
+
+            console.log(err)
           }
-  
-          // 6. Delete guest_user
-          if (userId && hasPermissions) {
-            await ctx.prisma.user.delete({
-              where: { id: userId },
-            }).catch(handleSubmitErr);
-  
-            // Delete existing gues_user cookie
-            await ctx.res.clearCookie('token', { domain: process.env.NODE_ENV === 'development' ? process.env.LOCAL_DOMAIN : process.env.APP_DOMAIN });
-          }
-  
-          // 7. generate the JWT Token
-          const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
-  
-          // 8. Set the cookie with the token
-          ctx.res.cookie('token', token, {
-            //Set domain to custom domain name to resolve issue with non custom heroku/now domain names
-            domain: process.env.NODE_ENV === 'development' ? process.env.LOCAL_DOMAIN : process.env.APP_DOMAIN,
-            secure: process.env.NODE_ENV === 'development' ? false : true,
-            httpOnly: true,
-            maxAge: 1000 * 60 * 60 * 24 * 365,
-            sameSite: 'lax',
-          });
-  
-          // 9. Return the user
-          return user;
         
         }
       })
@@ -733,7 +726,7 @@ export const Mutation = mutationType({
           await ctx.prisma.user.update({
             where: { email: args.email },
             data: { resetToken, resetTokenExpiry },
-          }).catch(handleSubmitErr);
+          })
   
           // 3. Email them that reset token
           await transport.sendMail({
@@ -743,7 +736,7 @@ export const Mutation = mutationType({
             html: makeANiceEmail(`Your Password Reset Token is here!
             \n\n
             <a href="${process.env.FRONTEND_URL}/reset?resetToken=${resetToken}">Click Here to Reset</a>`),
-          }).catch(handleSubmitErr);
+          })
   
           // 4. Return the message
           return { message: 'Thanks!!' };
@@ -775,7 +768,7 @@ export const Mutation = mutationType({
                 gte: Date.now() - 3600000,
               }
             },
-          }).catch(handleSubmitErr);
+          })
   
           if (!user) {
             throw new Error('This token is either invalid or expired!');
@@ -792,7 +785,7 @@ export const Mutation = mutationType({
               resetToken: null,
               resetTokenExpiry: null,
             },
-          }).catch(handleSubmitErr);
+          })
   
           // 6. Generate JWT Note: if it errors on updatedUser then try updatedUser.id
           const token = jwt.sign({ userId: updatedUser }, process.env.APP_SECRET);
@@ -849,7 +842,7 @@ export const Mutation = mutationType({
             where: {
               id: args.userId,
             },          
-          }).catch(handleSubmitErr);
+          })
         
         }
       })
@@ -887,7 +880,7 @@ export const Mutation = mutationType({
                 }
               }
             },
-          ).catch(handleSubmitErr);
+          )
 
           console.log("users in UpdateGuestEmail = ", users);
   
@@ -903,7 +896,7 @@ export const Mutation = mutationType({
             where: {
               id: args.userId,
             },
-          }).catch(handleSubmitErr);
+          })
   
           return updatedUser;
         
@@ -931,14 +924,14 @@ export const Mutation = mutationType({
               user: { equals: userId },
               item: { equals: args.id },
             },
-          }).catch(handleSubmitErr);
+          })
   
           // 2b. Check that the existingCartItem count is not > the Item quantity available
           const currentItemState = await ctx.prisma.item.findOne({
             where: {
               id: args.id,
             },
-          }).catch(handleSubmitErr);
+          })
   
           let totalCheck = ((existingCartItem && existingCartItem.quantity + 1) > currentItemState.quantity || 1 > currentItemState.quantity)? true : false;
           if (totalCheck) {
@@ -952,7 +945,7 @@ export const Mutation = mutationType({
             return ctx.prisma.cartItem.update({
               where: { id: existingCartItem.id },
               data: { quantity: existingCartItem.quantity + 1 },
-            }).catch(handleSubmitErr);
+            })
           }
   
           // 4. If its not, create a fresh CartItem for that user!
@@ -999,14 +992,14 @@ export const Mutation = mutationType({
               user: { equals: userId },
               itemvariants: { equals: args.id },
             },
-          }).catch(handleSubmitErr);
+          })
 
           // 2b. Check that the existingCartItem count is not > the Item quantity available
           const currentItemState = await ctx.prisma.itemVariants.findOne({
             where: {
               id: args.id,
             },
-          }).catch(handleSubmitErr);
+          })
 
           let totalCheck = ((existingCartItem && existingCartItem.quantity + 1) > currentItemState.quantity || 1 > currentItemState.quantity)? true : false;
 
@@ -1021,7 +1014,7 @@ export const Mutation = mutationType({
             const updatedCartItem = await ctx.prisma.cartItem.update({
               where: { id: existingCartItem[0].id },
               data: { quantity: existingCartItem[0].quantity + 1 },
-            }).catch(handleSubmitErr);
+            })
 
             return updatedCartItem;
 
@@ -1067,7 +1060,7 @@ export const Mutation = mutationType({
             where: {
               id: args.id,
             },
-          }).catch(handleSubmitErr);
+          })
   
           // 1.5 Make sure we found an item
           if (!cartItem) throw new Error('No CartItem Found!');
@@ -1080,7 +1073,7 @@ export const Mutation = mutationType({
           // 3. Delete that cart item
           return ctx.prisma.cartItem.delete({
             where: { id: args.id },
-          }).catch(handleSubmitErr);
+          })
         
         }
       })
@@ -1126,7 +1119,7 @@ export const Mutation = mutationType({
                 }
               },
             }
-          }).catch(handleSubmitErr);
+          })
 
            // 2. recalculate the total for the price
           const amount = user && user.cart.reduce(
@@ -1201,7 +1194,7 @@ export const Mutation = mutationType({
               where: {
                 id: cartItem.ItemVariants.id,
               },
-            }).catch(handleSubmitErr);
+            })
 
             delete orderItem.id;
             return orderItem;
@@ -1235,7 +1228,7 @@ export const Mutation = mutationType({
                 }
               },
             }
-          }).catch(handleSubmitErr);
+          })
   
           // 6. Clean up - clear the users cart, delete cartItems
           const cartItemIds = user && user.cart.map((cartItem: any) => cartItem.id);
@@ -1245,7 +1238,7 @@ export const Mutation = mutationType({
                 in: cartItemIds,
               }
             },
-          }).catch(handleSubmitErr);
+          })
   
           // 7. Send an email order request and customer receipt. Use the format in 
           // frontend/Order to create the email 
@@ -1256,7 +1249,7 @@ export const Mutation = mutationType({
             to: 'orders@flamingo.com',
             subject: 'Customer Order',
             html: orderRequest(order),
-          }).catch(handleSubmitErr);
+          })
 
           // Customer receipt
           await transport.sendMail({
@@ -1264,7 +1257,7 @@ export const Mutation = mutationType({
             to: user.email,
             subject: 'Your Flamingo Receipt',
             html: mailReceipt(order),
-          }).catch(handleSubmitErr);
+          })
   
           // 8. Return the Order to the client
           return order;
@@ -1300,7 +1293,7 @@ export const Mutation = mutationType({
             where: {
               id: args.id,
             },
-          }).catch(handleSubmitErr);
+          })
   
         }
       })
