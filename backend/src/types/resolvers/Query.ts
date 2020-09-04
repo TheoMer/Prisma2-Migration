@@ -219,6 +219,9 @@ export const Query = queryType({
                     equals: userId 
                   },
                 },
+                orderBy: {
+                  createdAt: 'desc',
+                },
             }).catch(handleSubmitErr);
 
           } catch (err) {
