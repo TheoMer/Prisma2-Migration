@@ -32,7 +32,7 @@ app.use((req: any, res: any, next: any) => {
         } catch (e) {
 
           // No valid userId exists
-          req.userId = '-1';
+          req.userId = '0001';
 
         }
     }

@@ -370,6 +370,19 @@ export const Mutation = mutationType({
     
             // lowercase their email
             args.email = args.email.toLowerCase();
+
+            // Check if a user with this mail already exists
+            const emailTest = args.email;
+  
+            // You may get an error because of email: emailTest. If so revert back to just
+            // where { emailTest }
+            const userTest = await ctx.prisma.user.findOne({ 
+              where: { email: emailTest } 
+            })
+
+            if (userTest) {
+              throw new Error(`A user with the email: ${emailTest} already exists.`);
+            }
     
             // hash their password
             const password = await bcrypt.hash(args.password, 10);
@@ -377,7 +390,7 @@ export const Mutation = mutationType({
             // delete un-hased password from args
             delete args.password;
     
-            // If userId already exists and the user has guest_user permissions then
+            // If userId already exists (i.e the cookie hasn't been deleted) and the user has guest_user permissions then
             // update the existing user details with the new user details
             const hasPermissions = ctx.req.user.permissions2.some((permission2: any) =>
               ['GUEST_USER'].includes(permission2));
@@ -398,22 +411,9 @@ export const Mutation = mutationType({
                 },
               })
 
-            } else {
-              
-              // Check if a user with this mail already exists
-              const emailTest = args.email;
+            } else if (userId === '0001') {
     
-              // You may get an error because of email: emailTest. If so revert back to just
-              // where { emailTest }
-              const userTest = await ctx.prisma.user.findOne({ 
-                where: { email: emailTest } 
-              })
-    
-              if (userTest != null) {
-                throw new Error(`A user with the email: ${emailTest} already exists.`);
-              }
-
-              // create the user in the database
+              // The cookie or user has expired or been deleted so create a new user
               user = await ctx.prisma.user.create(
                 {
                   data: {
@@ -515,8 +515,8 @@ export const Mutation = mutationType({
               },
             })
   
-            if (user === null) {
-              throw new Error(`No such user found for email ${email}`);
+            if (!user) {
+              throw new Error(`Error: The specified email ${email} does not exist on our system!`);
             }
     
             // 2. Check if their password is correct
@@ -951,8 +951,8 @@ export const Mutation = mutationType({
               },
             )
 
-            console.log("users in UpdateGuestEmail = ", users);
-    
+            console.log("users = ", users);
+
             if (users.length >= 1) {
               throw new Error(`A user with this email currently exists. Please select a different one.`);
             }
