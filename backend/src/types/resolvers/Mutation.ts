@@ -37,14 +37,10 @@ export const Mutation = mutationType({
               },
             )
 
-            console.log("newItem before push = ", newItem);
-
-            // Manually add that an item was created
-            newItem.data.push({
+            // Manually add that an item was created?
+            /*newItem.data.push({
               mutation: 'CREATED'
-            });
-
-            console.log("newItem after push = ", newItem);
+            });*/
 
             ctx.pubsub.publish('itemWatch', newItem);
             return newItem;
@@ -313,7 +309,7 @@ export const Mutation = mutationType({
               mutation: 'DELETED'
             });*/
 
-            ctx.pubsub.publish('itemDeleted', deletedItem);
+            ctx.pubsub.publish('itemWatch', deletedItem);
             return deletedItem;
 
           } catch (err) {
