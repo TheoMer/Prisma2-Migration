@@ -37,16 +37,20 @@ export const Mutation = mutationType({
               },
             )
 
+            console.log("newItem before push = ", newItem);
+
             // Manually add that an item was created
-            newItem.push({
+            newItem.data.push({
               mutation: 'CREATED'
             });
+
+            console.log("newItem after push = ", newItem);
 
             ctx.pubsub.publish('itemWatch', newItem);
             return newItem;
 
           } catch (err) {
-            console.log(`createAddress err = ${err}`);
+            console.log(`createItem err = ${err}`);
             throw new Error(err);
           }
 
@@ -188,7 +192,7 @@ export const Mutation = mutationType({
             return updateAddress;
 
           } catch (err) {
-            console.log(`createSiteVisits err = ${err}`);
+            console.log(`updateAddress err = ${err}`);
             throw new Error(err);
           }
   
@@ -227,44 +231,19 @@ export const Mutation = mutationType({
         }
       })
   
-      t.field('updateItem', {
-        type: 'Item',
-        nullable: false,
-        args: {
-          id: stringArg({ nullable: false }),
-          title: stringArg({ nullable: false}), 
-          description: stringArg({ nullable: false}), 
-          mainDescription: stringArg({ nullable: false}), 
-          price: intArg({ nullable: false }), 
-          quantity: intArg({ nullable: false }),
-          image: stringArg({ nullable: true}), 
-          largeImage: stringArg({ nullable: true}),
-          size: arg({ type: "SizeCreateOneWithoutItemInput" }), 
-          color: arg({ type: "ColorCreateOneWithoutItemInput"}),
-        },
+      // args (variables and where:) are specified in frontend/component/updateItem.js
+      t.crud.updateOneItem({
+        alias: "updateItem",
         resolve: async (root: any, args: any, ctx: any) => {
 
           try {
     
-            // remove the id and email from args
-            delete args.id;
-    
             // run the update method
-            const updateItem =  await ctx.prisma.item.update(
+            const updateItem = await ctx.prisma.item.update(
               {
-                data: {
-                  ...args,
-                },
-                where: {
-                  id: args.id,
-                },
+                ...args
               }
             )
-
-            // Manually add that an item was updated
-            updateItem.push({
-              mutation: 'UPDATED'
-            });
 
             ctx.pubsub.publish('itemWatch', updateItem);
             return updateItem;
@@ -330,9 +309,9 @@ export const Mutation = mutationType({
             }
 
             // Manually add that an item was deleted
-            deletedItem.push({
+            /*deletedItem.push({
               mutation: 'DELETED'
-            });
+            });*/
 
             ctx.pubsub.publish('itemDeleted', deletedItem);
             return deletedItem;
@@ -462,10 +441,10 @@ export const Mutation = mutationType({
 
             let user: any;
             const { userId } = ctx.req;
-            //console.log("userId = ", userId);
+            console.log("userId = ", userId);
             //console.log("User  = ", ctx.req.user);
             
-            //Check that the email and password aren't empty
+            // Check that the email and password aren't empty
             if (email.length == 0) {
               throw new Error('A valid email address is required.');
             }
@@ -1210,6 +1189,8 @@ export const Mutation = mutationType({
               }
             })
 
+            //console.log("user = ", user);
+
             // 2. recalculate the total for the price
             const amount = user && user.cart.reduce(
               (tally: any, cartItem: any) => tally + cartItem.ItemVariants.price * cartItem.quantity,
@@ -1230,6 +1211,8 @@ export const Mutation = mutationType({
               return err;
             });
 
+            //console.log("charge = ", charge);
+
             // 3b. Check if the charge has failed and generated an error object
             let chargeFailed = false;
             // console.log("charge object = ", charge.raw && charge.raw.code);
@@ -1237,6 +1220,8 @@ export const Mutation = mutationType({
             if (charge && charge.raw) {
               chargeFailed = true;
             }
+
+            //console.log("chargeFailed = ", chargeFailed);
     
             // Create a trojan horse createOrder object, which is only being used
             // to return the actual error message (charge.raw.code) to the client
@@ -1272,6 +1257,8 @@ export const Mutation = mutationType({
                 Color: { connect: { name: cartItem.ItemVariants.Color.name } },
                 Size: { connect: { name: cartItem.ItemVariants.Size.name } }
               };
+
+              //console.log("orderItem = ", orderItem);
 
               // Update the quantity sold of each Item variant
               const quantityValItemVariant = cartItem.ItemVariants.quantity - cartItem.quantity;
@@ -1318,6 +1305,8 @@ export const Mutation = mutationType({
                 },
               }
             })
+
+            //console.log("order = ", order);
     
             // 6. Clean up - clear the users cart, delete cartItems
             const cartItemIds = user && user.cart.map((cartItem: any) => cartItem.id);
@@ -1328,6 +1317,8 @@ export const Mutation = mutationType({
                 }
               },
             })
+
+            //console.log("cartItemIds = ", cartItemIds);
     
             // 7. Send an email order request and customer receipt. Use the format in 
             // frontend/Order to create the email 
@@ -1340,6 +1331,8 @@ export const Mutation = mutationType({
               html: orderRequest(order),
             })
 
+            //console.log("Order Request sent = ", true);
+
             // Customer receipt
             await transport.sendMail({
               from: 'sales@flamingo.com',
@@ -1347,6 +1340,8 @@ export const Mutation = mutationType({
               subject: 'Your Flamingo Receipt',
               html: mailReceipt(order),
             })
+
+            //console.log("Customer Receipt sent = ", true);
     
             // 8. Return the Order to the client
             return order;

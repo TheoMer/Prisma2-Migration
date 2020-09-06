@@ -198,38 +198,10 @@ export const Query = queryType({
         }
       })
   
+      // where: and orderBy: are specified in frontend/component/orders.js
       t.crud.orders({
         filtering: true,
-        ordering: true,
-        resolve: async (root: any, args: any, ctx: any) => {
-
-          try {
-    
-            const { userId } = ctx.req;
-    
-            // 1. Make sure they are logged in
-            if (!userId) {
-              throw new Error('You must be signed in!');
-            }
-    
-            // Return users
-            return ctx.prisma.order.findMany({
-                where: {
-                  user: { 
-                    equals: userId 
-                  },
-                },
-                orderBy: {
-                  createdAt: 'desc',
-                },
-            }).catch(handleSubmitErr);
-
-          } catch (err) {
-            console.log(`orders err = ${err}`);
-            throw new Error(err);
-          }
-  
-        } 
+        ordering: true      
       })
   
     }

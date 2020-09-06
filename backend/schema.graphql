@@ -55,6 +55,72 @@ input AddressOrderByInput {
   user: SortOrder
 }
 
+input AddressScalarWhereInput {
+  address_line: StringFilter
+  AND: [AddressScalarWhereInput!]
+  card_name: StringFilter
+  city: StringFilter
+  country: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  NOT: [AddressScalarWhereInput!]
+  OR: [AddressScalarWhereInput!]
+  postcode: StringFilter
+  updatedAt: DateTimeFilter
+  user: StringNullableFilter
+}
+
+input AddressUpdateManyDataInput {
+  address_line: String
+  card_name: String
+  city: String
+  country: String
+  createdAt: DateTime
+  id: String
+  postcode: String
+  updatedAt: DateTime
+}
+
+input AddressUpdateManyWithoutUserInput {
+  connect: [AddressWhereUniqueInput!]
+  connectOrCreate: [AddressCreateOrConnectWithoutUserInput!]
+  create: [AddressCreateWithoutUserInput!]
+  delete: [AddressWhereUniqueInput!]
+  deleteMany: [AddressScalarWhereInput!]
+  disconnect: [AddressWhereUniqueInput!]
+  set: [AddressWhereUniqueInput!]
+  update: [AddressUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [AddressUpdateManyWithWhereNestedInput!]
+  upsert: [AddressUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input AddressUpdateManyWithWhereNestedInput {
+  data: AddressUpdateManyDataInput!
+  where: AddressScalarWhereInput!
+}
+
+input AddressUpdateWithoutUserDataInput {
+  address_line: String
+  card_name: String
+  city: String
+  country: String
+  createdAt: DateTime
+  id: String
+  postcode: String
+  updatedAt: DateTime
+}
+
+input AddressUpdateWithWhereUniqueWithoutUserInput {
+  data: AddressUpdateWithoutUserDataInput!
+  where: AddressWhereUniqueInput!
+}
+
+input AddressUpsertWithWhereUniqueWithoutUserInput {
+  create: AddressCreateWithoutUserInput!
+  update: AddressUpdateWithoutUserDataInput!
+  where: AddressWhereUniqueInput!
+}
+
 input AddressWhereInput {
   address_line: StringFilter
   AND: [AddressWhereInput!]
@@ -164,6 +230,130 @@ input CartItemOrderByInput {
   user: SortOrder
 }
 
+input CartItemScalarWhereInput {
+  AND: [CartItemScalarWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  item: StringNullableFilter
+  itemvariants: StringNullableFilter
+  NOT: [CartItemScalarWhereInput!]
+  OR: [CartItemScalarWhereInput!]
+  quantity: IntFilter
+  updatedAt: DateTimeFilter
+  user: StringNullableFilter
+}
+
+input CartItemUpdateManyDataInput {
+  createdAt: DateTime
+  id: String
+  quantity: Int
+  updatedAt: DateTime
+}
+
+input CartItemUpdateManyWithoutItemInput {
+  connect: [CartItemWhereUniqueInput!]
+  connectOrCreate: [CartItemCreateOrConnectWithoutItemInput!]
+  create: [CartItemCreateWithoutItemInput!]
+  delete: [CartItemWhereUniqueInput!]
+  deleteMany: [CartItemScalarWhereInput!]
+  disconnect: [CartItemWhereUniqueInput!]
+  set: [CartItemWhereUniqueInput!]
+  update: [CartItemUpdateWithWhereUniqueWithoutItemInput!]
+  updateMany: [CartItemUpdateManyWithWhereNestedInput!]
+  upsert: [CartItemUpsertWithWhereUniqueWithoutItemInput!]
+}
+
+input CartItemUpdateManyWithoutItemVariantsInput {
+  connect: [CartItemWhereUniqueInput!]
+  connectOrCreate: [CartItemCreateOrConnectWithoutItemVariantsInput!]
+  create: [CartItemCreateWithoutItemVariantsInput!]
+  delete: [CartItemWhereUniqueInput!]
+  deleteMany: [CartItemScalarWhereInput!]
+  disconnect: [CartItemWhereUniqueInput!]
+  set: [CartItemWhereUniqueInput!]
+  update: [CartItemUpdateWithWhereUniqueWithoutItemVariantsInput!]
+  updateMany: [CartItemUpdateManyWithWhereNestedInput!]
+  upsert: [CartItemUpsertWithWhereUniqueWithoutItemVariantsInput!]
+}
+
+input CartItemUpdateManyWithoutUserInput {
+  connect: [CartItemWhereUniqueInput!]
+  connectOrCreate: [CartItemCreateOrConnectWithoutUserInput!]
+  create: [CartItemCreateWithoutUserInput!]
+  delete: [CartItemWhereUniqueInput!]
+  deleteMany: [CartItemScalarWhereInput!]
+  disconnect: [CartItemWhereUniqueInput!]
+  set: [CartItemWhereUniqueInput!]
+  update: [CartItemUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [CartItemUpdateManyWithWhereNestedInput!]
+  upsert: [CartItemUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input CartItemUpdateManyWithWhereNestedInput {
+  data: CartItemUpdateManyDataInput!
+  where: CartItemScalarWhereInput!
+}
+
+input CartItemUpdateWithoutItemDataInput {
+  createdAt: DateTime
+  id: String
+  ItemVariants: ItemVariantsUpdateOneWithoutCartitemsInput
+  quantity: Int
+  updatedAt: DateTime
+  User: UserUpdateOneWithoutCartInput
+}
+
+input CartItemUpdateWithoutItemVariantsDataInput {
+  createdAt: DateTime
+  id: String
+  Item: ItemUpdateOneWithoutCartitemsInput
+  quantity: Int
+  updatedAt: DateTime
+  User: UserUpdateOneWithoutCartInput
+}
+
+input CartItemUpdateWithoutUserDataInput {
+  createdAt: DateTime
+  id: String
+  Item: ItemUpdateOneWithoutCartitemsInput
+  ItemVariants: ItemVariantsUpdateOneWithoutCartitemsInput
+  quantity: Int
+  updatedAt: DateTime
+}
+
+input CartItemUpdateWithWhereUniqueWithoutItemInput {
+  data: CartItemUpdateWithoutItemDataInput!
+  where: CartItemWhereUniqueInput!
+}
+
+input CartItemUpdateWithWhereUniqueWithoutItemVariantsInput {
+  data: CartItemUpdateWithoutItemVariantsDataInput!
+  where: CartItemWhereUniqueInput!
+}
+
+input CartItemUpdateWithWhereUniqueWithoutUserInput {
+  data: CartItemUpdateWithoutUserDataInput!
+  where: CartItemWhereUniqueInput!
+}
+
+input CartItemUpsertWithWhereUniqueWithoutItemInput {
+  create: CartItemCreateWithoutItemInput!
+  update: CartItemUpdateWithoutItemDataInput!
+  where: CartItemWhereUniqueInput!
+}
+
+input CartItemUpsertWithWhereUniqueWithoutItemVariantsInput {
+  create: CartItemCreateWithoutItemVariantsInput!
+  update: CartItemUpdateWithoutItemVariantsDataInput!
+  where: CartItemWhereUniqueInput!
+}
+
+input CartItemUpsertWithWhereUniqueWithoutUserInput {
+  create: CartItemCreateWithoutUserInput!
+  update: CartItemUpdateWithoutUserDataInput!
+  where: CartItemWhereUniqueInput!
+}
+
 input CartItemWhereInput {
   AND: [CartItemWhereInput!]
   createdAt: DateTimeFilter
@@ -264,6 +454,75 @@ input ColorOrderByInput {
   label: SortOrder
   name: SortOrder
   updatedAt: SortOrder
+}
+
+input ColorUpdateOneRequiredWithoutItemInput {
+  connect: ColorWhereUniqueInput
+  connectOrCreate: ColorCreateOrConnectWithoutItemInput
+  create: ColorCreateWithoutItemInput
+  update: ColorUpdateWithoutItemDataInput
+  upsert: ColorUpsertWithoutItemInput
+}
+
+input ColorUpdateOneRequiredWithoutItemvariantsInput {
+  connect: ColorWhereUniqueInput
+  connectOrCreate: ColorCreateOrConnectWithoutItemVariantsInput
+  create: ColorCreateWithoutItemvariantsInput
+  update: ColorUpdateWithoutItemvariantsDataInput
+  upsert: ColorUpsertWithoutItemvariantsInput
+}
+
+input ColorUpdateOneRequiredWithoutOrderitemInput {
+  connect: ColorWhereUniqueInput
+  connectOrCreate: ColorCreateOrConnectWithoutOrderItemInput
+  create: ColorCreateWithoutOrderitemInput
+  update: ColorUpdateWithoutOrderitemDataInput
+  upsert: ColorUpsertWithoutOrderitemInput
+}
+
+input ColorUpdateWithoutItemDataInput {
+  createdAt: DateTime
+  id: String
+  itemvariants: ItemVariantsUpdateManyWithoutColorInput
+  label: String
+  name: String
+  orderitem: OrderItemUpdateManyWithoutColorInput
+  updatedAt: DateTime
+}
+
+input ColorUpdateWithoutItemvariantsDataInput {
+  createdAt: DateTime
+  id: String
+  item: ItemUpdateManyWithoutColorInput
+  label: String
+  name: String
+  orderitem: OrderItemUpdateManyWithoutColorInput
+  updatedAt: DateTime
+}
+
+input ColorUpdateWithoutOrderitemDataInput {
+  createdAt: DateTime
+  id: String
+  item: ItemUpdateManyWithoutColorInput
+  itemvariants: ItemVariantsUpdateManyWithoutColorInput
+  label: String
+  name: String
+  updatedAt: DateTime
+}
+
+input ColorUpsertWithoutItemInput {
+  create: ColorCreateWithoutItemInput!
+  update: ColorUpdateWithoutItemDataInput!
+}
+
+input ColorUpsertWithoutItemvariantsInput {
+  create: ColorCreateWithoutItemvariantsInput!
+  update: ColorUpdateWithoutItemvariantsDataInput!
+}
+
+input ColorUpsertWithoutOrderitemInput {
+  create: ColorCreateWithoutOrderitemInput!
+  update: ColorUpdateWithoutOrderitemDataInput!
 }
 
 input ColorWhereInput {
@@ -620,6 +879,334 @@ input ItemOrderByInput {
   userIdentity: SortOrder
 }
 
+input ItemScalarWhereInput {
+  AND: [ItemScalarWhereInput!]
+  color: StringFilter
+  createdAt: DateTimeFilter
+  description: StringFilter
+  id: StringFilter
+  image: StringNullableFilter
+  image2: StringNullableFilter
+  image3: StringNullableFilter
+  image4: StringNullableFilter
+  image5: StringNullableFilter
+  image6: StringNullableFilter
+  largeImage: StringNullableFilter
+  largeImage2: StringNullableFilter
+  largeImage3: StringNullableFilter
+  largeImage4: StringNullableFilter
+  largeImage5: StringNullableFilter
+  largeImage6: StringNullableFilter
+  mainDescription: StringFilter
+  NOT: [ItemScalarWhereInput!]
+  OR: [ItemScalarWhereInput!]
+  price: IntFilter
+  quantity: IntFilter
+  size: StringFilter
+  title: StringFilter
+  updatedAt: DateTimeFilter
+  user: StringNullableFilter
+  userIdentity: StringFilter
+}
+
+input ItemUpdateInput {
+  cartitems: CartItemUpdateManyWithoutItemInput
+  Color: ColorUpdateOneRequiredWithoutItemInput
+  createdAt: DateTime
+  description: String
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  itemvariants: ItemVariantsUpdateManyWithoutItemInput
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String
+  price: Int
+  quantity: Int
+  Size: SizeUpdateOneRequiredWithoutItemInput
+  title: String
+  updatedAt: DateTime
+  User: UserUpdateOneWithoutItemsInput
+  userIdentity: String
+}
+
+input ItemUpdateManyDataInput {
+  createdAt: DateTime
+  description: String
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String
+  price: Int
+  quantity: Int
+  title: String
+  updatedAt: DateTime
+  userIdentity: String
+}
+
+input ItemUpdateManyWithoutColorInput {
+  connect: [ItemWhereUniqueInput!]
+  connectOrCreate: [ItemCreateOrConnectWithoutColorInput!]
+  create: [ItemCreateWithoutColorInput!]
+  delete: [ItemWhereUniqueInput!]
+  deleteMany: [ItemScalarWhereInput!]
+  disconnect: [ItemWhereUniqueInput!]
+  set: [ItemWhereUniqueInput!]
+  update: [ItemUpdateWithWhereUniqueWithoutColorInput!]
+  updateMany: [ItemUpdateManyWithWhereNestedInput!]
+  upsert: [ItemUpsertWithWhereUniqueWithoutColorInput!]
+}
+
+input ItemUpdateManyWithoutSizeInput {
+  connect: [ItemWhereUniqueInput!]
+  connectOrCreate: [ItemCreateOrConnectWithoutSizeInput!]
+  create: [ItemCreateWithoutSizeInput!]
+  delete: [ItemWhereUniqueInput!]
+  deleteMany: [ItemScalarWhereInput!]
+  disconnect: [ItemWhereUniqueInput!]
+  set: [ItemWhereUniqueInput!]
+  update: [ItemUpdateWithWhereUniqueWithoutSizeInput!]
+  updateMany: [ItemUpdateManyWithWhereNestedInput!]
+  upsert: [ItemUpsertWithWhereUniqueWithoutSizeInput!]
+}
+
+input ItemUpdateManyWithoutUserInput {
+  connect: [ItemWhereUniqueInput!]
+  connectOrCreate: [ItemCreateOrConnectWithoutUserInput!]
+  create: [ItemCreateWithoutUserInput!]
+  delete: [ItemWhereUniqueInput!]
+  deleteMany: [ItemScalarWhereInput!]
+  disconnect: [ItemWhereUniqueInput!]
+  set: [ItemWhereUniqueInput!]
+  update: [ItemUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [ItemUpdateManyWithWhereNestedInput!]
+  upsert: [ItemUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input ItemUpdateManyWithWhereNestedInput {
+  data: ItemUpdateManyDataInput!
+  where: ItemScalarWhereInput!
+}
+
+input ItemUpdateOneRequiredWithoutItemvariantsInput {
+  connect: ItemWhereUniqueInput
+  connectOrCreate: ItemCreateOrConnectWithoutItemVariantsInput
+  create: ItemCreateWithoutItemvariantsInput
+  update: ItemUpdateWithoutItemvariantsDataInput
+  upsert: ItemUpsertWithoutItemvariantsInput
+}
+
+input ItemUpdateOneWithoutCartitemsInput {
+  connect: ItemWhereUniqueInput
+  connectOrCreate: ItemCreateOrConnectWithoutCartItemInput
+  create: ItemCreateWithoutCartitemsInput
+  delete: Boolean
+  disconnect: Boolean
+  update: ItemUpdateWithoutCartitemsDataInput
+  upsert: ItemUpsertWithoutCartitemsInput
+}
+
+input ItemUpdateWithoutCartitemsDataInput {
+  Color: ColorUpdateOneRequiredWithoutItemInput
+  createdAt: DateTime
+  description: String
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  itemvariants: ItemVariantsUpdateManyWithoutItemInput
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String
+  price: Int
+  quantity: Int
+  Size: SizeUpdateOneRequiredWithoutItemInput
+  title: String
+  updatedAt: DateTime
+  User: UserUpdateOneWithoutItemsInput
+  userIdentity: String
+}
+
+input ItemUpdateWithoutColorDataInput {
+  cartitems: CartItemUpdateManyWithoutItemInput
+  createdAt: DateTime
+  description: String
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  itemvariants: ItemVariantsUpdateManyWithoutItemInput
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String
+  price: Int
+  quantity: Int
+  Size: SizeUpdateOneRequiredWithoutItemInput
+  title: String
+  updatedAt: DateTime
+  User: UserUpdateOneWithoutItemsInput
+  userIdentity: String
+}
+
+input ItemUpdateWithoutItemvariantsDataInput {
+  cartitems: CartItemUpdateManyWithoutItemInput
+  Color: ColorUpdateOneRequiredWithoutItemInput
+  createdAt: DateTime
+  description: String
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String
+  price: Int
+  quantity: Int
+  Size: SizeUpdateOneRequiredWithoutItemInput
+  title: String
+  updatedAt: DateTime
+  User: UserUpdateOneWithoutItemsInput
+  userIdentity: String
+}
+
+input ItemUpdateWithoutSizeDataInput {
+  cartitems: CartItemUpdateManyWithoutItemInput
+  Color: ColorUpdateOneRequiredWithoutItemInput
+  createdAt: DateTime
+  description: String
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  itemvariants: ItemVariantsUpdateManyWithoutItemInput
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String
+  price: Int
+  quantity: Int
+  title: String
+  updatedAt: DateTime
+  User: UserUpdateOneWithoutItemsInput
+  userIdentity: String
+}
+
+input ItemUpdateWithoutUserDataInput {
+  cartitems: CartItemUpdateManyWithoutItemInput
+  Color: ColorUpdateOneRequiredWithoutItemInput
+  createdAt: DateTime
+  description: String
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  itemvariants: ItemVariantsUpdateManyWithoutItemInput
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String
+  price: Int
+  quantity: Int
+  Size: SizeUpdateOneRequiredWithoutItemInput
+  title: String
+  updatedAt: DateTime
+  userIdentity: String
+}
+
+input ItemUpdateWithWhereUniqueWithoutColorInput {
+  data: ItemUpdateWithoutColorDataInput!
+  where: ItemWhereUniqueInput!
+}
+
+input ItemUpdateWithWhereUniqueWithoutSizeInput {
+  data: ItemUpdateWithoutSizeDataInput!
+  where: ItemWhereUniqueInput!
+}
+
+input ItemUpdateWithWhereUniqueWithoutUserInput {
+  data: ItemUpdateWithoutUserDataInput!
+  where: ItemWhereUniqueInput!
+}
+
+input ItemUpsertWithoutCartitemsInput {
+  create: ItemCreateWithoutCartitemsInput!
+  update: ItemUpdateWithoutCartitemsDataInput!
+}
+
+input ItemUpsertWithoutItemvariantsInput {
+  create: ItemCreateWithoutItemvariantsInput!
+  update: ItemUpdateWithoutItemvariantsDataInput!
+}
+
+input ItemUpsertWithWhereUniqueWithoutColorInput {
+  create: ItemCreateWithoutColorInput!
+  update: ItemUpdateWithoutColorDataInput!
+  where: ItemWhereUniqueInput!
+}
+
+input ItemUpsertWithWhereUniqueWithoutSizeInput {
+  create: ItemCreateWithoutSizeInput!
+  update: ItemUpdateWithoutSizeDataInput!
+  where: ItemWhereUniqueInput!
+}
+
+input ItemUpsertWithWhereUniqueWithoutUserInput {
+  create: ItemCreateWithoutUserInput!
+  update: ItemUpdateWithoutUserDataInput!
+  where: ItemWhereUniqueInput!
+}
+
 type ItemVariants {
   cartitems(cursor: CartItemWhereUniqueInput, orderBy: [CartItemOrderByInput!], skip: Int, take: Int, where: CartItemWhereInput): [CartItem!]!
   color: String!
@@ -875,6 +1462,310 @@ input ItemVariantsOrderByInput {
   user: SortOrder
 }
 
+input ItemVariantsScalarWhereInput {
+  AND: [ItemVariantsScalarWhereInput!]
+  color: StringFilter
+  createdAt: DateTimeFilter
+  description: StringFilter
+  id: StringFilter
+  image: StringNullableFilter
+  image2: StringNullableFilter
+  image3: StringNullableFilter
+  image4: StringNullableFilter
+  image5: StringNullableFilter
+  image6: StringNullableFilter
+  item: StringFilter
+  largeImage: StringNullableFilter
+  largeImage2: StringNullableFilter
+  largeImage3: StringNullableFilter
+  largeImage4: StringNullableFilter
+  largeImage5: StringNullableFilter
+  largeImage6: StringNullableFilter
+  mainDescription: StringFilter
+  NOT: [ItemVariantsScalarWhereInput!]
+  OR: [ItemVariantsScalarWhereInput!]
+  price: IntFilter
+  quantity: IntFilter
+  size: StringFilter
+  title: StringFilter
+  updatedAt: DateTimeFilter
+  user: StringNullableFilter
+}
+
+input ItemVariantsUpdateManyDataInput {
+  createdAt: DateTime
+  description: String
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String
+  price: Int
+  quantity: Int
+  title: String
+  updatedAt: DateTime
+}
+
+input ItemVariantsUpdateManyWithoutColorInput {
+  connect: [ItemVariantsWhereUniqueInput!]
+  connectOrCreate: [ItemVariantsCreateOrConnectWithoutColorInput!]
+  create: [ItemVariantsCreateWithoutColorInput!]
+  delete: [ItemVariantsWhereUniqueInput!]
+  deleteMany: [ItemVariantsScalarWhereInput!]
+  disconnect: [ItemVariantsWhereUniqueInput!]
+  set: [ItemVariantsWhereUniqueInput!]
+  update: [ItemVariantsUpdateWithWhereUniqueWithoutColorInput!]
+  updateMany: [ItemVariantsUpdateManyWithWhereNestedInput!]
+  upsert: [ItemVariantsUpsertWithWhereUniqueWithoutColorInput!]
+}
+
+input ItemVariantsUpdateManyWithoutItemInput {
+  connect: [ItemVariantsWhereUniqueInput!]
+  connectOrCreate: [ItemVariantsCreateOrConnectWithoutItemInput!]
+  create: [ItemVariantsCreateWithoutItemInput!]
+  delete: [ItemVariantsWhereUniqueInput!]
+  deleteMany: [ItemVariantsScalarWhereInput!]
+  disconnect: [ItemVariantsWhereUniqueInput!]
+  set: [ItemVariantsWhereUniqueInput!]
+  update: [ItemVariantsUpdateWithWhereUniqueWithoutItemInput!]
+  updateMany: [ItemVariantsUpdateManyWithWhereNestedInput!]
+  upsert: [ItemVariantsUpsertWithWhereUniqueWithoutItemInput!]
+}
+
+input ItemVariantsUpdateManyWithoutSizeInput {
+  connect: [ItemVariantsWhereUniqueInput!]
+  connectOrCreate: [ItemVariantsCreateOrConnectWithoutSizeInput!]
+  create: [ItemVariantsCreateWithoutSizeInput!]
+  delete: [ItemVariantsWhereUniqueInput!]
+  deleteMany: [ItemVariantsScalarWhereInput!]
+  disconnect: [ItemVariantsWhereUniqueInput!]
+  set: [ItemVariantsWhereUniqueInput!]
+  update: [ItemVariantsUpdateWithWhereUniqueWithoutSizeInput!]
+  updateMany: [ItemVariantsUpdateManyWithWhereNestedInput!]
+  upsert: [ItemVariantsUpsertWithWhereUniqueWithoutSizeInput!]
+}
+
+input ItemVariantsUpdateManyWithoutUserInput {
+  connect: [ItemVariantsWhereUniqueInput!]
+  connectOrCreate: [ItemVariantsCreateOrConnectWithoutUserInput!]
+  create: [ItemVariantsCreateWithoutUserInput!]
+  delete: [ItemVariantsWhereUniqueInput!]
+  deleteMany: [ItemVariantsScalarWhereInput!]
+  disconnect: [ItemVariantsWhereUniqueInput!]
+  set: [ItemVariantsWhereUniqueInput!]
+  update: [ItemVariantsUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [ItemVariantsUpdateManyWithWhereNestedInput!]
+  upsert: [ItemVariantsUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input ItemVariantsUpdateManyWithWhereNestedInput {
+  data: ItemVariantsUpdateManyDataInput!
+  where: ItemVariantsScalarWhereInput!
+}
+
+input ItemVariantsUpdateOneWithoutCartitemsInput {
+  connect: ItemVariantsWhereUniqueInput
+  connectOrCreate: ItemVariantsCreateOrConnectWithoutCartItemInput
+  create: ItemVariantsCreateWithoutCartitemsInput
+  delete: Boolean
+  disconnect: Boolean
+  update: ItemVariantsUpdateWithoutCartitemsDataInput
+  upsert: ItemVariantsUpsertWithoutCartitemsInput
+}
+
+input ItemVariantsUpdateWithoutCartitemsDataInput {
+  Color: ColorUpdateOneRequiredWithoutItemvariantsInput
+  createdAt: DateTime
+  description: String
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  Item: ItemUpdateOneRequiredWithoutItemvariantsInput
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String
+  price: Int
+  quantity: Int
+  Size: SizeUpdateOneRequiredWithoutItemvariantsInput
+  title: String
+  updatedAt: DateTime
+  User: UserUpdateOneWithoutItemvariantsInput
+}
+
+input ItemVariantsUpdateWithoutColorDataInput {
+  cartitems: CartItemUpdateManyWithoutItemVariantsInput
+  createdAt: DateTime
+  description: String
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  Item: ItemUpdateOneRequiredWithoutItemvariantsInput
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String
+  price: Int
+  quantity: Int
+  Size: SizeUpdateOneRequiredWithoutItemvariantsInput
+  title: String
+  updatedAt: DateTime
+  User: UserUpdateOneWithoutItemvariantsInput
+}
+
+input ItemVariantsUpdateWithoutItemDataInput {
+  cartitems: CartItemUpdateManyWithoutItemVariantsInput
+  Color: ColorUpdateOneRequiredWithoutItemvariantsInput
+  createdAt: DateTime
+  description: String
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String
+  price: Int
+  quantity: Int
+  Size: SizeUpdateOneRequiredWithoutItemvariantsInput
+  title: String
+  updatedAt: DateTime
+  User: UserUpdateOneWithoutItemvariantsInput
+}
+
+input ItemVariantsUpdateWithoutSizeDataInput {
+  cartitems: CartItemUpdateManyWithoutItemVariantsInput
+  Color: ColorUpdateOneRequiredWithoutItemvariantsInput
+  createdAt: DateTime
+  description: String
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  Item: ItemUpdateOneRequiredWithoutItemvariantsInput
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String
+  price: Int
+  quantity: Int
+  title: String
+  updatedAt: DateTime
+  User: UserUpdateOneWithoutItemvariantsInput
+}
+
+input ItemVariantsUpdateWithoutUserDataInput {
+  cartitems: CartItemUpdateManyWithoutItemVariantsInput
+  Color: ColorUpdateOneRequiredWithoutItemvariantsInput
+  createdAt: DateTime
+  description: String
+  id: String
+  image: String
+  image2: String
+  image3: String
+  image4: String
+  image5: String
+  image6: String
+  Item: ItemUpdateOneRequiredWithoutItemvariantsInput
+  largeImage: String
+  largeImage2: String
+  largeImage3: String
+  largeImage4: String
+  largeImage5: String
+  largeImage6: String
+  mainDescription: String
+  price: Int
+  quantity: Int
+  Size: SizeUpdateOneRequiredWithoutItemvariantsInput
+  title: String
+  updatedAt: DateTime
+}
+
+input ItemVariantsUpdateWithWhereUniqueWithoutColorInput {
+  data: ItemVariantsUpdateWithoutColorDataInput!
+  where: ItemVariantsWhereUniqueInput!
+}
+
+input ItemVariantsUpdateWithWhereUniqueWithoutItemInput {
+  data: ItemVariantsUpdateWithoutItemDataInput!
+  where: ItemVariantsWhereUniqueInput!
+}
+
+input ItemVariantsUpdateWithWhereUniqueWithoutSizeInput {
+  data: ItemVariantsUpdateWithoutSizeDataInput!
+  where: ItemVariantsWhereUniqueInput!
+}
+
+input ItemVariantsUpdateWithWhereUniqueWithoutUserInput {
+  data: ItemVariantsUpdateWithoutUserDataInput!
+  where: ItemVariantsWhereUniqueInput!
+}
+
+input ItemVariantsUpsertWithoutCartitemsInput {
+  create: ItemVariantsCreateWithoutCartitemsInput!
+  update: ItemVariantsUpdateWithoutCartitemsDataInput!
+}
+
+input ItemVariantsUpsertWithWhereUniqueWithoutColorInput {
+  create: ItemVariantsCreateWithoutColorInput!
+  update: ItemVariantsUpdateWithoutColorDataInput!
+  where: ItemVariantsWhereUniqueInput!
+}
+
+input ItemVariantsUpsertWithWhereUniqueWithoutItemInput {
+  create: ItemVariantsCreateWithoutItemInput!
+  update: ItemVariantsUpdateWithoutItemDataInput!
+  where: ItemVariantsWhereUniqueInput!
+}
+
+input ItemVariantsUpsertWithWhereUniqueWithoutSizeInput {
+  create: ItemVariantsCreateWithoutSizeInput!
+  update: ItemVariantsUpdateWithoutSizeDataInput!
+  where: ItemVariantsWhereUniqueInput!
+}
+
+input ItemVariantsUpsertWithWhereUniqueWithoutUserInput {
+  create: ItemVariantsCreateWithoutUserInput!
+  update: ItemVariantsUpdateWithoutUserDataInput!
+  where: ItemVariantsWhereUniqueInput!
+}
+
 input ItemVariantsWhereInput {
   AND: [ItemVariantsWhereInput!]
   cartitems: CartItemListRelationFilter
@@ -970,7 +1861,7 @@ type Mutation {
   updateAddress(address_line: String!, card_name: String!, city: String!, country: String!, email: String!, postcode: String!, userId: ID!): Address!
   updateCartItem(id: String!, quantity: Int): CartItem
   updateGuestEmail(email: String!, userId: String!): User!
-  updateItem(color: ColorCreateOneWithoutItemInput, description: String!, id: String!, image: String, largeImage: String, mainDescription: String!, price: Int!, quantity: Int!, size: SizeCreateOneWithoutItemInput, title: String!): Item!
+  updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
   updatePermissions(permissions2: [Permission2!], userId: String!): User
 }
 
@@ -1270,6 +2161,210 @@ input OrderItemOrderByInput {
   user: SortOrder
 }
 
+input OrderItemScalarWhereInput {
+  AND: [OrderItemScalarWhereInput!]
+  color: StringFilter
+  createdAt: DateTimeFilter
+  description: StringFilter
+  id: StringFilter
+  image: StringFilter
+  itemid: StringFilter
+  largeImage: StringFilter
+  mainDescription: StringFilter
+  NOT: [OrderItemScalarWhereInput!]
+  OR: [OrderItemScalarWhereInput!]
+  order: StringFilter
+  price: IntFilter
+  quantity: IntFilter
+  size: StringFilter
+  title: StringFilter
+  updatedAt: DateTimeFilter
+  user: StringNullableFilter
+}
+
+input OrderItemUpdateManyDataInput {
+  createdAt: DateTime
+  description: String
+  id: String
+  image: String
+  itemid: String
+  largeImage: String
+  mainDescription: String
+  price: Int
+  quantity: Int
+  title: String
+  updatedAt: DateTime
+}
+
+input OrderItemUpdateManyWithoutColorInput {
+  connect: [OrderItemWhereUniqueInput!]
+  connectOrCreate: [OrderItemCreateOrConnectWithoutColorInput!]
+  create: [OrderItemCreateWithoutColorInput!]
+  delete: [OrderItemWhereUniqueInput!]
+  deleteMany: [OrderItemScalarWhereInput!]
+  disconnect: [OrderItemWhereUniqueInput!]
+  set: [OrderItemWhereUniqueInput!]
+  update: [OrderItemUpdateWithWhereUniqueWithoutColorInput!]
+  updateMany: [OrderItemUpdateManyWithWhereNestedInput!]
+  upsert: [OrderItemUpsertWithWhereUniqueWithoutColorInput!]
+}
+
+input OrderItemUpdateManyWithoutOrderInput {
+  connect: [OrderItemWhereUniqueInput!]
+  connectOrCreate: [OrderItemCreateOrConnectWithoutOrderInput!]
+  create: [OrderItemCreateWithoutOrderInput!]
+  delete: [OrderItemWhereUniqueInput!]
+  deleteMany: [OrderItemScalarWhereInput!]
+  disconnect: [OrderItemWhereUniqueInput!]
+  set: [OrderItemWhereUniqueInput!]
+  update: [OrderItemUpdateWithWhereUniqueWithoutOrderInput!]
+  updateMany: [OrderItemUpdateManyWithWhereNestedInput!]
+  upsert: [OrderItemUpsertWithWhereUniqueWithoutOrderInput!]
+}
+
+input OrderItemUpdateManyWithoutSizeInput {
+  connect: [OrderItemWhereUniqueInput!]
+  connectOrCreate: [OrderItemCreateOrConnectWithoutSizeInput!]
+  create: [OrderItemCreateWithoutSizeInput!]
+  delete: [OrderItemWhereUniqueInput!]
+  deleteMany: [OrderItemScalarWhereInput!]
+  disconnect: [OrderItemWhereUniqueInput!]
+  set: [OrderItemWhereUniqueInput!]
+  update: [OrderItemUpdateWithWhereUniqueWithoutSizeInput!]
+  updateMany: [OrderItemUpdateManyWithWhereNestedInput!]
+  upsert: [OrderItemUpsertWithWhereUniqueWithoutSizeInput!]
+}
+
+input OrderItemUpdateManyWithoutUserInput {
+  connect: [OrderItemWhereUniqueInput!]
+  connectOrCreate: [OrderItemCreateOrConnectWithoutUserInput!]
+  create: [OrderItemCreateWithoutUserInput!]
+  delete: [OrderItemWhereUniqueInput!]
+  deleteMany: [OrderItemScalarWhereInput!]
+  disconnect: [OrderItemWhereUniqueInput!]
+  set: [OrderItemWhereUniqueInput!]
+  update: [OrderItemUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [OrderItemUpdateManyWithWhereNestedInput!]
+  upsert: [OrderItemUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input OrderItemUpdateManyWithWhereNestedInput {
+  data: OrderItemUpdateManyDataInput!
+  where: OrderItemScalarWhereInput!
+}
+
+input OrderItemUpdateWithoutColorDataInput {
+  createdAt: DateTime
+  description: String
+  id: String
+  image: String
+  itemid: String
+  largeImage: String
+  mainDescription: String
+  Order: OrderUpdateOneRequiredWithoutItemsInput
+  price: Int
+  quantity: Int
+  Size: SizeUpdateOneRequiredWithoutOrderitemInput
+  title: String
+  updatedAt: DateTime
+  User: UserUpdateOneWithoutOrderitemInput
+}
+
+input OrderItemUpdateWithoutOrderDataInput {
+  Color: ColorUpdateOneRequiredWithoutOrderitemInput
+  createdAt: DateTime
+  description: String
+  id: String
+  image: String
+  itemid: String
+  largeImage: String
+  mainDescription: String
+  price: Int
+  quantity: Int
+  Size: SizeUpdateOneRequiredWithoutOrderitemInput
+  title: String
+  updatedAt: DateTime
+  User: UserUpdateOneWithoutOrderitemInput
+}
+
+input OrderItemUpdateWithoutSizeDataInput {
+  Color: ColorUpdateOneRequiredWithoutOrderitemInput
+  createdAt: DateTime
+  description: String
+  id: String
+  image: String
+  itemid: String
+  largeImage: String
+  mainDescription: String
+  Order: OrderUpdateOneRequiredWithoutItemsInput
+  price: Int
+  quantity: Int
+  title: String
+  updatedAt: DateTime
+  User: UserUpdateOneWithoutOrderitemInput
+}
+
+input OrderItemUpdateWithoutUserDataInput {
+  Color: ColorUpdateOneRequiredWithoutOrderitemInput
+  createdAt: DateTime
+  description: String
+  id: String
+  image: String
+  itemid: String
+  largeImage: String
+  mainDescription: String
+  Order: OrderUpdateOneRequiredWithoutItemsInput
+  price: Int
+  quantity: Int
+  Size: SizeUpdateOneRequiredWithoutOrderitemInput
+  title: String
+  updatedAt: DateTime
+}
+
+input OrderItemUpdateWithWhereUniqueWithoutColorInput {
+  data: OrderItemUpdateWithoutColorDataInput!
+  where: OrderItemWhereUniqueInput!
+}
+
+input OrderItemUpdateWithWhereUniqueWithoutOrderInput {
+  data: OrderItemUpdateWithoutOrderDataInput!
+  where: OrderItemWhereUniqueInput!
+}
+
+input OrderItemUpdateWithWhereUniqueWithoutSizeInput {
+  data: OrderItemUpdateWithoutSizeDataInput!
+  where: OrderItemWhereUniqueInput!
+}
+
+input OrderItemUpdateWithWhereUniqueWithoutUserInput {
+  data: OrderItemUpdateWithoutUserDataInput!
+  where: OrderItemWhereUniqueInput!
+}
+
+input OrderItemUpsertWithWhereUniqueWithoutColorInput {
+  create: OrderItemCreateWithoutColorInput!
+  update: OrderItemUpdateWithoutColorDataInput!
+  where: OrderItemWhereUniqueInput!
+}
+
+input OrderItemUpsertWithWhereUniqueWithoutOrderInput {
+  create: OrderItemCreateWithoutOrderInput!
+  update: OrderItemUpdateWithoutOrderDataInput!
+  where: OrderItemWhereUniqueInput!
+}
+
+input OrderItemUpsertWithWhereUniqueWithoutSizeInput {
+  create: OrderItemCreateWithoutSizeInput!
+  update: OrderItemUpdateWithoutSizeDataInput!
+  where: OrderItemWhereUniqueInput!
+}
+
+input OrderItemUpsertWithWhereUniqueWithoutUserInput {
+  create: OrderItemCreateWithoutUserInput!
+  update: OrderItemUpdateWithoutUserDataInput!
+  where: OrderItemWhereUniqueInput!
+}
+
 input OrderItemWhereInput {
   AND: [OrderItemWhereInput!]
   color: StringFilter
@@ -1319,6 +2414,114 @@ input OrderOrderByInput {
   total: SortOrder
   updatedAt: SortOrder
   user: SortOrder
+}
+
+input OrderScalarWhereInput {
+  address_line: StringFilter
+  AND: [OrderScalarWhereInput!]
+  card_brand: StringFilter
+  card_name: StringFilter
+  charge: StringFilter
+  city: StringFilter
+  country: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  last4card_digits: StringFilter
+  NOT: [OrderScalarWhereInput!]
+  OR: [OrderScalarWhereInput!]
+  postcode: StringFilter
+  total: IntFilter
+  updatedAt: DateTimeFilter
+  user: StringNullableFilter
+}
+
+input OrderUpdateManyDataInput {
+  address_line: String
+  card_brand: String
+  card_name: String
+  charge: String
+  city: String
+  country: String
+  createdAt: DateTime
+  id: String
+  last4card_digits: String
+  postcode: String
+  total: Int
+  updatedAt: DateTime
+}
+
+input OrderUpdateManyWithoutUserInput {
+  connect: [OrderWhereUniqueInput!]
+  connectOrCreate: [OrderCreateOrConnectWithoutUserInput!]
+  create: [OrderCreateWithoutUserInput!]
+  delete: [OrderWhereUniqueInput!]
+  deleteMany: [OrderScalarWhereInput!]
+  disconnect: [OrderWhereUniqueInput!]
+  set: [OrderWhereUniqueInput!]
+  update: [OrderUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [OrderUpdateManyWithWhereNestedInput!]
+  upsert: [OrderUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input OrderUpdateManyWithWhereNestedInput {
+  data: OrderUpdateManyDataInput!
+  where: OrderScalarWhereInput!
+}
+
+input OrderUpdateOneRequiredWithoutItemsInput {
+  connect: OrderWhereUniqueInput
+  connectOrCreate: OrderCreateOrConnectWithoutOrderItemInput
+  create: OrderCreateWithoutItemsInput
+  update: OrderUpdateWithoutItemsDataInput
+  upsert: OrderUpsertWithoutItemsInput
+}
+
+input OrderUpdateWithoutItemsDataInput {
+  address_line: String
+  card_brand: String
+  card_name: String
+  charge: String
+  city: String
+  country: String
+  createdAt: DateTime
+  id: String
+  last4card_digits: String
+  postcode: String
+  total: Int
+  updatedAt: DateTime
+  User: UserUpdateOneWithoutOrderInput
+}
+
+input OrderUpdateWithoutUserDataInput {
+  address_line: String
+  card_brand: String
+  card_name: String
+  charge: String
+  city: String
+  country: String
+  createdAt: DateTime
+  id: String
+  items: OrderItemUpdateManyWithoutOrderInput
+  last4card_digits: String
+  postcode: String
+  total: Int
+  updatedAt: DateTime
+}
+
+input OrderUpdateWithWhereUniqueWithoutUserInput {
+  data: OrderUpdateWithoutUserDataInput!
+  where: OrderWhereUniqueInput!
+}
+
+input OrderUpsertWithoutItemsInput {
+  create: OrderCreateWithoutItemsInput!
+  update: OrderUpdateWithoutItemsDataInput!
+}
+
+input OrderUpsertWithWhereUniqueWithoutUserInput {
+  create: OrderCreateWithoutUserInput!
+  update: OrderUpdateWithoutUserDataInput!
+  where: OrderWhereUniqueInput!
 }
 
 input OrderWhereInput {
@@ -1463,6 +2666,75 @@ input SizeOrderByInput {
   updatedAt: SortOrder
 }
 
+input SizeUpdateOneRequiredWithoutItemInput {
+  connect: SizeWhereUniqueInput
+  connectOrCreate: SizeCreateOrConnectWithoutItemInput
+  create: SizeCreateWithoutItemInput
+  update: SizeUpdateWithoutItemDataInput
+  upsert: SizeUpsertWithoutItemInput
+}
+
+input SizeUpdateOneRequiredWithoutItemvariantsInput {
+  connect: SizeWhereUniqueInput
+  connectOrCreate: SizeCreateOrConnectWithoutItemVariantsInput
+  create: SizeCreateWithoutItemvariantsInput
+  update: SizeUpdateWithoutItemvariantsDataInput
+  upsert: SizeUpsertWithoutItemvariantsInput
+}
+
+input SizeUpdateOneRequiredWithoutOrderitemInput {
+  connect: SizeWhereUniqueInput
+  connectOrCreate: SizeCreateOrConnectWithoutOrderItemInput
+  create: SizeCreateWithoutOrderitemInput
+  update: SizeUpdateWithoutOrderitemDataInput
+  upsert: SizeUpsertWithoutOrderitemInput
+}
+
+input SizeUpdateWithoutItemDataInput {
+  createdAt: DateTime
+  id: String
+  itemvariants: ItemVariantsUpdateManyWithoutSizeInput
+  label: String
+  name: String
+  orderitem: OrderItemUpdateManyWithoutSizeInput
+  updatedAt: DateTime
+}
+
+input SizeUpdateWithoutItemvariantsDataInput {
+  createdAt: DateTime
+  id: String
+  item: ItemUpdateManyWithoutSizeInput
+  label: String
+  name: String
+  orderitem: OrderItemUpdateManyWithoutSizeInput
+  updatedAt: DateTime
+}
+
+input SizeUpdateWithoutOrderitemDataInput {
+  createdAt: DateTime
+  id: String
+  item: ItemUpdateManyWithoutSizeInput
+  itemvariants: ItemVariantsUpdateManyWithoutSizeInput
+  label: String
+  name: String
+  updatedAt: DateTime
+}
+
+input SizeUpsertWithoutItemInput {
+  create: SizeCreateWithoutItemInput!
+  update: SizeUpdateWithoutItemDataInput!
+}
+
+input SizeUpsertWithoutItemvariantsInput {
+  create: SizeCreateWithoutItemvariantsInput!
+  update: SizeUpdateWithoutItemvariantsDataInput!
+}
+
+input SizeUpsertWithoutOrderitemInput {
+  create: SizeCreateWithoutOrderitemInput!
+  update: SizeUpdateWithoutOrderitemDataInput!
+}
+
 input SizeWhereInput {
   AND: [SizeWhereInput!]
   createdAt: DateTimeFilter
@@ -1562,6 +2834,54 @@ input User_permissionsListRelationFilter {
   every: User_permissionsWhereInput
   none: User_permissionsWhereInput
   some: User_permissionsWhereInput
+}
+
+input User_permissionsScalarWhereInput {
+  AND: [User_permissionsScalarWhereInput!]
+  nodeId: StringFilter
+  NOT: [User_permissionsScalarWhereInput!]
+  OR: [User_permissionsScalarWhereInput!]
+  position: IntFilter
+  value: StringFilter
+}
+
+input User_permissionsUpdateManyDataInput {
+  position: Int
+  value: String
+}
+
+input User_permissionsUpdateManyWithoutUserInput {
+  connect: [User_permissionsWhereUniqueInput!]
+  connectOrCreate: [User_permissionsCreateOrConnectWithoutUserInput!]
+  create: [User_permissionsCreateWithoutUserInput!]
+  delete: [User_permissionsWhereUniqueInput!]
+  deleteMany: [User_permissionsScalarWhereInput!]
+  disconnect: [User_permissionsWhereUniqueInput!]
+  set: [User_permissionsWhereUniqueInput!]
+  update: [User_permissionsUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [User_permissionsUpdateManyWithWhereNestedInput!]
+  upsert: [User_permissionsUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input User_permissionsUpdateManyWithWhereNestedInput {
+  data: User_permissionsUpdateManyDataInput!
+  where: User_permissionsScalarWhereInput!
+}
+
+input User_permissionsUpdateWithoutUserDataInput {
+  position: Int
+  value: String
+}
+
+input User_permissionsUpdateWithWhereUniqueWithoutUserInput {
+  data: User_permissionsUpdateWithoutUserDataInput!
+  where: User_permissionsWhereUniqueInput!
+}
+
+input User_permissionsUpsertWithWhereUniqueWithoutUserInput {
+  create: User_permissionsCreateWithoutUserInput!
+  update: User_permissionsUpdateWithoutUserDataInput!
+  where: User_permissionsWhereUniqueInput!
 }
 
 input User_permissionsWhereInput {
@@ -1737,6 +3057,175 @@ input UserOrderByInput {
   resetToken: SortOrder
   resetTokenExpiry: SortOrder
   updatedAt: SortOrder
+}
+
+input UserUpdateOneWithoutCartInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutCartItemInput
+  create: UserCreateWithoutCartInput
+  delete: Boolean
+  disconnect: Boolean
+  update: UserUpdateWithoutCartDataInput
+  upsert: UserUpsertWithoutCartInput
+}
+
+input UserUpdateOneWithoutItemsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutItemInput
+  create: UserCreateWithoutItemsInput
+  delete: Boolean
+  disconnect: Boolean
+  update: UserUpdateWithoutItemsDataInput
+  upsert: UserUpsertWithoutItemsInput
+}
+
+input UserUpdateOneWithoutItemvariantsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutItemVariantsInput
+  create: UserCreateWithoutItemvariantsInput
+  delete: Boolean
+  disconnect: Boolean
+  update: UserUpdateWithoutItemvariantsDataInput
+  upsert: UserUpsertWithoutItemvariantsInput
+}
+
+input UserUpdateOneWithoutOrderInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutOrderInput
+  create: UserCreateWithoutOrderInput
+  delete: Boolean
+  disconnect: Boolean
+  update: UserUpdateWithoutOrderDataInput
+  upsert: UserUpsertWithoutOrderInput
+}
+
+input UserUpdateOneWithoutOrderitemInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutOrderItemInput
+  create: UserCreateWithoutOrderitemInput
+  delete: Boolean
+  disconnect: Boolean
+  update: UserUpdateWithoutOrderitemDataInput
+  upsert: UserUpsertWithoutOrderitemInput
+}
+
+input UserUpdatepermissions2Input {
+  set: [Permission2!]
+}
+
+input UserUpdateWithoutCartDataInput {
+  address: AddressUpdateManyWithoutUserInput
+  createdAt: DateTime
+  email: String
+  id: String
+  items: ItemUpdateManyWithoutUserInput
+  itemvariants: ItemVariantsUpdateManyWithoutUserInput
+  name: String
+  order: OrderUpdateManyWithoutUserInput
+  orderitem: OrderItemUpdateManyWithoutUserInput
+  password: String
+  permissions2: UserUpdatepermissions2Input
+  resetToken: String
+  resetTokenExpiry: Float
+  updatedAt: DateTime
+  User_permissions: User_permissionsUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutItemsDataInput {
+  address: AddressUpdateManyWithoutUserInput
+  cart: CartItemUpdateManyWithoutUserInput
+  createdAt: DateTime
+  email: String
+  id: String
+  itemvariants: ItemVariantsUpdateManyWithoutUserInput
+  name: String
+  order: OrderUpdateManyWithoutUserInput
+  orderitem: OrderItemUpdateManyWithoutUserInput
+  password: String
+  permissions2: UserUpdatepermissions2Input
+  resetToken: String
+  resetTokenExpiry: Float
+  updatedAt: DateTime
+  User_permissions: User_permissionsUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutItemvariantsDataInput {
+  address: AddressUpdateManyWithoutUserInput
+  cart: CartItemUpdateManyWithoutUserInput
+  createdAt: DateTime
+  email: String
+  id: String
+  items: ItemUpdateManyWithoutUserInput
+  name: String
+  order: OrderUpdateManyWithoutUserInput
+  orderitem: OrderItemUpdateManyWithoutUserInput
+  password: String
+  permissions2: UserUpdatepermissions2Input
+  resetToken: String
+  resetTokenExpiry: Float
+  updatedAt: DateTime
+  User_permissions: User_permissionsUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutOrderDataInput {
+  address: AddressUpdateManyWithoutUserInput
+  cart: CartItemUpdateManyWithoutUserInput
+  createdAt: DateTime
+  email: String
+  id: String
+  items: ItemUpdateManyWithoutUserInput
+  itemvariants: ItemVariantsUpdateManyWithoutUserInput
+  name: String
+  orderitem: OrderItemUpdateManyWithoutUserInput
+  password: String
+  permissions2: UserUpdatepermissions2Input
+  resetToken: String
+  resetTokenExpiry: Float
+  updatedAt: DateTime
+  User_permissions: User_permissionsUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutOrderitemDataInput {
+  address: AddressUpdateManyWithoutUserInput
+  cart: CartItemUpdateManyWithoutUserInput
+  createdAt: DateTime
+  email: String
+  id: String
+  items: ItemUpdateManyWithoutUserInput
+  itemvariants: ItemVariantsUpdateManyWithoutUserInput
+  name: String
+  order: OrderUpdateManyWithoutUserInput
+  password: String
+  permissions2: UserUpdatepermissions2Input
+  resetToken: String
+  resetTokenExpiry: Float
+  updatedAt: DateTime
+  User_permissions: User_permissionsUpdateManyWithoutUserInput
+}
+
+input UserUpsertWithoutCartInput {
+  create: UserCreateWithoutCartInput!
+  update: UserUpdateWithoutCartDataInput!
+}
+
+input UserUpsertWithoutItemsInput {
+  create: UserCreateWithoutItemsInput!
+  update: UserUpdateWithoutItemsDataInput!
+}
+
+input UserUpsertWithoutItemvariantsInput {
+  create: UserCreateWithoutItemvariantsInput!
+  update: UserUpdateWithoutItemvariantsDataInput!
+}
+
+input UserUpsertWithoutOrderInput {
+  create: UserCreateWithoutOrderInput!
+  update: UserUpdateWithoutOrderDataInput!
+}
+
+input UserUpsertWithoutOrderitemInput {
+  create: UserCreateWithoutOrderitemInput!
+  update: UserUpdateWithoutOrderitemDataInput!
 }
 
 input UserWhereInput {

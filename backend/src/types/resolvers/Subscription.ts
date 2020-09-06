@@ -36,18 +36,11 @@ export const ItemWatch = subscriptionField('itemWatch', {
     /*args: {
       userId: stringArg({ nullable: false }),
     },*/
-    subscribe: withFilter(
-      (_, args: any, ctx: any) => {
-        const { pubsub } = ctx;
-        return pubsub.asyncIterator('itemWatch');
-      },
-      (payload: any, args: any, ctx: any) => {
-        const { userId } = ctx;
-        return payload.id === userId;
-      },
-    ),
-    resolve: (payload) => {
-      return payload;
+    subscribe(_root, _args, ctx) {
+      const { pubsub } = ctx;
+      return pubsub.asyncIterator('itemWatch');
+    },
+    resolve(payload) {
+      return payload
     },
 });
-
