@@ -795,7 +795,7 @@ export const Mutation = mutationType({
     
             // 2. check if its a legit reset token
             // 3. Check if its expired
-            const user = await ctx.prisma.user.findMany({
+            const [user] = await ctx.prisma.user.findMany({
               where: {
                 resetToken: args.resetToken,
                 resetTokenExpiry: {
@@ -803,14 +803,14 @@ export const Mutation = mutationType({
                 }
               },
             })
-    
-            if (!user) {
+
+             if (!user) {
               throw new Error('This token is either invalid or expired!');
             }
     
             // 4. Hash their new password
             const password = await bcrypt.hash(args.password, 10);
-    
+
             // 5. Save the new password to the user and remove old resetToken fields
             const updatedUser = await ctx.prisma.user.update({
               where: { email: user.email },
@@ -822,7 +822,7 @@ export const Mutation = mutationType({
             })
     
             // 6. Generate JWT Note: if it errors on updatedUser then try updatedUser.id
-            const token = jwt.sign({ userId: updatedUser }, process.env.APP_SECRET);
+            const token = jwt.sign({ userId: updatedUser.id }, process.env.APP_SECRET);
     
             // 7. Set the JWT cookie
             ctx.res.cookie('token', token, {
