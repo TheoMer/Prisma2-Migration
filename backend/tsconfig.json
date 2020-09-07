@@ -1,19 +1,27 @@
 {
-    "compilerOptions": {
-      /* Works for both Prisma 1 and 2 */
-      "target": "es5",                          
-      "module": "commonjs",                    
-      "lib": ["es6"],                     
-      "allowJs": true,
-      "outDir": "dist",
-      "noImplicitAny": true,
-      "esModuleInterop": true,
-      "skipLibCheck": true,
-      "strict": true,
-      "rootDir": "src",
-      "noEmit": true,
-      "typeRoots": ["node_modules/@types","types"],
-      "plugins": [{ "name": "nexus/typescript-language-service" }]
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "target": "es2018",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration":false,
+    "lib": ["esnext", "dom", "es6"],
+    "sourceMap":true,
+    "pretty":true,
+    "allowUnreachableCode":true,
+    "allowUnusedLabels":true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "outDir":"dist",
+    "baseUrl":"src",
+    "listFiles":false,
+    "skipLibCheck": true,
+    "typeRoots": ["node_modules/@types","types"],
+    "plugins": [{ "name": "nexus/typescript-language-service" }]
     },
-    "include": ["src/**/*", "src", "types.d.ts"]
+    "include": ["src/**/*", "types.d.ts"]
 }
