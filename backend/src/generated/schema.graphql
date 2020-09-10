@@ -852,6 +852,11 @@ input ItemListRelationFilter {
   some: ItemWhereInput
 }
 
+type ItemModifier {
+  item: Item!
+  type: String!
+}
+
 input ItemOrderByInput {
   color: SortOrder
   createdAt: SortOrder
@@ -1850,7 +1855,7 @@ type Mutation {
   createAddress(address_line: String!, card_name: String!, city: String!, country: String!, email: String!, postcode: String!, userId: String!): Address!
   createItem(data: ItemCreateInput!): Item!
   createOrder(address_line: String!, card_brand: String!, card_name: String!, city: String!, country: String!, last4card_digits: String!, postcode: String!, token: String!): Order!
-  createSiteVisits(url: String, urlReferer: String, userAgent: String, userID: String, userIP: String, userType: String): SiteVisits
+  createSiteVisits(data: SiteVisitsCreateInput!): SiteVisits!
   deleteItem(id: String!): Item
   removeFromCart(id: String!, itemId: String!): CartItem
   requestReset(email: String!): SuccessMessage
@@ -1924,11 +1929,6 @@ input NestedStringNullableFilter {
   not: NestedStringNullableFilter
   notIn: [String!]
   startsWith: String
-}
-
-input NodeIdPositionCompoundUniqueInput {
-  nodeId: String!
-  position: Int!
 }
 
 type Order {
@@ -2584,6 +2584,18 @@ type SiteVisits {
   userType: String
 }
 
+input SiteVisitsCreateInput {
+  createdAt: DateTime
+  id: String
+  updatedAt: DateTime
+  url: String
+  urlReferer: String
+  userAgent: String
+  userID: String
+  userIP: String
+  userType: String
+}
+
 type Size {
   createdAt: Date!
   id: String!
@@ -2788,8 +2800,8 @@ input StringNullableFilter {
 }
 
 type Subscription {
-  itemDeleted: Item!
-  itemWatch: Item!
+  itemDeleted: ItemModifier!
+  itemWatch: ItemModifier!
 }
 
 type SuccessMessage {
@@ -2812,90 +2824,6 @@ type User {
   resetToken: String
   resetTokenExpiry: Float
   updatedAt: Date!
-}
-
-input User_permissionsCreateManyWithoutUserInput {
-  connect: [User_permissionsWhereUniqueInput!]
-  connectOrCreate: [User_permissionsCreateOrConnectWithoutUserInput!]
-  create: [User_permissionsCreateWithoutUserInput!]
-}
-
-input User_permissionsCreateOrConnectWithoutUserInput {
-  create: User_permissionsCreateWithoutUserInput!
-  where: User_permissionsWhereUniqueInput!
-}
-
-input User_permissionsCreateWithoutUserInput {
-  position: Int!
-  value: String!
-}
-
-input User_permissionsListRelationFilter {
-  every: User_permissionsWhereInput
-  none: User_permissionsWhereInput
-  some: User_permissionsWhereInput
-}
-
-input User_permissionsScalarWhereInput {
-  AND: [User_permissionsScalarWhereInput!]
-  nodeId: StringFilter
-  NOT: [User_permissionsScalarWhereInput!]
-  OR: [User_permissionsScalarWhereInput!]
-  position: IntFilter
-  value: StringFilter
-}
-
-input User_permissionsUpdateManyDataInput {
-  position: Int
-  value: String
-}
-
-input User_permissionsUpdateManyWithoutUserInput {
-  connect: [User_permissionsWhereUniqueInput!]
-  connectOrCreate: [User_permissionsCreateOrConnectWithoutUserInput!]
-  create: [User_permissionsCreateWithoutUserInput!]
-  delete: [User_permissionsWhereUniqueInput!]
-  deleteMany: [User_permissionsScalarWhereInput!]
-  disconnect: [User_permissionsWhereUniqueInput!]
-  set: [User_permissionsWhereUniqueInput!]
-  update: [User_permissionsUpdateWithWhereUniqueWithoutUserInput!]
-  updateMany: [User_permissionsUpdateManyWithWhereNestedInput!]
-  upsert: [User_permissionsUpsertWithWhereUniqueWithoutUserInput!]
-}
-
-input User_permissionsUpdateManyWithWhereNestedInput {
-  data: User_permissionsUpdateManyDataInput!
-  where: User_permissionsScalarWhereInput!
-}
-
-input User_permissionsUpdateWithoutUserDataInput {
-  position: Int
-  value: String
-}
-
-input User_permissionsUpdateWithWhereUniqueWithoutUserInput {
-  data: User_permissionsUpdateWithoutUserDataInput!
-  where: User_permissionsWhereUniqueInput!
-}
-
-input User_permissionsUpsertWithWhereUniqueWithoutUserInput {
-  create: User_permissionsCreateWithoutUserInput!
-  update: User_permissionsUpdateWithoutUserDataInput!
-  where: User_permissionsWhereUniqueInput!
-}
-
-input User_permissionsWhereInput {
-  AND: [User_permissionsWhereInput!]
-  nodeId: StringFilter
-  NOT: [User_permissionsWhereInput!]
-  OR: [User_permissionsWhereInput!]
-  position: IntFilter
-  User: UserWhereInput
-  value: StringFilter
-}
-
-input User_permissionsWhereUniqueInput {
-  nodeId_position: NodeIdPositionCompoundUniqueInput
 }
 
 input UserCreateOneWithoutCartInput {
@@ -2972,7 +2900,6 @@ input UserCreateWithoutCartInput {
   resetToken: String
   resetTokenExpiry: Float
   updatedAt: DateTime
-  User_permissions: User_permissionsCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutItemsInput {
@@ -2990,7 +2917,6 @@ input UserCreateWithoutItemsInput {
   resetToken: String
   resetTokenExpiry: Float
   updatedAt: DateTime
-  User_permissions: User_permissionsCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutItemvariantsInput {
@@ -3008,7 +2934,6 @@ input UserCreateWithoutItemvariantsInput {
   resetToken: String
   resetTokenExpiry: Float
   updatedAt: DateTime
-  User_permissions: User_permissionsCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutOrderInput {
@@ -3026,7 +2951,6 @@ input UserCreateWithoutOrderInput {
   resetToken: String
   resetTokenExpiry: Float
   updatedAt: DateTime
-  User_permissions: User_permissionsCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutOrderitemInput {
@@ -3044,7 +2968,6 @@ input UserCreateWithoutOrderitemInput {
   resetToken: String
   resetTokenExpiry: Float
   updatedAt: DateTime
-  User_permissions: User_permissionsCreateManyWithoutUserInput
 }
 
 input UserOrderByInput {
@@ -3128,7 +3051,6 @@ input UserUpdateWithoutCartDataInput {
   resetToken: String
   resetTokenExpiry: Float
   updatedAt: DateTime
-  User_permissions: User_permissionsUpdateManyWithoutUserInput
 }
 
 input UserUpdateWithoutItemsDataInput {
@@ -3146,7 +3068,6 @@ input UserUpdateWithoutItemsDataInput {
   resetToken: String
   resetTokenExpiry: Float
   updatedAt: DateTime
-  User_permissions: User_permissionsUpdateManyWithoutUserInput
 }
 
 input UserUpdateWithoutItemvariantsDataInput {
@@ -3164,7 +3085,6 @@ input UserUpdateWithoutItemvariantsDataInput {
   resetToken: String
   resetTokenExpiry: Float
   updatedAt: DateTime
-  User_permissions: User_permissionsUpdateManyWithoutUserInput
 }
 
 input UserUpdateWithoutOrderDataInput {
@@ -3182,7 +3102,6 @@ input UserUpdateWithoutOrderDataInput {
   resetToken: String
   resetTokenExpiry: Float
   updatedAt: DateTime
-  User_permissions: User_permissionsUpdateManyWithoutUserInput
 }
 
 input UserUpdateWithoutOrderitemDataInput {
@@ -3200,7 +3119,6 @@ input UserUpdateWithoutOrderitemDataInput {
   resetToken: String
   resetTokenExpiry: Float
   updatedAt: DateTime
-  User_permissions: User_permissionsUpdateManyWithoutUserInput
 }
 
 input UserUpsertWithoutCartInput {
@@ -3247,7 +3165,6 @@ input UserWhereInput {
   resetToken: StringNullableFilter
   resetTokenExpiry: FloatNullableFilter
   updatedAt: DateTimeFilter
-  User_permissions: User_permissionsListRelationFilter
 }
 
 input UserWhereUniqueInput {

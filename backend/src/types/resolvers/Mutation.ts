@@ -42,7 +42,7 @@ export const Mutation = mutationType({
               mutation: 'CREATED'
             });*/
 
-            ctx.pubsub.publish('itemWatch', newItem);
+            ctx.pubsub.publish('itemWatch', { type: 'CREATED', item: newItem } );
             return newItem;
 
           } catch (err) {
@@ -195,26 +195,15 @@ export const Mutation = mutationType({
         }      
       })
   
-      t.field('createSiteVisits', {
-        type: 'SiteVisits',
-        nullable: true,
-        args: {
-          userID: stringArg({ nullable: true}), 
-          userType: stringArg({ nullable: true}), 
-          url: stringArg({ nullable: true}), 
-          userAgent: stringArg({ nullable: true}), 
-          userIP: stringArg({ nullable: true}), 
-          urlReferer: stringArg({ nullable: true})
-        },
+      // args (variables) are specified in frontend/component/IpBrowserDetails.js
+      t.crud.createOneSiteVisits({
+        alias: 'createSiteVisits',
         resolve: async (root: any, args: any, ctx: any) => {
 
           try {
     
             const item = await ctx.prisma.siteVisits.create({
-              data: {
-                //id: '-1',
-                ...args,
-              },
+              ...args
             })
         
             return item;
@@ -241,7 +230,7 @@ export const Mutation = mutationType({
               }
             )
 
-            ctx.pubsub.publish('itemWatch', updateItem);
+            ctx.pubsub.publish('itemWatch', { type: 'UPDATED', item: updateItem } );
             return updateItem;
 
           } catch (err) {
@@ -309,7 +298,7 @@ export const Mutation = mutationType({
               mutation: 'DELETED'
             });*/
 
-            ctx.pubsub.publish('itemWatch', deletedItem);
+            ctx.pubsub.publish('itemDeleted', { type: 'DELETED', item: deletedItem } );
             return deletedItem;
 
           } catch (err) {
@@ -405,11 +394,12 @@ export const Mutation = mutationType({
               // We set the jwt as a cookie on the response
               ctx.res.cookie('token', token, {
                 //Set domain to custom domain name to resolve issue with non custom heroku/now domain names
-                domain: process.env.NODE_ENV === 'development' ? process.env.LOCAL_DOMAIN : process.env.APP_DOMAIN,
+                domain: process.env.NODE_ENV === 'development' ? undefined : process.env.APP_DOMAIN,
                 secure: process.env.NODE_ENV === 'development' ? false : true,
                 httpOnly: true,
                 maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
                 sameSite: 'lax',
+                path: '/'
               });
             }
     
@@ -437,8 +427,6 @@ export const Mutation = mutationType({
 
             let user: any;
             const { userId } = ctx.req;
-            console.log("userId = ", userId);
-            //console.log("User  = ", ctx.req.user);
             
             // Check that the email and password aren't empty
             if (email.length == 0) {
@@ -656,7 +644,7 @@ export const Mutation = mutationType({
               })
   
               // Delete existing gues_user cookie
-              await ctx.res.clearCookie('token', { domain: process.env.NODE_ENV === 'development' ? process.env.LOCAL_DOMAIN : process.env.APP_DOMAIN });
+              await ctx.res.clearCookie('token', { domain: process.env.NODE_ENV === 'development' ? undefined : process.env.APP_DOMAIN });
             }
     
             // 7. generate the JWT Token
@@ -665,11 +653,12 @@ export const Mutation = mutationType({
             // 8. Set the cookie with the token
             ctx.res.cookie('token', token, {
               //Set domain to custom domain name to resolve issue with non custom heroku/now domain names
-              domain: process.env.NODE_ENV === 'development' ? process.env.LOCAL_DOMAIN : process.env.APP_DOMAIN,
+              domain: process.env.NODE_ENV === 'development' ? undefined : process.env.APP_DOMAIN,
               secure: process.env.NODE_ENV === 'development' ? false : true,
               httpOnly: true,
               maxAge: 1000 * 60 * 60 * 24 * 365,
               sameSite: 'lax',
+              path: '/'
             });
     
             // 9. Return the user
@@ -699,14 +688,15 @@ export const Mutation = mutationType({
             // 3. Set the cookie with the uuid
             await ctx.res.cookie('uuid', logid, {
               //Set domain to custom domain name to resolve issue with non custom heroku/now domain names
-              domain: process.env.NODE_ENV === 'development' ? process.env.LOCAL_DOMAIN : process.env.APP_DOMAIN,
+              domain: process.env.NODE_ENV === 'development' ? undefined : process.env.APP_DOMAIN,
               secure: process.env.NODE_ENV === 'development' ? false : true,
               httpOnly: true,
               maxAge: 5 * 1000, //Set time for 5 seconds
               sameSite: 'lax',
+              path: '/'
             });
             
-            await ctx.res.clearCookie('token', { domain: process.env.NODE_ENV === 'development' ? process.env.LOCAL_DOMAIN : process.env.APP_DOMAIN });
+            await ctx.res.clearCookie('token', { domain: process.env.NODE_ENV === 'development' ? undefined : process.env.APP_DOMAIN });
 
             return { message: 'Goodbye!' };
           
@@ -823,11 +813,12 @@ export const Mutation = mutationType({
             // 7. Set the JWT cookie
             ctx.res.cookie('token', token, {
               // Set domain to custom domain name to resolve issue with non custom heroku/now domain names
-              domain: process.env.NODE_ENV === 'development' ? process.env.LOCAL_DOMAIN : process.env.APP_DOMAIN,
+              domain: process.env.NODE_ENV === 'development' ? undefined : process.env.APP_DOMAIN,
               secure: process.env.NODE_ENV === 'development' ? false : true,
               httpOnly: true,
               maxAge: 1000 * 60 * 60 * 24 * 365,
               sameSite: 'lax',
+              path: '/'
             });
     
             // 8. return the new user

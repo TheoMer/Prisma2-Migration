@@ -10,6 +10,7 @@ const nexusPrisma = nexusSchemaPrisma({
     experimentalCRUD: true,
     paginationStrategy: 'prisma',
     prismaClient: (ctx: Context) => ctx.prisma,
+    outputs: { typegen: path.join(__dirname, '/generated/typegen-nexus-plugin-prisma.d.ts' )},
   })
 
 export const schema = makeSchema({
@@ -17,8 +18,8 @@ export const schema = makeSchema({
   //plugins: [nexusSchemaPrisma()],
   plugins: [nexusPrisma],
   outputs: {
-    schema: path.join(__dirname, './../schema.graphql'),
-    typegen: path.join(__dirname, './generated/nexus.ts'),
+    schema: path.join(__dirname, '/generated/schema.graphql'),
+    typegen: path.join(__dirname, '/generated/nexus.ts'),
   },
   typegenAutoConfig: {
     sources: [

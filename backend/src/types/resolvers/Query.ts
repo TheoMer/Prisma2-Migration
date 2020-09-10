@@ -98,17 +98,18 @@ export const Query = queryType({
 
                 // create the jwt token for them
                 const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
-    
+
                 // We set the jwt as a cookie on the response
-                ctx.res.cookie('token', token, {
+                await ctx.res.cookie('token', token, {
                   //Set domain to custom domain name to resolve issue with non custom heroku/now domain names
-                  domain: process.env.NODE_ENV === 'development' ? process.env.LOCAL_DOMAIN : process.env.APP_DOMAIN,
+                  domain: process.env.NODE_ENV === 'development' ? undefined : process.env.APP_DOMAIN,
                   secure: process.env.NODE_ENV === 'development' ? false : true,
                   httpOnly: true,
                   maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
                   sameSite: 'lax',
+                  path: '/'
                 });
-    
+
                 return user;
     
               } else {

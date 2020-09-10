@@ -188,16 +188,6 @@ model User {
   itemvariants     ItemVariants[]
   order            Order[]
   orderitem        OrderItem[]
-  User_permissions User_permissions[]
-}
-
-model User_permissions {
-  nodeId   String
-  position Int
-  value    String
-  User     User   @relation(fields: [nodeId], references: [id])
-
-  @@id([nodeId, position])
 }
 
 enum Permission2 {

@@ -11,3 +11,4 @@ export * from './SiteVisits';
 export * from './Size';
 export * from './SuccessMessage';
 export * from './User';
+export * from './ItemModifier';

@@ -1,5 +1,5 @@
-const path = process.env.NODE_ENV === 'production' ? 'variables.production.env' : 'variables.env';
-require('dotenv').config({ path });
+//const path = process.env.NODE_ENV === 'production' ? 'variables.production.env' : 'variables.env';
+//require('dotenv').config({ path });
 const http = require('http');
 const express = require('express');
 const cookieParser = require('cookie-parser');

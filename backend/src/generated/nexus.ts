@@ -1662,10 +1662,6 @@ export interface NexusGenInputs {
     notIn?: string[] | null; // [String!]
     startsWith?: string | null; // String
   }
-  NodeIdPositionCompoundUniqueInput: { // input type
-    nodeId: string; // String!
-    position: number; // Int!
-  }
   OrderCreateManyWithoutUserInput: { // input type
     connect?: NexusGenInputs['OrderWhereUniqueInput'][] | null; // [OrderWhereUniqueInput!]
     connectOrCreate?: NexusGenInputs['OrderCreateOrConnectWithoutUserInput'][] | null; // [OrderCreateOrConnectWithoutUserInput!]
@@ -2189,6 +2185,17 @@ export interface NexusGenInputs {
   OrderWhereUniqueInput: { // input type
     id?: string | null; // String
   }
+  SiteVisitsCreateInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    url?: string | null; // String
+    urlReferer?: string | null; // String
+    userAgent?: string | null; // String
+    userID?: string | null; // String
+    userIP?: string | null; // String
+    userType?: string | null; // String
+  }
   SizeCreateOneWithoutItemInput: { // input type
     connect?: NexusGenInputs['SizeWhereUniqueInput'] | null; // SizeWhereUniqueInput
     connectOrCreate?: NexusGenInputs['SizeCreateOrConnectWithoutItemInput'] | null; // SizeCreateOrConnectWithoutItemInput
@@ -2413,7 +2420,6 @@ export interface NexusGenInputs {
     resetToken?: string | null; // String
     resetTokenExpiry?: number | null; // Float
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User_permissions?: NexusGenInputs['User_permissionsCreateManyWithoutUserInput'] | null; // User_permissionsCreateManyWithoutUserInput
   }
   UserCreateWithoutItemsInput: { // input type
     address?: NexusGenInputs['AddressCreateManyWithoutUserInput'] | null; // AddressCreateManyWithoutUserInput
@@ -2430,7 +2436,6 @@ export interface NexusGenInputs {
     resetToken?: string | null; // String
     resetTokenExpiry?: number | null; // Float
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User_permissions?: NexusGenInputs['User_permissionsCreateManyWithoutUserInput'] | null; // User_permissionsCreateManyWithoutUserInput
   }
   UserCreateWithoutItemvariantsInput: { // input type
     address?: NexusGenInputs['AddressCreateManyWithoutUserInput'] | null; // AddressCreateManyWithoutUserInput
@@ -2447,7 +2452,6 @@ export interface NexusGenInputs {
     resetToken?: string | null; // String
     resetTokenExpiry?: number | null; // Float
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User_permissions?: NexusGenInputs['User_permissionsCreateManyWithoutUserInput'] | null; // User_permissionsCreateManyWithoutUserInput
   }
   UserCreateWithoutOrderInput: { // input type
     address?: NexusGenInputs['AddressCreateManyWithoutUserInput'] | null; // AddressCreateManyWithoutUserInput
@@ -2464,7 +2468,6 @@ export interface NexusGenInputs {
     resetToken?: string | null; // String
     resetTokenExpiry?: number | null; // Float
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User_permissions?: NexusGenInputs['User_permissionsCreateManyWithoutUserInput'] | null; // User_permissionsCreateManyWithoutUserInput
   }
   UserCreateWithoutOrderitemInput: { // input type
     address?: NexusGenInputs['AddressCreateManyWithoutUserInput'] | null; // AddressCreateManyWithoutUserInput
@@ -2481,7 +2484,6 @@ export interface NexusGenInputs {
     resetToken?: string | null; // String
     resetTokenExpiry?: number | null; // Float
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User_permissions?: NexusGenInputs['User_permissionsCreateManyWithoutUserInput'] | null; // User_permissionsCreateManyWithoutUserInput
   }
   UserCreatepermissions2Input: { // input type
     set?: NexusGenEnums['Permission2'][] | null; // [Permission2!]
@@ -2557,7 +2559,6 @@ export interface NexusGenInputs {
     resetToken?: string | null; // String
     resetTokenExpiry?: number | null; // Float
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User_permissions?: NexusGenInputs['User_permissionsUpdateManyWithoutUserInput'] | null; // User_permissionsUpdateManyWithoutUserInput
   }
   UserUpdateWithoutItemsDataInput: { // input type
     address?: NexusGenInputs['AddressUpdateManyWithoutUserInput'] | null; // AddressUpdateManyWithoutUserInput
@@ -2574,7 +2575,6 @@ export interface NexusGenInputs {
     resetToken?: string | null; // String
     resetTokenExpiry?: number | null; // Float
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User_permissions?: NexusGenInputs['User_permissionsUpdateManyWithoutUserInput'] | null; // User_permissionsUpdateManyWithoutUserInput
   }
   UserUpdateWithoutItemvariantsDataInput: { // input type
     address?: NexusGenInputs['AddressUpdateManyWithoutUserInput'] | null; // AddressUpdateManyWithoutUserInput
@@ -2591,7 +2591,6 @@ export interface NexusGenInputs {
     resetToken?: string | null; // String
     resetTokenExpiry?: number | null; // Float
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User_permissions?: NexusGenInputs['User_permissionsUpdateManyWithoutUserInput'] | null; // User_permissionsUpdateManyWithoutUserInput
   }
   UserUpdateWithoutOrderDataInput: { // input type
     address?: NexusGenInputs['AddressUpdateManyWithoutUserInput'] | null; // AddressUpdateManyWithoutUserInput
@@ -2608,7 +2607,6 @@ export interface NexusGenInputs {
     resetToken?: string | null; // String
     resetTokenExpiry?: number | null; // Float
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User_permissions?: NexusGenInputs['User_permissionsUpdateManyWithoutUserInput'] | null; // User_permissionsUpdateManyWithoutUserInput
   }
   UserUpdateWithoutOrderitemDataInput: { // input type
     address?: NexusGenInputs['AddressUpdateManyWithoutUserInput'] | null; // AddressUpdateManyWithoutUserInput
@@ -2625,7 +2623,6 @@ export interface NexusGenInputs {
     resetToken?: string | null; // String
     resetTokenExpiry?: number | null; // Float
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    User_permissions?: NexusGenInputs['User_permissionsUpdateManyWithoutUserInput'] | null; // User_permissionsUpdateManyWithoutUserInput
   }
   UserUpdatepermissions2Input: { // input type
     set?: NexusGenEnums['Permission2'][] | null; // [Permission2!]
@@ -2669,82 +2666,10 @@ export interface NexusGenInputs {
     resetToken?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     resetTokenExpiry?: NexusGenInputs['FloatNullableFilter'] | null; // FloatNullableFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-    User_permissions?: NexusGenInputs['User_permissionsListRelationFilter'] | null; // User_permissionsListRelationFilter
   }
   UserWhereUniqueInput: { // input type
     email?: string | null; // String
     id?: string | null; // String
-  }
-  User_permissionsCreateManyWithoutUserInput: { // input type
-    connect?: NexusGenInputs['User_permissionsWhereUniqueInput'][] | null; // [User_permissionsWhereUniqueInput!]
-    connectOrCreate?: NexusGenInputs['User_permissionsCreateOrConnectWithoutUserInput'][] | null; // [User_permissionsCreateOrConnectWithoutUserInput!]
-    create?: NexusGenInputs['User_permissionsCreateWithoutUserInput'][] | null; // [User_permissionsCreateWithoutUserInput!]
-  }
-  User_permissionsCreateOrConnectWithoutUserInput: { // input type
-    create: NexusGenInputs['User_permissionsCreateWithoutUserInput']; // User_permissionsCreateWithoutUserInput!
-    where: NexusGenInputs['User_permissionsWhereUniqueInput']; // User_permissionsWhereUniqueInput!
-  }
-  User_permissionsCreateWithoutUserInput: { // input type
-    position: number; // Int!
-    value: string; // String!
-  }
-  User_permissionsListRelationFilter: { // input type
-    every?: NexusGenInputs['User_permissionsWhereInput'] | null; // User_permissionsWhereInput
-    none?: NexusGenInputs['User_permissionsWhereInput'] | null; // User_permissionsWhereInput
-    some?: NexusGenInputs['User_permissionsWhereInput'] | null; // User_permissionsWhereInput
-  }
-  User_permissionsScalarWhereInput: { // input type
-    AND?: NexusGenInputs['User_permissionsScalarWhereInput'][] | null; // [User_permissionsScalarWhereInput!]
-    nodeId?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    NOT?: NexusGenInputs['User_permissionsScalarWhereInput'][] | null; // [User_permissionsScalarWhereInput!]
-    OR?: NexusGenInputs['User_permissionsScalarWhereInput'][] | null; // [User_permissionsScalarWhereInput!]
-    position?: NexusGenInputs['IntFilter'] | null; // IntFilter
-    value?: NexusGenInputs['StringFilter'] | null; // StringFilter
-  }
-  User_permissionsUpdateManyDataInput: { // input type
-    position?: number | null; // Int
-    value?: string | null; // String
-  }
-  User_permissionsUpdateManyWithWhereNestedInput: { // input type
-    data: NexusGenInputs['User_permissionsUpdateManyDataInput']; // User_permissionsUpdateManyDataInput!
-    where: NexusGenInputs['User_permissionsScalarWhereInput']; // User_permissionsScalarWhereInput!
-  }
-  User_permissionsUpdateManyWithoutUserInput: { // input type
-    connect?: NexusGenInputs['User_permissionsWhereUniqueInput'][] | null; // [User_permissionsWhereUniqueInput!]
-    connectOrCreate?: NexusGenInputs['User_permissionsCreateOrConnectWithoutUserInput'][] | null; // [User_permissionsCreateOrConnectWithoutUserInput!]
-    create?: NexusGenInputs['User_permissionsCreateWithoutUserInput'][] | null; // [User_permissionsCreateWithoutUserInput!]
-    delete?: NexusGenInputs['User_permissionsWhereUniqueInput'][] | null; // [User_permissionsWhereUniqueInput!]
-    deleteMany?: NexusGenInputs['User_permissionsScalarWhereInput'][] | null; // [User_permissionsScalarWhereInput!]
-    disconnect?: NexusGenInputs['User_permissionsWhereUniqueInput'][] | null; // [User_permissionsWhereUniqueInput!]
-    set?: NexusGenInputs['User_permissionsWhereUniqueInput'][] | null; // [User_permissionsWhereUniqueInput!]
-    update?: NexusGenInputs['User_permissionsUpdateWithWhereUniqueWithoutUserInput'][] | null; // [User_permissionsUpdateWithWhereUniqueWithoutUserInput!]
-    updateMany?: NexusGenInputs['User_permissionsUpdateManyWithWhereNestedInput'][] | null; // [User_permissionsUpdateManyWithWhereNestedInput!]
-    upsert?: NexusGenInputs['User_permissionsUpsertWithWhereUniqueWithoutUserInput'][] | null; // [User_permissionsUpsertWithWhereUniqueWithoutUserInput!]
-  }
-  User_permissionsUpdateWithWhereUniqueWithoutUserInput: { // input type
-    data: NexusGenInputs['User_permissionsUpdateWithoutUserDataInput']; // User_permissionsUpdateWithoutUserDataInput!
-    where: NexusGenInputs['User_permissionsWhereUniqueInput']; // User_permissionsWhereUniqueInput!
-  }
-  User_permissionsUpdateWithoutUserDataInput: { // input type
-    position?: number | null; // Int
-    value?: string | null; // String
-  }
-  User_permissionsUpsertWithWhereUniqueWithoutUserInput: { // input type
-    create: NexusGenInputs['User_permissionsCreateWithoutUserInput']; // User_permissionsCreateWithoutUserInput!
-    update: NexusGenInputs['User_permissionsUpdateWithoutUserDataInput']; // User_permissionsUpdateWithoutUserDataInput!
-    where: NexusGenInputs['User_permissionsWhereUniqueInput']; // User_permissionsWhereUniqueInput!
-  }
-  User_permissionsWhereInput: { // input type
-    AND?: NexusGenInputs['User_permissionsWhereInput'][] | null; // [User_permissionsWhereInput!]
-    nodeId?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    NOT?: NexusGenInputs['User_permissionsWhereInput'][] | null; // [User_permissionsWhereInput!]
-    OR?: NexusGenInputs['User_permissionsWhereInput'][] | null; // [User_permissionsWhereInput!]
-    position?: NexusGenInputs['IntFilter'] | null; // IntFilter
-    User?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
-    value?: NexusGenInputs['StringFilter'] | null; // StringFilter
-  }
-  User_permissionsWhereUniqueInput: { // input type
-    nodeId_position?: NexusGenInputs['NodeIdPositionCompoundUniqueInput'] | null; // NodeIdPositionCompoundUniqueInput
   }
 }
 
@@ -2819,6 +2744,10 @@ export interface NexusGenRootTypes {
   }
   ItemConnection: { // root type
     count: number; // Int!
+  }
+  ItemModifier: { // root type
+    item: NexusGenRootTypes['Item']; // Item!
+    type: string; // String!
   }
   ItemVariants: { // root type
     color: string; // String!
@@ -3070,7 +2999,6 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   NestedIntFilter: NexusGenInputs['NestedIntFilter'];
   NestedStringFilter: NexusGenInputs['NestedStringFilter'];
   NestedStringNullableFilter: NexusGenInputs['NestedStringNullableFilter'];
-  NodeIdPositionCompoundUniqueInput: NexusGenInputs['NodeIdPositionCompoundUniqueInput'];
   OrderCreateManyWithoutUserInput: NexusGenInputs['OrderCreateManyWithoutUserInput'];
   OrderCreateOneWithoutItemsInput: NexusGenInputs['OrderCreateOneWithoutItemsInput'];
   OrderCreateOrConnectWithoutOrderItemInput: NexusGenInputs['OrderCreateOrConnectWithoutOrderItemInput'];
@@ -3126,6 +3054,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   OrderUpsertWithoutItemsInput: NexusGenInputs['OrderUpsertWithoutItemsInput'];
   OrderWhereInput: NexusGenInputs['OrderWhereInput'];
   OrderWhereUniqueInput: NexusGenInputs['OrderWhereUniqueInput'];
+  SiteVisitsCreateInput: NexusGenInputs['SiteVisitsCreateInput'];
   SizeCreateOneWithoutItemInput: NexusGenInputs['SizeCreateOneWithoutItemInput'];
   SizeCreateOneWithoutItemvariantsInput: NexusGenInputs['SizeCreateOneWithoutItemvariantsInput'];
   SizeCreateOneWithoutOrderitemInput: NexusGenInputs['SizeCreateOneWithoutOrderitemInput'];
@@ -3184,19 +3113,6 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   UserUpsertWithoutOrderitemInput: NexusGenInputs['UserUpsertWithoutOrderitemInput'];
   UserWhereInput: NexusGenInputs['UserWhereInput'];
   UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
-  User_permissionsCreateManyWithoutUserInput: NexusGenInputs['User_permissionsCreateManyWithoutUserInput'];
-  User_permissionsCreateOrConnectWithoutUserInput: NexusGenInputs['User_permissionsCreateOrConnectWithoutUserInput'];
-  User_permissionsCreateWithoutUserInput: NexusGenInputs['User_permissionsCreateWithoutUserInput'];
-  User_permissionsListRelationFilter: NexusGenInputs['User_permissionsListRelationFilter'];
-  User_permissionsScalarWhereInput: NexusGenInputs['User_permissionsScalarWhereInput'];
-  User_permissionsUpdateManyDataInput: NexusGenInputs['User_permissionsUpdateManyDataInput'];
-  User_permissionsUpdateManyWithWhereNestedInput: NexusGenInputs['User_permissionsUpdateManyWithWhereNestedInput'];
-  User_permissionsUpdateManyWithoutUserInput: NexusGenInputs['User_permissionsUpdateManyWithoutUserInput'];
-  User_permissionsUpdateWithWhereUniqueWithoutUserInput: NexusGenInputs['User_permissionsUpdateWithWhereUniqueWithoutUserInput'];
-  User_permissionsUpdateWithoutUserDataInput: NexusGenInputs['User_permissionsUpdateWithoutUserDataInput'];
-  User_permissionsUpsertWithWhereUniqueWithoutUserInput: NexusGenInputs['User_permissionsUpsertWithWhereUniqueWithoutUserInput'];
-  User_permissionsWhereInput: NexusGenInputs['User_permissionsWhereInput'];
-  User_permissionsWhereUniqueInput: NexusGenInputs['User_permissionsWhereUniqueInput'];
   Permission2: NexusGenEnums['Permission2'];
   SortOrder: NexusGenEnums['SortOrder'];
   String: NexusGenScalars['String'];
@@ -3277,6 +3193,10 @@ export interface NexusGenFieldTypes {
   ItemConnection: { // field return type
     count: number; // Int!
   }
+  ItemModifier: { // field return type
+    item: NexusGenRootTypes['Item']; // Item!
+    type: string; // String!
+  }
   ItemVariants: { // field return type
     cartitems: NexusGenRootTypes['CartItem'][]; // [CartItem!]!
     color: string; // String!
@@ -3314,7 +3234,7 @@ export interface NexusGenFieldTypes {
     createAddress: NexusGenRootTypes['Address']; // Address!
     createItem: NexusGenRootTypes['Item']; // Item!
     createOrder: NexusGenRootTypes['Order']; // Order!
-    createSiteVisits: NexusGenRootTypes['SiteVisits'] | null; // SiteVisits
+    createSiteVisits: NexusGenRootTypes['SiteVisits']; // SiteVisits!
     deleteItem: NexusGenRootTypes['Item'] | null; // Item
     removeFromCart: NexusGenRootTypes['CartItem'] | null; // CartItem
     requestReset: NexusGenRootTypes['SuccessMessage'] | null; // SuccessMessage
@@ -3400,8 +3320,8 @@ export interface NexusGenFieldTypes {
     updatedAt: NexusGenScalars['Date']; // Date!
   }
   Subscription: { // field return type
-    itemDeleted: NexusGenRootTypes['Item']; // Item!
-    itemWatch: NexusGenRootTypes['Item']; // Item!
+    itemDeleted: NexusGenRootTypes['ItemModifier']; // ItemModifier!
+    itemWatch: NexusGenRootTypes['ItemModifier']; // ItemModifier!
   }
   SuccessMessage: { // field return type
     message: string; // String!
@@ -3504,12 +3424,7 @@ export interface NexusGenArgTypes {
       token: string; // String!
     }
     createSiteVisits: { // args
-      url?: string | null; // String
-      urlReferer?: string | null; // String
-      userAgent?: string | null; // String
-      userID?: string | null; // String
-      userIP?: string | null; // String
-      userType?: string | null; // String
+      data: NexusGenInputs['SiteVisitsCreateInput']; // SiteVisitsCreateInput!
     }
     deleteItem: { // args
       id: string; // String!
@@ -3697,9 +3612,9 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Address" | "CartItem" | "Color" | "Item" | "ItemConnection" | "ItemVariants" | "Mutation" | "Order" | "OrderItem" | "Query" | "SiteVisits" | "Size" | "Subscription" | "SuccessMessage" | "User";
+export type NexusGenObjectNames = "Address" | "CartItem" | "Color" | "Item" | "ItemConnection" | "ItemModifier" | "ItemVariants" | "Mutation" | "Order" | "OrderItem" | "Query" | "SiteVisits" | "Size" | "Subscription" | "SuccessMessage" | "User";
 
-export type NexusGenInputNames = "AddressCreateManyWithoutUserInput" | "AddressCreateOrConnectWithoutUserInput" | "AddressCreateWithoutUserInput" | "AddressListRelationFilter" | "AddressOrderByInput" | "AddressScalarWhereInput" | "AddressUpdateManyDataInput" | "AddressUpdateManyWithWhereNestedInput" | "AddressUpdateManyWithoutUserInput" | "AddressUpdateWithWhereUniqueWithoutUserInput" | "AddressUpdateWithoutUserDataInput" | "AddressUpsertWithWhereUniqueWithoutUserInput" | "AddressWhereInput" | "AddressWhereUniqueInput" | "CartItemCreateManyWithoutItemInput" | "CartItemCreateManyWithoutItemVariantsInput" | "CartItemCreateManyWithoutUserInput" | "CartItemCreateOrConnectWithoutItemInput" | "CartItemCreateOrConnectWithoutItemVariantsInput" | "CartItemCreateOrConnectWithoutUserInput" | "CartItemCreateWithoutItemInput" | "CartItemCreateWithoutItemVariantsInput" | "CartItemCreateWithoutUserInput" | "CartItemListRelationFilter" | "CartItemOrderByInput" | "CartItemScalarWhereInput" | "CartItemUpdateManyDataInput" | "CartItemUpdateManyWithWhereNestedInput" | "CartItemUpdateManyWithoutItemInput" | "CartItemUpdateManyWithoutItemVariantsInput" | "CartItemUpdateManyWithoutUserInput" | "CartItemUpdateWithWhereUniqueWithoutItemInput" | "CartItemUpdateWithWhereUniqueWithoutItemVariantsInput" | "CartItemUpdateWithWhereUniqueWithoutUserInput" | "CartItemUpdateWithoutItemDataInput" | "CartItemUpdateWithoutItemVariantsDataInput" | "CartItemUpdateWithoutUserDataInput" | "CartItemUpsertWithWhereUniqueWithoutItemInput" | "CartItemUpsertWithWhereUniqueWithoutItemVariantsInput" | "CartItemUpsertWithWhereUniqueWithoutUserInput" | "CartItemWhereInput" | "CartItemWhereUniqueInput" | "ColorCreateOneWithoutItemInput" | "ColorCreateOneWithoutItemvariantsInput" | "ColorCreateOneWithoutOrderitemInput" | "ColorCreateOrConnectWithoutItemInput" | "ColorCreateOrConnectWithoutItemVariantsInput" | "ColorCreateOrConnectWithoutOrderItemInput" | "ColorCreateWithoutItemInput" | "ColorCreateWithoutItemvariantsInput" | "ColorCreateWithoutOrderitemInput" | "ColorOrderByInput" | "ColorUpdateOneRequiredWithoutItemInput" | "ColorUpdateOneRequiredWithoutItemvariantsInput" | "ColorUpdateOneRequiredWithoutOrderitemInput" | "ColorUpdateWithoutItemDataInput" | "ColorUpdateWithoutItemvariantsDataInput" | "ColorUpdateWithoutOrderitemDataInput" | "ColorUpsertWithoutItemInput" | "ColorUpsertWithoutItemvariantsInput" | "ColorUpsertWithoutOrderitemInput" | "ColorWhereInput" | "ColorWhereUniqueInput" | "DateTimeFilter" | "FloatNullableFilter" | "IntFilter" | "ItemCreateInput" | "ItemCreateManyWithoutColorInput" | "ItemCreateManyWithoutSizeInput" | "ItemCreateManyWithoutUserInput" | "ItemCreateOneWithoutCartitemsInput" | "ItemCreateOneWithoutItemvariantsInput" | "ItemCreateOrConnectWithoutCartItemInput" | "ItemCreateOrConnectWithoutColorInput" | "ItemCreateOrConnectWithoutItemVariantsInput" | "ItemCreateOrConnectWithoutSizeInput" | "ItemCreateOrConnectWithoutUserInput" | "ItemCreateWithoutCartitemsInput" | "ItemCreateWithoutColorInput" | "ItemCreateWithoutItemvariantsInput" | "ItemCreateWithoutSizeInput" | "ItemCreateWithoutUserInput" | "ItemListRelationFilter" | "ItemOrderByInput" | "ItemScalarWhereInput" | "ItemUpdateInput" | "ItemUpdateManyDataInput" | "ItemUpdateManyWithWhereNestedInput" | "ItemUpdateManyWithoutColorInput" | "ItemUpdateManyWithoutSizeInput" | "ItemUpdateManyWithoutUserInput" | "ItemUpdateOneRequiredWithoutItemvariantsInput" | "ItemUpdateOneWithoutCartitemsInput" | "ItemUpdateWithWhereUniqueWithoutColorInput" | "ItemUpdateWithWhereUniqueWithoutSizeInput" | "ItemUpdateWithWhereUniqueWithoutUserInput" | "ItemUpdateWithoutCartitemsDataInput" | "ItemUpdateWithoutColorDataInput" | "ItemUpdateWithoutItemvariantsDataInput" | "ItemUpdateWithoutSizeDataInput" | "ItemUpdateWithoutUserDataInput" | "ItemUpsertWithWhereUniqueWithoutColorInput" | "ItemUpsertWithWhereUniqueWithoutSizeInput" | "ItemUpsertWithWhereUniqueWithoutUserInput" | "ItemUpsertWithoutCartitemsInput" | "ItemUpsertWithoutItemvariantsInput" | "ItemVariantsCreateManyWithoutColorInput" | "ItemVariantsCreateManyWithoutItemInput" | "ItemVariantsCreateManyWithoutSizeInput" | "ItemVariantsCreateManyWithoutUserInput" | "ItemVariantsCreateOneWithoutCartitemsInput" | "ItemVariantsCreateOrConnectWithoutCartItemInput" | "ItemVariantsCreateOrConnectWithoutColorInput" | "ItemVariantsCreateOrConnectWithoutItemInput" | "ItemVariantsCreateOrConnectWithoutSizeInput" | "ItemVariantsCreateOrConnectWithoutUserInput" | "ItemVariantsCreateWithoutCartitemsInput" | "ItemVariantsCreateWithoutColorInput" | "ItemVariantsCreateWithoutItemInput" | "ItemVariantsCreateWithoutSizeInput" | "ItemVariantsCreateWithoutUserInput" | "ItemVariantsListRelationFilter" | "ItemVariantsOrderByInput" | "ItemVariantsScalarWhereInput" | "ItemVariantsUpdateManyDataInput" | "ItemVariantsUpdateManyWithWhereNestedInput" | "ItemVariantsUpdateManyWithoutColorInput" | "ItemVariantsUpdateManyWithoutItemInput" | "ItemVariantsUpdateManyWithoutSizeInput" | "ItemVariantsUpdateManyWithoutUserInput" | "ItemVariantsUpdateOneWithoutCartitemsInput" | "ItemVariantsUpdateWithWhereUniqueWithoutColorInput" | "ItemVariantsUpdateWithWhereUniqueWithoutItemInput" | "ItemVariantsUpdateWithWhereUniqueWithoutSizeInput" | "ItemVariantsUpdateWithWhereUniqueWithoutUserInput" | "ItemVariantsUpdateWithoutCartitemsDataInput" | "ItemVariantsUpdateWithoutColorDataInput" | "ItemVariantsUpdateWithoutItemDataInput" | "ItemVariantsUpdateWithoutSizeDataInput" | "ItemVariantsUpdateWithoutUserDataInput" | "ItemVariantsUpsertWithWhereUniqueWithoutColorInput" | "ItemVariantsUpsertWithWhereUniqueWithoutItemInput" | "ItemVariantsUpsertWithWhereUniqueWithoutSizeInput" | "ItemVariantsUpsertWithWhereUniqueWithoutUserInput" | "ItemVariantsUpsertWithoutCartitemsInput" | "ItemVariantsWhereInput" | "ItemVariantsWhereUniqueInput" | "ItemWhereInput" | "ItemWhereUniqueInput" | "NestedDateTimeFilter" | "NestedFloatNullableFilter" | "NestedIntFilter" | "NestedStringFilter" | "NestedStringNullableFilter" | "NodeIdPositionCompoundUniqueInput" | "OrderCreateManyWithoutUserInput" | "OrderCreateOneWithoutItemsInput" | "OrderCreateOrConnectWithoutOrderItemInput" | "OrderCreateOrConnectWithoutUserInput" | "OrderCreateWithoutItemsInput" | "OrderCreateWithoutUserInput" | "OrderItemCreateManyWithoutColorInput" | "OrderItemCreateManyWithoutOrderInput" | "OrderItemCreateManyWithoutSizeInput" | "OrderItemCreateManyWithoutUserInput" | "OrderItemCreateOrConnectWithoutColorInput" | "OrderItemCreateOrConnectWithoutOrderInput" | "OrderItemCreateOrConnectWithoutSizeInput" | "OrderItemCreateOrConnectWithoutUserInput" | "OrderItemCreateWithoutColorInput" | "OrderItemCreateWithoutOrderInput" | "OrderItemCreateWithoutSizeInput" | "OrderItemCreateWithoutUserInput" | "OrderItemListRelationFilter" | "OrderItemOrderByInput" | "OrderItemScalarWhereInput" | "OrderItemUpdateManyDataInput" | "OrderItemUpdateManyWithWhereNestedInput" | "OrderItemUpdateManyWithoutColorInput" | "OrderItemUpdateManyWithoutOrderInput" | "OrderItemUpdateManyWithoutSizeInput" | "OrderItemUpdateManyWithoutUserInput" | "OrderItemUpdateWithWhereUniqueWithoutColorInput" | "OrderItemUpdateWithWhereUniqueWithoutOrderInput" | "OrderItemUpdateWithWhereUniqueWithoutSizeInput" | "OrderItemUpdateWithWhereUniqueWithoutUserInput" | "OrderItemUpdateWithoutColorDataInput" | "OrderItemUpdateWithoutOrderDataInput" | "OrderItemUpdateWithoutSizeDataInput" | "OrderItemUpdateWithoutUserDataInput" | "OrderItemUpsertWithWhereUniqueWithoutColorInput" | "OrderItemUpsertWithWhereUniqueWithoutOrderInput" | "OrderItemUpsertWithWhereUniqueWithoutSizeInput" | "OrderItemUpsertWithWhereUniqueWithoutUserInput" | "OrderItemWhereInput" | "OrderItemWhereUniqueInput" | "OrderListRelationFilter" | "OrderOrderByInput" | "OrderScalarWhereInput" | "OrderUpdateManyDataInput" | "OrderUpdateManyWithWhereNestedInput" | "OrderUpdateManyWithoutUserInput" | "OrderUpdateOneRequiredWithoutItemsInput" | "OrderUpdateWithWhereUniqueWithoutUserInput" | "OrderUpdateWithoutItemsDataInput" | "OrderUpdateWithoutUserDataInput" | "OrderUpsertWithWhereUniqueWithoutUserInput" | "OrderUpsertWithoutItemsInput" | "OrderWhereInput" | "OrderWhereUniqueInput" | "SizeCreateOneWithoutItemInput" | "SizeCreateOneWithoutItemvariantsInput" | "SizeCreateOneWithoutOrderitemInput" | "SizeCreateOrConnectWithoutItemInput" | "SizeCreateOrConnectWithoutItemVariantsInput" | "SizeCreateOrConnectWithoutOrderItemInput" | "SizeCreateWithoutItemInput" | "SizeCreateWithoutItemvariantsInput" | "SizeCreateWithoutOrderitemInput" | "SizeOrderByInput" | "SizeUpdateOneRequiredWithoutItemInput" | "SizeUpdateOneRequiredWithoutItemvariantsInput" | "SizeUpdateOneRequiredWithoutOrderitemInput" | "SizeUpdateWithoutItemDataInput" | "SizeUpdateWithoutItemvariantsDataInput" | "SizeUpdateWithoutOrderitemDataInput" | "SizeUpsertWithoutItemInput" | "SizeUpsertWithoutItemvariantsInput" | "SizeUpsertWithoutOrderitemInput" | "SizeWhereInput" | "SizeWhereUniqueInput" | "StringFilter" | "StringNullableFilter" | "UserCreateOneWithoutCartInput" | "UserCreateOneWithoutItemsInput" | "UserCreateOneWithoutItemvariantsInput" | "UserCreateOneWithoutOrderInput" | "UserCreateOneWithoutOrderitemInput" | "UserCreateOrConnectWithoutCartItemInput" | "UserCreateOrConnectWithoutItemInput" | "UserCreateOrConnectWithoutItemVariantsInput" | "UserCreateOrConnectWithoutOrderInput" | "UserCreateOrConnectWithoutOrderItemInput" | "UserCreateWithoutCartInput" | "UserCreateWithoutItemsInput" | "UserCreateWithoutItemvariantsInput" | "UserCreateWithoutOrderInput" | "UserCreateWithoutOrderitemInput" | "UserCreatepermissions2Input" | "UserOrderByInput" | "UserUpdateOneWithoutCartInput" | "UserUpdateOneWithoutItemsInput" | "UserUpdateOneWithoutItemvariantsInput" | "UserUpdateOneWithoutOrderInput" | "UserUpdateOneWithoutOrderitemInput" | "UserUpdateWithoutCartDataInput" | "UserUpdateWithoutItemsDataInput" | "UserUpdateWithoutItemvariantsDataInput" | "UserUpdateWithoutOrderDataInput" | "UserUpdateWithoutOrderitemDataInput" | "UserUpdatepermissions2Input" | "UserUpsertWithoutCartInput" | "UserUpsertWithoutItemsInput" | "UserUpsertWithoutItemvariantsInput" | "UserUpsertWithoutOrderInput" | "UserUpsertWithoutOrderitemInput" | "UserWhereInput" | "UserWhereUniqueInput" | "User_permissionsCreateManyWithoutUserInput" | "User_permissionsCreateOrConnectWithoutUserInput" | "User_permissionsCreateWithoutUserInput" | "User_permissionsListRelationFilter" | "User_permissionsScalarWhereInput" | "User_permissionsUpdateManyDataInput" | "User_permissionsUpdateManyWithWhereNestedInput" | "User_permissionsUpdateManyWithoutUserInput" | "User_permissionsUpdateWithWhereUniqueWithoutUserInput" | "User_permissionsUpdateWithoutUserDataInput" | "User_permissionsUpsertWithWhereUniqueWithoutUserInput" | "User_permissionsWhereInput" | "User_permissionsWhereUniqueInput";
+export type NexusGenInputNames = "AddressCreateManyWithoutUserInput" | "AddressCreateOrConnectWithoutUserInput" | "AddressCreateWithoutUserInput" | "AddressListRelationFilter" | "AddressOrderByInput" | "AddressScalarWhereInput" | "AddressUpdateManyDataInput" | "AddressUpdateManyWithWhereNestedInput" | "AddressUpdateManyWithoutUserInput" | "AddressUpdateWithWhereUniqueWithoutUserInput" | "AddressUpdateWithoutUserDataInput" | "AddressUpsertWithWhereUniqueWithoutUserInput" | "AddressWhereInput" | "AddressWhereUniqueInput" | "CartItemCreateManyWithoutItemInput" | "CartItemCreateManyWithoutItemVariantsInput" | "CartItemCreateManyWithoutUserInput" | "CartItemCreateOrConnectWithoutItemInput" | "CartItemCreateOrConnectWithoutItemVariantsInput" | "CartItemCreateOrConnectWithoutUserInput" | "CartItemCreateWithoutItemInput" | "CartItemCreateWithoutItemVariantsInput" | "CartItemCreateWithoutUserInput" | "CartItemListRelationFilter" | "CartItemOrderByInput" | "CartItemScalarWhereInput" | "CartItemUpdateManyDataInput" | "CartItemUpdateManyWithWhereNestedInput" | "CartItemUpdateManyWithoutItemInput" | "CartItemUpdateManyWithoutItemVariantsInput" | "CartItemUpdateManyWithoutUserInput" | "CartItemUpdateWithWhereUniqueWithoutItemInput" | "CartItemUpdateWithWhereUniqueWithoutItemVariantsInput" | "CartItemUpdateWithWhereUniqueWithoutUserInput" | "CartItemUpdateWithoutItemDataInput" | "CartItemUpdateWithoutItemVariantsDataInput" | "CartItemUpdateWithoutUserDataInput" | "CartItemUpsertWithWhereUniqueWithoutItemInput" | "CartItemUpsertWithWhereUniqueWithoutItemVariantsInput" | "CartItemUpsertWithWhereUniqueWithoutUserInput" | "CartItemWhereInput" | "CartItemWhereUniqueInput" | "ColorCreateOneWithoutItemInput" | "ColorCreateOneWithoutItemvariantsInput" | "ColorCreateOneWithoutOrderitemInput" | "ColorCreateOrConnectWithoutItemInput" | "ColorCreateOrConnectWithoutItemVariantsInput" | "ColorCreateOrConnectWithoutOrderItemInput" | "ColorCreateWithoutItemInput" | "ColorCreateWithoutItemvariantsInput" | "ColorCreateWithoutOrderitemInput" | "ColorOrderByInput" | "ColorUpdateOneRequiredWithoutItemInput" | "ColorUpdateOneRequiredWithoutItemvariantsInput" | "ColorUpdateOneRequiredWithoutOrderitemInput" | "ColorUpdateWithoutItemDataInput" | "ColorUpdateWithoutItemvariantsDataInput" | "ColorUpdateWithoutOrderitemDataInput" | "ColorUpsertWithoutItemInput" | "ColorUpsertWithoutItemvariantsInput" | "ColorUpsertWithoutOrderitemInput" | "ColorWhereInput" | "ColorWhereUniqueInput" | "DateTimeFilter" | "FloatNullableFilter" | "IntFilter" | "ItemCreateInput" | "ItemCreateManyWithoutColorInput" | "ItemCreateManyWithoutSizeInput" | "ItemCreateManyWithoutUserInput" | "ItemCreateOneWithoutCartitemsInput" | "ItemCreateOneWithoutItemvariantsInput" | "ItemCreateOrConnectWithoutCartItemInput" | "ItemCreateOrConnectWithoutColorInput" | "ItemCreateOrConnectWithoutItemVariantsInput" | "ItemCreateOrConnectWithoutSizeInput" | "ItemCreateOrConnectWithoutUserInput" | "ItemCreateWithoutCartitemsInput" | "ItemCreateWithoutColorInput" | "ItemCreateWithoutItemvariantsInput" | "ItemCreateWithoutSizeInput" | "ItemCreateWithoutUserInput" | "ItemListRelationFilter" | "ItemOrderByInput" | "ItemScalarWhereInput" | "ItemUpdateInput" | "ItemUpdateManyDataInput" | "ItemUpdateManyWithWhereNestedInput" | "ItemUpdateManyWithoutColorInput" | "ItemUpdateManyWithoutSizeInput" | "ItemUpdateManyWithoutUserInput" | "ItemUpdateOneRequiredWithoutItemvariantsInput" | "ItemUpdateOneWithoutCartitemsInput" | "ItemUpdateWithWhereUniqueWithoutColorInput" | "ItemUpdateWithWhereUniqueWithoutSizeInput" | "ItemUpdateWithWhereUniqueWithoutUserInput" | "ItemUpdateWithoutCartitemsDataInput" | "ItemUpdateWithoutColorDataInput" | "ItemUpdateWithoutItemvariantsDataInput" | "ItemUpdateWithoutSizeDataInput" | "ItemUpdateWithoutUserDataInput" | "ItemUpsertWithWhereUniqueWithoutColorInput" | "ItemUpsertWithWhereUniqueWithoutSizeInput" | "ItemUpsertWithWhereUniqueWithoutUserInput" | "ItemUpsertWithoutCartitemsInput" | "ItemUpsertWithoutItemvariantsInput" | "ItemVariantsCreateManyWithoutColorInput" | "ItemVariantsCreateManyWithoutItemInput" | "ItemVariantsCreateManyWithoutSizeInput" | "ItemVariantsCreateManyWithoutUserInput" | "ItemVariantsCreateOneWithoutCartitemsInput" | "ItemVariantsCreateOrConnectWithoutCartItemInput" | "ItemVariantsCreateOrConnectWithoutColorInput" | "ItemVariantsCreateOrConnectWithoutItemInput" | "ItemVariantsCreateOrConnectWithoutSizeInput" | "ItemVariantsCreateOrConnectWithoutUserInput" | "ItemVariantsCreateWithoutCartitemsInput" | "ItemVariantsCreateWithoutColorInput" | "ItemVariantsCreateWithoutItemInput" | "ItemVariantsCreateWithoutSizeInput" | "ItemVariantsCreateWithoutUserInput" | "ItemVariantsListRelationFilter" | "ItemVariantsOrderByInput" | "ItemVariantsScalarWhereInput" | "ItemVariantsUpdateManyDataInput" | "ItemVariantsUpdateManyWithWhereNestedInput" | "ItemVariantsUpdateManyWithoutColorInput" | "ItemVariantsUpdateManyWithoutItemInput" | "ItemVariantsUpdateManyWithoutSizeInput" | "ItemVariantsUpdateManyWithoutUserInput" | "ItemVariantsUpdateOneWithoutCartitemsInput" | "ItemVariantsUpdateWithWhereUniqueWithoutColorInput" | "ItemVariantsUpdateWithWhereUniqueWithoutItemInput" | "ItemVariantsUpdateWithWhereUniqueWithoutSizeInput" | "ItemVariantsUpdateWithWhereUniqueWithoutUserInput" | "ItemVariantsUpdateWithoutCartitemsDataInput" | "ItemVariantsUpdateWithoutColorDataInput" | "ItemVariantsUpdateWithoutItemDataInput" | "ItemVariantsUpdateWithoutSizeDataInput" | "ItemVariantsUpdateWithoutUserDataInput" | "ItemVariantsUpsertWithWhereUniqueWithoutColorInput" | "ItemVariantsUpsertWithWhereUniqueWithoutItemInput" | "ItemVariantsUpsertWithWhereUniqueWithoutSizeInput" | "ItemVariantsUpsertWithWhereUniqueWithoutUserInput" | "ItemVariantsUpsertWithoutCartitemsInput" | "ItemVariantsWhereInput" | "ItemVariantsWhereUniqueInput" | "ItemWhereInput" | "ItemWhereUniqueInput" | "NestedDateTimeFilter" | "NestedFloatNullableFilter" | "NestedIntFilter" | "NestedStringFilter" | "NestedStringNullableFilter" | "OrderCreateManyWithoutUserInput" | "OrderCreateOneWithoutItemsInput" | "OrderCreateOrConnectWithoutOrderItemInput" | "OrderCreateOrConnectWithoutUserInput" | "OrderCreateWithoutItemsInput" | "OrderCreateWithoutUserInput" | "OrderItemCreateManyWithoutColorInput" | "OrderItemCreateManyWithoutOrderInput" | "OrderItemCreateManyWithoutSizeInput" | "OrderItemCreateManyWithoutUserInput" | "OrderItemCreateOrConnectWithoutColorInput" | "OrderItemCreateOrConnectWithoutOrderInput" | "OrderItemCreateOrConnectWithoutSizeInput" | "OrderItemCreateOrConnectWithoutUserInput" | "OrderItemCreateWithoutColorInput" | "OrderItemCreateWithoutOrderInput" | "OrderItemCreateWithoutSizeInput" | "OrderItemCreateWithoutUserInput" | "OrderItemListRelationFilter" | "OrderItemOrderByInput" | "OrderItemScalarWhereInput" | "OrderItemUpdateManyDataInput" | "OrderItemUpdateManyWithWhereNestedInput" | "OrderItemUpdateManyWithoutColorInput" | "OrderItemUpdateManyWithoutOrderInput" | "OrderItemUpdateManyWithoutSizeInput" | "OrderItemUpdateManyWithoutUserInput" | "OrderItemUpdateWithWhereUniqueWithoutColorInput" | "OrderItemUpdateWithWhereUniqueWithoutOrderInput" | "OrderItemUpdateWithWhereUniqueWithoutSizeInput" | "OrderItemUpdateWithWhereUniqueWithoutUserInput" | "OrderItemUpdateWithoutColorDataInput" | "OrderItemUpdateWithoutOrderDataInput" | "OrderItemUpdateWithoutSizeDataInput" | "OrderItemUpdateWithoutUserDataInput" | "OrderItemUpsertWithWhereUniqueWithoutColorInput" | "OrderItemUpsertWithWhereUniqueWithoutOrderInput" | "OrderItemUpsertWithWhereUniqueWithoutSizeInput" | "OrderItemUpsertWithWhereUniqueWithoutUserInput" | "OrderItemWhereInput" | "OrderItemWhereUniqueInput" | "OrderListRelationFilter" | "OrderOrderByInput" | "OrderScalarWhereInput" | "OrderUpdateManyDataInput" | "OrderUpdateManyWithWhereNestedInput" | "OrderUpdateManyWithoutUserInput" | "OrderUpdateOneRequiredWithoutItemsInput" | "OrderUpdateWithWhereUniqueWithoutUserInput" | "OrderUpdateWithoutItemsDataInput" | "OrderUpdateWithoutUserDataInput" | "OrderUpsertWithWhereUniqueWithoutUserInput" | "OrderUpsertWithoutItemsInput" | "OrderWhereInput" | "OrderWhereUniqueInput" | "SiteVisitsCreateInput" | "SizeCreateOneWithoutItemInput" | "SizeCreateOneWithoutItemvariantsInput" | "SizeCreateOneWithoutOrderitemInput" | "SizeCreateOrConnectWithoutItemInput" | "SizeCreateOrConnectWithoutItemVariantsInput" | "SizeCreateOrConnectWithoutOrderItemInput" | "SizeCreateWithoutItemInput" | "SizeCreateWithoutItemvariantsInput" | "SizeCreateWithoutOrderitemInput" | "SizeOrderByInput" | "SizeUpdateOneRequiredWithoutItemInput" | "SizeUpdateOneRequiredWithoutItemvariantsInput" | "SizeUpdateOneRequiredWithoutOrderitemInput" | "SizeUpdateWithoutItemDataInput" | "SizeUpdateWithoutItemvariantsDataInput" | "SizeUpdateWithoutOrderitemDataInput" | "SizeUpsertWithoutItemInput" | "SizeUpsertWithoutItemvariantsInput" | "SizeUpsertWithoutOrderitemInput" | "SizeWhereInput" | "SizeWhereUniqueInput" | "StringFilter" | "StringNullableFilter" | "UserCreateOneWithoutCartInput" | "UserCreateOneWithoutItemsInput" | "UserCreateOneWithoutItemvariantsInput" | "UserCreateOneWithoutOrderInput" | "UserCreateOneWithoutOrderitemInput" | "UserCreateOrConnectWithoutCartItemInput" | "UserCreateOrConnectWithoutItemInput" | "UserCreateOrConnectWithoutItemVariantsInput" | "UserCreateOrConnectWithoutOrderInput" | "UserCreateOrConnectWithoutOrderItemInput" | "UserCreateWithoutCartInput" | "UserCreateWithoutItemsInput" | "UserCreateWithoutItemvariantsInput" | "UserCreateWithoutOrderInput" | "UserCreateWithoutOrderitemInput" | "UserCreatepermissions2Input" | "UserOrderByInput" | "UserUpdateOneWithoutCartInput" | "UserUpdateOneWithoutItemsInput" | "UserUpdateOneWithoutItemvariantsInput" | "UserUpdateOneWithoutOrderInput" | "UserUpdateOneWithoutOrderitemInput" | "UserUpdateWithoutCartDataInput" | "UserUpdateWithoutItemsDataInput" | "UserUpdateWithoutItemvariantsDataInput" | "UserUpdateWithoutOrderDataInput" | "UserUpdateWithoutOrderitemDataInput" | "UserUpdatepermissions2Input" | "UserUpsertWithoutCartInput" | "UserUpsertWithoutItemsInput" | "UserUpsertWithoutItemvariantsInput" | "UserUpsertWithoutOrderInput" | "UserUpsertWithoutOrderitemInput" | "UserWhereInput" | "UserWhereUniqueInput";
 
 export type NexusGenEnumNames = "Permission2" | "SortOrder";
 
