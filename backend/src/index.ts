@@ -1,5 +1,7 @@
-//const path = process.env.NODE_ENV === 'production' ? 'variables.production.env' : 'variables.env';
-//require('dotenv').config({ path });
+import { config } from 'dotenv';
+const path = process.env.NODE_ENV === 'production' ? 'variables.production.env' : 'variables2.env';
+config({ path });
+
 const http = require('http');
 const express = require('express');
 const cookieParser = require('cookie-parser');
@@ -29,10 +31,10 @@ app.use((req: any, res: any, next: any) => {
           // Put the userId onto the req for future requests to access
           req.userId = userId;
 
-        } catch (e) {
+        } catch (err) {
 
           // No valid userId exists
-          req.userId = '0001';
+          console.log(`signup err = ${err}`);
 
         }
     }

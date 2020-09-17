@@ -57,7 +57,7 @@ export const Query = queryType({
         filtering: true,
         ordering: true
       })
-      
+
       t.field('me', {
         type: 'User',
         nullable: true,
@@ -71,7 +71,14 @@ export const Query = queryType({
               // Cookie userId exists but Guest user has been deleted from table
               if (userId !== undefined) {
                 userExists = await ctx.prisma.user.findOne({ 
-                  where: { id: userId } 
+                  where: { id: userId },
+                  include: {
+                    cart: {
+                      orderBy: {
+                        createdAt: 'desc'
+                      }
+                    }
+                  }
                 }).catch(handleSubmitErr);
               }
 

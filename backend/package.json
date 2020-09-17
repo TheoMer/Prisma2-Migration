@@ -3,14 +3,14 @@
   "description": "the backend of Flamingo Ecommerce",
   "version": "1.0.0",
   "engines": {
-    "node": "10.16.0",
-    "npm": "6.5.0"
+    "node": "14.10.1",
+    "npm": "6.14.8"
   },
   "scripts": {
     "start": "set NODE_ENV=production && node dist/index",
     "clean": "rm -rf dist",
     "build": "npm -s run generate && npx tsc",
-    "dev": "dotenv -e variables2.env -- ts-node-dev --inspect --no-notify --respawn --transpileOnly src/index",
+    "dev": "set NODE_ENV=development && ts-node-dev --no-notify --respawn --transpile-only src/index",
     "test": "jest",
     "initprisma2": "npx prisma init",
     "introspect": "npx prisma introspect",
@@ -51,6 +51,7 @@
     "cookie-parser": "^1.4.3",
     "copyfiles": "^2.3.0",
     "date-fns": "^2.16.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "graphql-cli": "^3.0.5",
     "graphql-import": "^0.7.1",

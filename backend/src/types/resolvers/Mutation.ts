@@ -37,11 +37,6 @@ export const Mutation = mutationType({
               },
             )
 
-            // Manually add that an item was created?
-            /*newItem.data.push({
-              mutation: 'CREATED'
-            });*/
-
             ctx.pubsub.publish('itemWatch', { type: 'CREATED', item: newItem } );
             return newItem;
 
@@ -90,8 +85,6 @@ export const Mutation = mutationType({
               },
             )
 
-            console.log("users in createUser - Mutations.js = ", users);
-    
             // I'm having to check the users.length as am [Object: null prototype] is returned
             // See: https://stackoverflow.com/questions/53983315/is-there-a-way-to-get-rid-of-object-null-prototype-in-graphql
     
@@ -110,8 +103,6 @@ export const Mutation = mutationType({
               },
             })
 
-            console.log("updateUser = ", updateUser);
-    
             // 4. create an address for the user
     
             // remove the id and email from args
@@ -130,8 +121,6 @@ export const Mutation = mutationType({
               },
             })
 
-            console.log("address = ", address);
-    
             // add the email to the return object
             return address;
 
@@ -293,11 +282,6 @@ export const Mutation = mutationType({
               await cloudinary.uploader.destroy(file);
             }
 
-            // Manually add that an item was deleted
-            /*deletedItem.push({
-              mutation: 'DELETED'
-            });*/
-
             ctx.pubsub.publish('itemDeleted', { type: 'DELETED', item: deletedItem } );
             return deletedItem;
 
@@ -375,7 +359,7 @@ export const Mutation = mutationType({
                 },
               })
 
-            } else if (userId === '0001') {
+            } else {
     
               // The cookie or user has expired or been deleted so create a new user
               user = await ctx.prisma.user.create(
@@ -696,7 +680,7 @@ export const Mutation = mutationType({
               path: '/'
             });
             
-            await ctx.res.clearCookie('token', { domain: process.env.NODE_ENV === 'development' ? undefined : process.env.APP_DOMAIN });
+            await ctx.res.clearCookie('token', { domain: process.env.NODE_ENV === 'development' ? process.env.LOCAL_DOMAIN : process.env.APP_DOMAIN });
 
             return { message: 'Goodbye!' };
           
@@ -1077,7 +1061,7 @@ export const Mutation = mutationType({
                 Item: {
                   connect: { id: currentItemState.item } // If this throws error try currentItemState.item.id
                 }
-              },
+              },    
             })
 
             return newCartItem;
