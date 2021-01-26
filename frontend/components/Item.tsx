@@ -17,25 +17,6 @@ import { CURRENT_USER_QUERY } from './User';
 import { ALL_ITEMS_QUERY } from './Items';
 import { useClient } from '../lib/Client';
 import { Item, InputProps, Response, Props } from './interfaceTypes/Item'
-// import { perPage } from '../config';
-
-/* Info about React.memo taken from: https://logrocket.com/blog/pure-functional-components/ */
-
-/* Note: How to specify a dynamic background-image 
-   Taken from: https://github.com/facebook/create-react-app/issues/3238
-    const Content = styled.div`
-        background-image: url(${props => props.img});
-    `;
-    <Content img={ImagePath} />
-    Also See: https://github.com/styled-components/styled-components/issues/1142
-    const HeaderImg = styled.img.attrs({
-        src: 'image url here'
-    })`
-    width: 100px;
-    height: 100px;
-    border: 1px solid blue;
-    <HeaderImg src={'https://cdn.cnn.com/cnnnext/dam/assets/180301124611-fedex-logo.png'} />
-*/
 
 const DELETE_ITEM_SUBSCRIPTION = gql`
   subscription {
