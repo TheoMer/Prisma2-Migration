@@ -32,20 +32,20 @@ const Nav = props => {
 
   return (
   <NavStyles data-test="nav">
-    <Link href="/items">
+    <Link href="/items" passHref>
       <a>SHOP</a>
     </Link>
     {me && hasAdminPerms && (
-      <Link href="/sell">
+      <Link href="/sell" passHref>
         <a>SELL</a>
       </Link>
     )}
     {me && hasPerms && (
       <>
-        <Link href="/orders">
+        <Link href="/orders" passHref>
           <a>ORDERS</a>
         </Link>
-        <Link href="/account">
+        <Link href="/account" passHref>
           <a>ACCOUNT</a>
         </Link>
         <Signout />
@@ -57,10 +57,10 @@ const Nav = props => {
     )}
     {me && (hasGuestPerms && hasGuestEmail) && (
       <>
-      <Link href="/account">
+      <Link href="/account" passHref>
           <a>ACCOUNT</a>
       </Link>
-      <Link href="/signup">
+      <Link href="/signup" passHref>
         <a>SIGNIN</a>
       </Link>
       <button onClick={toggleCart}>
@@ -71,10 +71,10 @@ const Nav = props => {
     )}
     {me && (hasGuestPerms && !hasGuestEmail) && (
       <>
-      <Link href="/account">
+      <Link href="/account" passHref>
           <a>ACCOUNT</a>
       </Link>
-      <Link href="/signup">
+      <Link href="/signup" passHref>
         <a>SIGNIN</a>
       </Link>
       <button onClick={toggleCart}>
@@ -85,10 +85,10 @@ const Nav = props => {
     )}
     {!me && (
       <>
-      <Link href="/account">
+      <Link href="/account" passHref>
           <a>ACCOUNT</a>
       </Link>
-      <Link href="/signup">
+      <Link href="/signup" passHref>
         <a>SIGNIN</a>
       </Link>
       <button>
